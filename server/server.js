@@ -1,3 +1,6 @@
+const dns = require("dns");
+dns.setDefaultResultOrder("ipv4first");
+
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
@@ -6,9 +9,6 @@ const connectDB = require("./config/db");
 
 // Load env vars
 dotenv.config();
-
-// Connect to database
-connectDB();
 
 const app = express();
 
@@ -27,16 +27,23 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "OK", timestamp: new Date().toISOString() });
 });
 
-// Serve frontend in production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build")));
+// Serve frontend - check if build folder exists
+const fs = require("fs");
+const buildPath = path.join(__dirname, "../client/build");
+if (fs.existsSync(buildPath)) {
+  console.log("Serving frontend from", buildPath);
+  app.use(express.static(buildPath));
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client/build/index.html"));
+    res.sendFile(path.resolve(buildPath, "index.html"));
   });
+} else {
+  console.log("No client build found at", buildPath);
 }
 
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  // Connect to database after server is listening
+  connectDB();
 });
