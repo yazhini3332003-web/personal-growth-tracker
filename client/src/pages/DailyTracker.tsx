@@ -33,7 +33,6 @@ const DailyTracker: React.FC = () => {
       setDailyLogs(logsRes.data);
       setCategories(catsRes.data);
 
-      // Check if there's already a log for today
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       const todayLog = logsRes.data.find((log: DailyLog) => {
@@ -113,7 +112,6 @@ const DailyTracker: React.FC = () => {
     }
   };
 
-  // Group tasks by category
   const tasksByCategory: Record<string, Task[]> = {};
   tasks.forEach((t) => {
     const catName =
@@ -143,7 +141,6 @@ const DailyTracker: React.FC = () => {
         </p>
       </div>
 
-      {/* Day Info */}
       <div className="bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl p-6 text-white">
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div>
@@ -181,7 +178,6 @@ const DailyTracker: React.FC = () => {
         </div>
       ) : (
         <>
-          {/* Task Selection */}
           <div className="space-y-6">
             {Object.entries(tasksByCategory).map(([catName, catTasks]) => {
               const cat =
@@ -254,7 +250,6 @@ const DailyTracker: React.FC = () => {
             })}
           </div>
 
-          {/* Notes */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Notes (optional)
@@ -268,7 +263,6 @@ const DailyTracker: React.FC = () => {
             />
           </div>
 
-          {/* Save */}
           <button
             onClick={handleSave}
             disabled={saving}
@@ -277,7 +271,6 @@ const DailyTracker: React.FC = () => {
             {saving ? "Saving..." : "Save Today's Progress"}
           </button>
 
-          {/* Previous Logs */}
           {dailyLogs.length > 0 && (
             <div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">
@@ -296,7 +289,7 @@ const DailyTracker: React.FC = () => {
                         </p>
                         <p className="text-gray-500 text-sm">
                           {new Date(log.date).toLocaleDateString()}
-                          {" · "}
+                          {" \u00B7 "}
                           {log.completedTasks.length} tasks completed
                         </p>
                       </div>

@@ -41,7 +41,6 @@ const dailyLogSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Compound index to prevent duplicate logs per goal per date
 dailyLogSchema.index({ goal: 1, date: 1 }, { unique: true });
 
 module.exports = mongoose.model("DailyLog", dailyLogSchema);

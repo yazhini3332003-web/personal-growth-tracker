@@ -124,7 +124,7 @@ const Investment: React.FC = () => {
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Investment</h1>
         <p className="text-gray-500 mt-1">
-          Invest wisely in every area of life — health, knowledge, time, and
+          Invest wisely in every area of life \u2014 health, knowledge, time, and
           money
         </p>
       </div>

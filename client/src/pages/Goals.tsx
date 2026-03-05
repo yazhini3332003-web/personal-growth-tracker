@@ -192,7 +192,6 @@ const Goals: React.FC = () => {
         </div>
       )}
 
-      {/* Modal */}
       <Modal
         isOpen={showModal}
         onClose={() => {

@@ -120,7 +120,6 @@ const Settings: React.FC = () => {
         </p>
       </div>
 
-      {/* Goal Settings */}
       <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
         <div className="flex items-center gap-2 mb-6">
           <HiOutlineCog className="w-5 h-5 text-gray-500" />
@@ -201,7 +200,6 @@ const Settings: React.FC = () => {
         </form>
       </div>
 
-      {/* Categories & Tasks Overview */}
       <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
           Categories & Tasks
@@ -270,7 +268,6 @@ const Settings: React.FC = () => {
         )}
       </div>
 
-      {/* Danger Zone */}
       <div className="bg-white rounded-xl border border-red-200 p-6 shadow-sm">
         <div className="flex items-center gap-2 mb-4">
           <HiOutlineExclamation className="w-5 h-5 text-red-500" />

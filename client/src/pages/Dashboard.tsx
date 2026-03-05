@@ -146,7 +146,6 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="space-y-8">
-      {/* Header */}
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
         <p className="text-gray-500 mt-1">
@@ -154,7 +153,6 @@ const Dashboard: React.FC = () => {
         </p>
       </div>
 
-      {/* Progress Bar */}
       <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
         <h3 className="font-semibold text-gray-700 mb-3">Goal Progress</h3>
         <ProgressBar
@@ -163,7 +161,6 @@ const Dashboard: React.FC = () => {
         />
       </div>
 
-      {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           title="Total Points"
@@ -195,7 +192,6 @@ const Dashboard: React.FC = () => {
         />
       </div>
 
-      {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
           <h3 className="font-semibold text-gray-700 mb-4">

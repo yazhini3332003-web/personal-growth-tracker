@@ -15,7 +15,7 @@ const API = axios.create({
   baseURL: process.env.REACT_APP_API_URL || "/api",
 });
 
-// ─── Goals ───────────────────────────────────────────────
+// Goals
 export const fetchGoals = () => API.get<Goal[]>("/goals");
 export const fetchGoal = (id: string) => API.get<Goal>(`/goals/${id}`);
 export const createGoal = (data: GoalFormData) =>
@@ -27,7 +27,7 @@ export const resetGoal = (id: string) => API.post<Goal>(`/goals/${id}/reset`);
 export const fetchDashboard = (id: string) =>
   API.get<DashboardData>(`/goals/${id}/dashboard`);
 
-// ─── Categories ──────────────────────────────────────────
+// Categories
 export const fetchCategories = (goalId: string) =>
   API.get<Category[]>(`/categories?goal=${goalId}`);
 export const createCategory = (data: CategoryFormData) =>
@@ -36,7 +36,7 @@ export const updateCategory = (id: string, data: Partial<CategoryFormData>) =>
   API.put<Category>(`/categories/${id}`, data);
 export const deleteCategory = (id: string) => API.delete(`/categories/${id}`);
 
-// ─── Tasks ───────────────────────────────────────────────
+// Tasks
 export const fetchTasks = (goalId: string) =>
   API.get<Task[]>(`/tasks?goal=${goalId}`);
 export const fetchTasksByCategory = (categoryId: string) =>
@@ -47,7 +47,7 @@ export const updateTask = (id: string, data: Partial<TaskFormData>) =>
   API.put<Task>(`/tasks/${id}`, data);
 export const deleteTask = (id: string) => API.delete(`/tasks/${id}`);
 
-// ─── Daily Logs ──────────────────────────────────────────
+// Daily Logs
 export const fetchDailyLogs = (goalId: string) =>
   API.get<DailyLog[]>(`/daily-logs?goal=${goalId}`);
 export const createDailyLog = (data: DailyLogFormData) =>

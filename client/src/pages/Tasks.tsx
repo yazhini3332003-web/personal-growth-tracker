@@ -90,7 +90,6 @@ const Tasks: React.FC = () => {
     }
   };
 
-  // Group tasks by category
   const tasksByCategory = tasks.reduce<Record<string, Task[]>>((acc, task) => {
     const catName =
       typeof task.category === "string"

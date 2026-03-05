@@ -69,7 +69,6 @@ const Analytics: React.FC = () => {
 
   const dailyScores = dashboard.dailyScores;
 
-  // ─── Daily Score Line Chart ─────────────────────────────
   const lineData = {
     labels: dailyScores.map((s) => `Day ${s.day}`),
     datasets: [
@@ -86,7 +85,6 @@ const Analytics: React.FC = () => {
     ],
   };
 
-  // ─── Cumulative Progress Line ───────────────────────────
   let cumulative = 0;
   const cumulativeData = dailyScores.map((s) => {
     cumulative += s.points;
@@ -120,7 +118,6 @@ const Analytics: React.FC = () => {
     ],
   };
 
-  // ─── Weekly Aggregation Bar Chart ───────────────────────
   const weeklyData: number[] = [];
   dailyScores.forEach((s) => {
     const weekIndex = Math.floor((s.day - 1) / 7);
@@ -146,7 +143,6 @@ const Analytics: React.FC = () => {
     ],
   };
 
-  // ─── Category Doughnut ──────────────────────────────────
   const catLabels = Object.keys(dashboard.categoryBreakdown);
   const catColors = [
     "#6366f1",
@@ -197,7 +193,6 @@ const Analytics: React.FC = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Daily Score Chart */}
           <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
             <h3 className="font-semibold text-gray-700 mb-4">
               Daily Score Trend
@@ -205,7 +200,6 @@ const Analytics: React.FC = () => {
             <Line data={lineData} options={chartOptions} />
           </div>
 
-          {/* Cumulative Progress */}
           <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
             <h3 className="font-semibold text-gray-700 mb-4">
               Cumulative Progress vs Target Pace
@@ -219,7 +213,6 @@ const Analytics: React.FC = () => {
             />
           </div>
 
-          {/* Weekly Progress */}
           <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
             <h3 className="font-semibold text-gray-700 mb-4">
               Weekly Progress
@@ -227,7 +220,6 @@ const Analytics: React.FC = () => {
             <Bar data={barData} options={chartOptions} />
           </div>
 
-          {/* Category Performance */}
           <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
             <h3 className="font-semibold text-gray-700 mb-4">
               Category Performance

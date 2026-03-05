@@ -220,7 +220,7 @@ const WebDevAIUpdates: React.FC = () => {
           Web Developer AI Updates
         </h1>
         <p className="text-gray-500 mt-1">
-          How AI is transforming software development — a structured roadmap for
+          How AI is transforming software development \u2014 a structured roadmap for
           developers
         </p>
       </div>
