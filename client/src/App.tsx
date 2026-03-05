@@ -12,6 +12,7 @@ import DailyTracker from "./pages/DailyTracker";
 import Analytics from "./pages/Analytics";
 import WebDevAIUpdates from "./pages/WebDevAIUpdates";
 import Investment from "./pages/Investment";
+import AILearningPlatform from "./pages/AILearningPlatform";
 import Settings from "./pages/Settings";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
                 <Route path="/analytics" element={<Analytics />} />
                 <Route path="/ai-updates" element={<WebDevAIUpdates />} />
                 <Route path="/investment" element={<Investment />} />
+                <Route path="/ai-learning" element={<AILearningPlatform />} />
                 <Route path="/settings" element={<Settings />} />
               </Routes>
             </div>
