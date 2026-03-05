@@ -9,6 +9,8 @@ import {
   HiOutlineViewGrid,
   HiOutlineMenu,
   HiOutlineX,
+  HiOutlineLightBulb,
+  HiOutlineCurrencyDollar,
 } from "react-icons/hi";
 
 const navigation = [
@@ -18,6 +20,8 @@ const navigation = [
   { name: "Tasks", href: "/tasks", icon: HiOutlineCalendar },
   { name: "Tracker", href: "/tracker", icon: HiOutlineCalendar },
   { name: "Analytics", href: "/analytics", icon: HiOutlineChartBar },
+  { name: "AI Updates", href: "/ai-updates", icon: HiOutlineLightBulb },
+  { name: "Investment", href: "/investment", icon: HiOutlineCurrencyDollar },
   { name: "Settings", href: "/settings", icon: HiOutlineCog },
 ];
 

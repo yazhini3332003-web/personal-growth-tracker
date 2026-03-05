@@ -10,6 +10,8 @@ import Categories from "./pages/Categories";
 import Tasks from "./pages/Tasks";
 import DailyTracker from "./pages/DailyTracker";
 import Analytics from "./pages/Analytics";
+import WebDevAIUpdates from "./pages/WebDevAIUpdates";
+import Investment from "./pages/Investment";
 import Settings from "./pages/Settings";
 
 function App() {
@@ -28,6 +30,8 @@ function App() {
                 <Route path="/tasks" element={<Tasks />} />
                 <Route path="/tracker" element={<DailyTracker />} />
                 <Route path="/analytics" element={<Analytics />} />
+                <Route path="/ai-updates" element={<WebDevAIUpdates />} />
+                <Route path="/investment" element={<Investment />} />
                 <Route path="/settings" element={<Settings />} />
               </Routes>
             </div>
