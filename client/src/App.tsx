@@ -13,6 +13,7 @@ import Analytics from "./pages/Analytics";
 import WebDevAIUpdates from "./pages/WebDevAIUpdates";
 import Investment from "./pages/Investment";
 import AILearningPlatform from "./pages/AILearningPlatform";
+import AILearningLab from "./pages/AILearningLab";
 import Settings from "./pages/Settings";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/ai-updates" element={<WebDevAIUpdates />} />
                 <Route path="/investment" element={<Investment />} />
                 <Route path="/ai-learning" element={<AILearningPlatform />} />
+                <Route path="/learning-lab" element={<AILearningLab />} />
                 <Route path="/settings" element={<Settings />} />
               </Routes>
             </div>
