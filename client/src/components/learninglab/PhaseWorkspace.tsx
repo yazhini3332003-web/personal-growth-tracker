@@ -3,6 +3,9 @@ import { LabPhase } from "../../types/learningLab";
 import { useLabContext } from "../../context/LearningLabContext";
 import CodeEditor from "./CodeEditor";
 import PromptPlayground from "./PromptPlayground";
+import ChatbotSimulator from "./ChatbotSimulator";
+import APITestingPlayground from "./APITestingPlayground";
+import AgentWorkflowBuilder from "./AgentWorkflowBuilder";
 
 interface PhaseWorkspaceProps {
   phase: LabPhase;
@@ -133,6 +136,29 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
         {/* LEARN TAB */}
         {activeTab === "learn" && (
           <div className="space-y-6">
+            {/* Why Important */}
+            <div className="bg-gray-900 rounded-2xl border border-gray-800 p-6">
+              <h2 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
+                ⚡ Why This Matters
+              </h2>
+              <p className="text-gray-300 text-sm leading-relaxed">{phase.whyImportant}</p>
+            </div>
+
+            {/* Real World Applications */}
+            <div className="bg-gray-900 rounded-2xl border border-gray-800 p-6">
+              <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                🌍 Real-World Applications
+              </h2>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {phase.realWorldApps.map((app, i) => (
+                  <div key={i} className="flex items-center gap-3 p-3 bg-gray-800/50 rounded-xl border border-gray-700/50">
+                    <span className="text-green-400 text-sm">✓</span>
+                    <span className="text-gray-300 text-sm">{app}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* Core Concepts */}
             <div className="bg-gray-900 rounded-2xl border border-gray-800 p-6">
               <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
@@ -212,20 +238,37 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
 
             {/* Quick Links */}
             <div className="bg-gray-900 rounded-2xl border border-gray-800 p-6">
-              <h2 className="text-lg font-bold text-white mb-4">📎 Quick Reference</h2>
-              <div className="grid gap-3 sm:grid-cols-3">
-                <div className="p-4 bg-blue-900/20 rounded-xl border border-blue-800/30">
-                  <p className="text-blue-400 text-xs font-semibold mb-1">📖 Documentation</p>
-                  <p className="text-gray-400 text-xs">Official docs and guides for each tool</p>
-                </div>
-                <div className="p-4 bg-purple-900/20 rounded-xl border border-purple-800/30">
-                  <p className="text-purple-400 text-xs font-semibold mb-1">🎥 Video Tutorials</p>
-                  <p className="text-gray-400 text-xs">Video walkthroughs and demos</p>
-                </div>
-                <div className="p-4 bg-green-900/20 rounded-xl border border-green-800/30">
-                  <p className="text-green-400 text-xs font-semibold mb-1">💬 Community</p>
-                  <p className="text-gray-400 text-xs">Forums, Discord, and Stack Overflow</p>
-                </div>
+              <h2 className="text-lg font-bold text-white mb-4">📎 Learning Resources</h2>
+              <div className="space-y-2">
+                {phase.resources.map((resource, i) => {
+                  const typeColors: Record<string, string> = {
+                    tutorial: "text-blue-400 bg-blue-500/10",
+                    docs: "text-green-400 bg-green-500/10",
+                    blog: "text-purple-400 bg-purple-500/10",
+                    github: "text-gray-300 bg-gray-500/10",
+                    video: "text-red-400 bg-red-500/10",
+                  };
+                  return (
+                    <a
+                      key={i}
+                      href={resource.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-3 bg-gray-800/50 rounded-xl border border-gray-700/50 hover:border-gray-500 transition-all group"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className={`text-xs px-2 py-0.5 rounded-full ${typeColors[resource.type] || "text-gray-400 bg-gray-700"}`}>
+                          {resource.type}
+                        </span>
+                        <div>
+                          <span className="text-white text-sm group-hover:text-indigo-300 transition-colors">{resource.title}</span>
+                          <p className="text-gray-500 text-xs mt-0.5">{resource.description}</p>
+                        </div>
+                      </div>
+                      <span className="text-gray-500 text-xs group-hover:text-indigo-400">↗</span>
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -242,8 +285,23 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
             </div>
 
             {/* Prompt Playground for prompt/api types */}
-            {(phase.practiceType === "prompt" || phase.practiceType === "api") && (
+            {(phase.practiceType === "prompt" || phase.practiceType === "nocode") && (
               <PromptPlayground phaseId={phase.id} />
+            )}
+
+            {/* API Testing Playground */}
+            {phase.practiceType === "api" && (
+              <APITestingPlayground phaseId={phase.id} />
+            )}
+
+            {/* Chatbot Simulator */}
+            {phase.practiceType === "chatbot" && (
+              <ChatbotSimulator phaseId={phase.id} />
+            )}
+
+            {/* Agent Workflow Builder */}
+            {phase.practiceType === "agent" && (
+              <AgentWorkflowBuilder phaseId={phase.id} />
             )}
 
             {/* Exercises */}

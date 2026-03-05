@@ -6,6 +6,7 @@ interface LabContextType {
   completeExercise: (exerciseId: string) => void;
   completeProject: (projectId: string) => void;
   completePhase: (phaseId: number) => void;
+  completeLesson: (lessonId: string) => void;
   setCurrentPhase: (phaseId: number) => void;
   saveCodeSnapshot: (key: string, code: string) => void;
   getCodeSnapshot: (key: string) => string;
@@ -13,13 +14,14 @@ interface LabContextType {
   addLearningTime: (minutes: number) => void;
   resetAllProgress: () => void;
   getPhaseProgress: (phaseId: number) => { exercises: number; totalExercises: number; projectDone: boolean; phaseDone: boolean };
-  getOverallStats: () => { completedPhases: number; completedExercises: number; completedProjects: number; totalProgress: number; streak: number; totalMinutes: number };
+  getOverallStats: () => { completedPhases: number; completedExercises: number; completedProjects: number; completedLessons: number; totalProgress: number; streak: number; totalMinutes: number };
 }
 
 const defaultProgress: LabProgress = {
   completedPhases: [],
   completedExercises: [],
   completedProjects: [],
+  completedLessons: [],
   phaseNotes: {},
   codeSnapshots: {},
   currentPhase: 1,
@@ -27,6 +29,7 @@ const defaultProgress: LabProgress = {
   lastActiveDate: "",
   totalMinutes: 0,
   weeklyLog: {},
+  dailyLog: {},
 };
 
 const STORAGE_KEY = "ai-learning-lab-progress";
@@ -86,6 +89,13 @@ export const LabProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     });
   }, []);
 
+  const completeLesson = useCallback((lessonId: string) => {
+    setProgress((p) => {
+      if (p.completedLessons.includes(lessonId)) return p;
+      return { ...p, completedLessons: [...p.completedLessons, lessonId] };
+    });
+  }, []);
+
   const setCurrentPhase = useCallback((phaseId: number) => {
     setProgress((p) => ({ ...p, currentPhase: phaseId }));
   }, []);
@@ -115,6 +125,7 @@ export const LabProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       ...p,
       totalMinutes: p.totalMinutes + minutes,
       weeklyLog: { ...p.weeklyLog, [today]: (p.weeklyLog[today] || 0) + minutes },
+      dailyLog: { ...p.dailyLog, [today]: (p.dailyLog[today] || 0) + minutes },
     }));
   }, []);
 
@@ -140,14 +151,16 @@ export const LabProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const totalExercises = progress.completedExercises.length;
     const totalProjects = progress.completedProjects.length;
     const totalPhases = progress.completedPhases.length;
-    // 8 phases, ~11 exercises, 8 projects = 27 items total
-    const totalItems = 27;
-    const completedItems = totalPhases + totalExercises + totalProjects;
+    const totalLessons = progress.completedLessons.length;
+    // 8 phases, ~11 exercises, 8 projects, ~48 lessons = ~75 items total
+    const totalItems = 75;
+    const completedItems = totalPhases + totalExercises + totalProjects + totalLessons;
     return {
       completedPhases: totalPhases,
       completedExercises: totalExercises,
       completedProjects: totalProjects,
-      totalProgress: Math.round((completedItems / totalItems) * 100),
+      completedLessons: totalLessons,
+      totalProgress: Math.min(100, Math.round((completedItems / totalItems) * 100)),
       streak: progress.streak,
       totalMinutes: progress.totalMinutes,
     };
@@ -160,6 +173,7 @@ export const LabProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         completeExercise,
         completeProject,
         completePhase,
+        completeLesson,
         setCurrentPhase,
         saveCodeSnapshot,
         getCodeSnapshot,

@@ -84,6 +84,19 @@ const LabProgressTracker: React.FC = () => {
             Exercises: {stats.completedExercises} | Projects: {stats.completedProjects}
           </p>
         </div>
+
+        <div className="bg-gradient-to-br from-purple-900/40 to-purple-900/20 rounded-2xl p-5 border border-purple-800/40 col-span-2 lg:col-span-4">
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-purple-300 text-xs font-semibold">📖 Lessons Completed</p>
+            <span className="text-purple-400 text-xs">{stats.completedLessons} lessons</span>
+          </div>
+          <div className="bg-purple-950 rounded-full h-2">
+            <div
+              className="h-full bg-purple-500 rounded-full transition-all duration-700"
+              style={{ width: `${Math.min((stats.completedLessons / 75) * 100, 100)}%` }}
+            />
+          </div>
+        </div>
       </div>
 
       {/* Weekly Chart */}
@@ -114,6 +127,55 @@ const LabProgressTracker: React.FC = () => {
               </div>
             );
           })}
+        </div>
+      </div>
+
+      {/* Daily Progress Log */}
+      <div className="bg-gray-900 rounded-2xl border border-gray-800 p-6">
+        <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+          📝 Daily Learning Log
+        </h3>
+        {Object.keys(progress.dailyLog || {}).length > 0 ? (
+          <div className="grid grid-cols-7 gap-2">
+            {Array.from({ length: 28 }, (_, i) => {
+              const d = new Date();
+              d.setDate(d.getDate() - (27 - i));
+              const key = d.toISOString().split("T")[0];
+              const mins = (progress.dailyLog || {})[key] || 0;
+              const intensity = mins === 0 ? 0 : mins < 10 ? 1 : mins < 30 ? 2 : mins < 60 ? 3 : 4;
+              const colors = [
+                "bg-gray-800",
+                "bg-indigo-900/60",
+                "bg-indigo-700/60",
+                "bg-indigo-500/60",
+                "bg-indigo-400/80",
+              ];
+              return (
+                <div
+                  key={key}
+                  className={`aspect-square rounded-md ${colors[intensity]} flex items-center justify-center cursor-default`}
+                  title={`${key}: ${mins} min`}
+                >
+                  {i >= 21 && (
+                    <span className="text-[10px] text-gray-400">
+                      {d.getDate()}
+                    </span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <p className="text-gray-600 text-sm text-center py-4">
+            Start learning to see your daily activity!
+          </p>
+        )}
+        <div className="flex items-center gap-2 mt-3 justify-end">
+          <span className="text-gray-600 text-xs">Less</span>
+          {["bg-gray-800", "bg-indigo-900/60", "bg-indigo-700/60", "bg-indigo-500/60", "bg-indigo-400/80"].map((c, i) => (
+            <div key={i} className={`w-3 h-3 rounded-sm ${c}`} />
+          ))}
+          <span className="text-gray-600 text-xs">More</span>
         </div>
       </div>
 

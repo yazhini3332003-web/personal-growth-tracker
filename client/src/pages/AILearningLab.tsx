@@ -6,8 +6,9 @@ import LabRoadmap from "../components/learninglab/LabRoadmap";
 import PhaseWorkspace from "../components/learninglab/PhaseWorkspace";
 import LabProgressTracker from "../components/learninglab/LabProgressTracker";
 import LabNewsFeed from "../components/learninglab/LabNewsFeed";
+import ResourceLibrary from "../components/learninglab/ResourceLibrary";
 
-type ViewMode = "home" | "phase" | "progress" | "news";
+type ViewMode = "home" | "phase" | "progress" | "news" | "resources";
 
 const LearningLabContent: React.FC = () => {
   const [view, setView] = useState<ViewMode>("home");
@@ -30,6 +31,7 @@ const LearningLabContent: React.FC = () => {
   const navItems = [
     { key: "home" as ViewMode, label: "Home", icon: "🏠" },
     { key: "progress" as ViewMode, label: "Progress", icon: "📊" },
+    { key: "resources" as ViewMode, label: "Resources", icon: "📚" },
     { key: "news" as ViewMode, label: "AI News", icon: "📰" },
   ];
 
@@ -77,6 +79,8 @@ const LearningLabContent: React.FC = () => {
       )}
 
       {view === "progress" && <LabProgressTracker />}
+
+      {view === "resources" && <ResourceLibrary />}
 
       {view === "news" && <LabNewsFeed />}
     </div>

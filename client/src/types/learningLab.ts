@@ -5,6 +5,13 @@ export interface LabTool {
   icon: string;
 }
 
+export interface LabResource {
+  title: string;
+  url: string;
+  type: "tutorial" | "docs" | "blog" | "github" | "video";
+  description: string;
+}
+
 export interface LabExercise {
   id: string;
   title: string;
@@ -29,11 +36,14 @@ export interface LabPhase {
   title: string;
   subtitle: string;
   description: string;
+  whyImportant: string;
+  realWorldApps: string[];
   learningContent: string[];
   tools: LabTool[];
+  resources: LabResource[];
   exercises: LabExercise[];
   miniProject: LabMiniProject;
-  practiceType: "prompt" | "code" | "api" | "simulator";
+  practiceType: "prompt" | "code" | "api" | "chatbot" | "agent" | "nocode";
   practiceDescription: string;
   color: string;
   icon: string;
@@ -43,6 +53,7 @@ export interface LabProgress {
   completedPhases: number[];
   completedExercises: string[];
   completedProjects: string[];
+  completedLessons: string[];
   phaseNotes: Record<number, string>;
   codeSnapshots: Record<string, string>;
   currentPhase: number;
@@ -50,6 +61,7 @@ export interface LabProgress {
   lastActiveDate: string;
   totalMinutes: number;
   weeklyLog: Record<string, number>;
+  dailyLog: Record<string, number>;
 }
 
 export interface NewsArticle {
