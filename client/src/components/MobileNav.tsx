@@ -35,9 +35,9 @@ const MobileNav: React.FC = () => {
 
   return (
     <div className="md:hidden">
-      <div className="bg-primary-900 px-4 py-3 flex items-center justify-between">
+      <div className="bg-slate-900 px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-primary-400 rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
             <span className="text-white text-sm font-bold">P</span>
           </div>
           <span className="text-white font-bold">Growth Tracker</span>
@@ -54,7 +54,7 @@ const MobileNav: React.FC = () => {
         </button>
       </div>
       {open && (
-        <div className="bg-primary-800 px-3 py-2 space-y-1">
+        <div className="bg-slate-800 px-3 py-2 space-y-1">
           {navigation.map((item) => {
             const isActive = location.pathname === item.href;
             return (
@@ -65,7 +65,7 @@ const MobileNav: React.FC = () => {
                 className={`flex items-center px-3 py-2 text-sm font-medium rounded-lg ${
                   isActive
                     ? "bg-primary-600 text-white"
-                    : "text-primary-200 hover:bg-primary-700"
+                    : "text-slate-300 hover:bg-slate-700"
                 }`}
               >
                 <item.icon className="mr-3 h-5 w-5" />

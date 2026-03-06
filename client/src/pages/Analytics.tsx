@@ -50,7 +50,7 @@ const Analytics: React.FC = () => {
   if (!activeGoal) {
     return (
       <div className="text-center py-20">
-        <p className="text-gray-500">
+        <p className="text-slate-500">
           Please create a goal to view analytics.
         </p>
       </div>
@@ -177,31 +177,31 @@ const Analytics: React.FC = () => {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">
+        <h1 className="text-3xl font-bold text-slate-900">
           Progress Analytics
         </h1>
-        <p className="text-gray-500 mt-1">
+        <p className="text-slate-500 mt-1">
           Detailed performance analysis for "{activeGoal.name}"
         </p>
       </div>
 
       {dailyScores.length === 0 ? (
-        <div className="text-center py-16 bg-white rounded-xl border border-gray-100">
-          <p className="text-gray-500 text-lg">
+        <div className="text-center py-16 bg-white rounded-xl border border-slate-200/60">
+          <p className="text-slate-500 text-lg">
             No data available yet. Start tracking your daily progress!
           </p>
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
-            <h3 className="font-semibold text-gray-700 mb-4">
+          <div className="bg-white rounded-xl border border-slate-200/60 p-6 shadow-sm">
+            <h3 className="font-semibold text-slate-700 mb-4">
               Daily Score Trend
             </h3>
             <Line data={lineData} options={chartOptions} />
           </div>
 
-          <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
-            <h3 className="font-semibold text-gray-700 mb-4">
+          <div className="bg-white rounded-xl border border-slate-200/60 p-6 shadow-sm">
+            <h3 className="font-semibold text-slate-700 mb-4">
               Cumulative Progress vs Target Pace
             </h3>
             <Line
@@ -213,15 +213,15 @@ const Analytics: React.FC = () => {
             />
           </div>
 
-          <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
-            <h3 className="font-semibold text-gray-700 mb-4">
+          <div className="bg-white rounded-xl border border-slate-200/60 p-6 shadow-sm">
+            <h3 className="font-semibold text-slate-700 mb-4">
               Weekly Progress
             </h3>
             <Bar data={barData} options={chartOptions} />
           </div>
 
-          <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
-            <h3 className="font-semibold text-gray-700 mb-4">
+          <div className="bg-white rounded-xl border border-slate-200/60 p-6 shadow-sm">
+            <h3 className="font-semibold text-slate-700 mb-4">
               Category Performance
             </h3>
             {catLabels.length > 0 ? (
@@ -250,11 +250,11 @@ const Analytics: React.FC = () => {
                               catColors[i % catColors.length],
                           }}
                         />
-                        <span className="text-gray-600">{cat}</span>
+                        <span className="text-slate-600">{cat}</span>
                       </div>
-                      <div className="text-gray-900 font-semibold">
+                      <div className="text-slate-900 font-semibold">
                         {dashboard.categoryBreakdown[cat].points} pts
-                        <span className="text-gray-400 font-normal ml-1">
+                        <span className="text-slate-400 font-normal ml-1">
                           ({dashboard.categoryBreakdown[cat].count} tasks)
                         </span>
                       </div>
@@ -263,7 +263,7 @@ const Analytics: React.FC = () => {
                 </div>
               </>
             ) : (
-              <p className="text-gray-400 text-center py-8">
+              <p className="text-slate-400 text-center py-8">
                 No category data yet.
               </p>
             )}

@@ -22,7 +22,7 @@ const LabNewsFeed: React.FC = () => {
     <div className="space-y-6">
       <div className="text-center mb-4">
         <h2 className="text-2xl font-bold text-white mb-2">📰 AI News & Updates</h2>
-        <p className="text-gray-400 text-sm">
+        <p className="text-slate-400 text-sm">
           Stay updated with the latest AI tools, frameworks, and breakthroughs
         </p>
       </div>
@@ -35,8 +35,8 @@ const LabNewsFeed: React.FC = () => {
             onClick={() => setFilter(cat)}
             className={`px-4 py-2 rounded-xl text-sm font-medium transition-all capitalize ${
               filter === cat
-                ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/20"
-                : "bg-gray-800 text-gray-400 hover:bg-gray-700 border border-gray-700"
+                ? "bg-indigo-600 text-white shadow-sm"
+                : "bg-slate-800 text-slate-400 hover:bg-slate-700 border border-slate-700"
             }`}
           >
             {cat === "all" ? "🌍 All" : cat}
@@ -51,10 +51,10 @@ const LabNewsFeed: React.FC = () => {
           return (
             <div
               key={article.id}
-              className="bg-gray-900 rounded-2xl border border-gray-800 p-5 hover:border-gray-600 transition-all group"
+              className="bg-slate-900 rounded-2xl border border-slate-800 p-5 hover:border-slate-600 transition-all group"
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gray-800 flex items-center justify-center text-2xl shrink-0 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-2xl shrink-0 group-hover:scale-110 transition-transform">
                   {article.icon}
                 </div>
                 <div className="flex-1 min-w-0">
@@ -64,14 +64,14 @@ const LabNewsFeed: React.FC = () => {
                     >
                       {article.category}
                     </span>
-                    <span className="text-gray-600 text-xs">{article.date}</span>
+                    <span className="text-slate-600 text-xs">{article.date}</span>
                   </div>
                   <h3 className="text-white font-semibold text-sm mb-2 group-hover:text-indigo-300 transition-colors">
                     {article.title}
                   </h3>
-                  <p className="text-gray-400 text-xs leading-relaxed">{article.summary}</p>
+                  <p className="text-slate-400 text-xs leading-relaxed">{article.summary}</p>
                   <div className="mt-3 flex items-center justify-between">
-                    <span className="text-gray-600 text-xs">📰 {article.source}</span>
+                    <span className="text-slate-600 text-xs">📰 {article.source}</span>
                     <span className="text-indigo-400 text-xs hover:text-indigo-300 cursor-pointer">
                       Read more →
                     </span>
@@ -85,9 +85,9 @@ const LabNewsFeed: React.FC = () => {
 
       {/* Auto-update notice */}
       <div className="text-center py-4">
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-800/50 rounded-xl border border-gray-700/50">
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800/50 rounded-xl border border-slate-700/50">
           <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-          <span className="text-gray-400 text-xs">Auto-updating with latest AI news</span>
+          <span className="text-slate-400 text-xs">Auto-updating with latest AI news</span>
         </div>
       </div>
     </div>

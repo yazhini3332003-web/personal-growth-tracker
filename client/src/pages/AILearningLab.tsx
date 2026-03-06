@@ -36,7 +36,7 @@ const LearningLabContent: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-950 -mx-6 lg:-mx-10 -my-8 px-6 lg:px-10 py-8">
+    <div className="min-h-screen bg-slate-950 -mx-6 lg:-mx-10 -my-8 px-6 lg:px-10 py-8">
       {/* Top Navigation */}
       <div className="flex items-center justify-between mb-10">
         <div className="flex items-center gap-3">
@@ -45,18 +45,18 @@ const LearningLabContent: React.FC = () => {
           </div>
           <div>
             <h1 className="text-white font-bold text-xl">Learning Lab</h1>
-            <p className="text-gray-500 text-xs">{stats.totalProgress}% complete</p>
+            <p className="text-slate-500 text-xs">{stats.totalProgress}% complete</p>
           </div>
         </div>
-        <div className="flex gap-1 bg-gray-900/80 rounded-xl p-1.5 border border-gray-800">
+        <div className="flex gap-1 bg-slate-900/80 rounded-xl p-1.5 border border-slate-800">
           {navItems.map((item) => (
             <button
               key={item.key}
               onClick={() => setView(item.key)}
               className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-all flex items-center gap-2 ${
                 view === item.key || (view === "phase" && item.key === "home")
-                  ? "bg-gray-800 text-white"
-                  : "text-gray-500 hover:text-gray-300"
+                  ? "bg-slate-800 text-white"
+                  : "text-slate-500 hover:text-slate-300"
               }`}
             >
               <span>{item.icon}</span>

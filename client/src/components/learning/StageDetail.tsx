@@ -73,8 +73,8 @@ const StageDetail: React.FC<Props> = ({ stage, onClose }) => {
             onClick={() => setActiveTab(tab.key)}
             className={`flex-1 px-4 py-3 text-sm font-medium transition-all ${
               activeTab === tab.key
-                ? "border-b-2 text-gray-800"
-                : "text-gray-500 hover:text-gray-700"
+                ? "border-b-2 text-slate-800"
+                : "text-slate-500 hover:text-slate-700"
             }`}
             style={activeTab === tab.key ? { borderColor: stage.color } : {}}
           >
@@ -94,7 +94,7 @@ const StageDetail: React.FC<Props> = ({ stage, onClose }) => {
                 <label
                   key={i}
                   className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition ${
-                    completed ? "bg-green-50" : "bg-gray-50 hover:bg-gray-100"
+                    completed ? "bg-green-50" : "bg-slate-50 hover:bg-slate-100"
                   }`}
                 >
                   <input
@@ -104,7 +104,7 @@ const StageDetail: React.FC<Props> = ({ stage, onClose }) => {
                     className="w-5 h-5 rounded"
                     style={{ accentColor: stage.color }}
                   />
-                  <span className={`flex-1 ${completed ? "line-through text-gray-400" : "text-gray-700"}`}>
+                  <span className={`flex-1 ${completed ? "line-through text-slate-400" : "text-slate-700"}`}>
                     {topic}
                   </span>
                   {completed && <span className="text-green-500 text-sm">✓ Done</span>}
@@ -122,17 +122,17 @@ const StageDetail: React.FC<Props> = ({ stage, onClose }) => {
                 href={res.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-start gap-3 p-4 bg-gray-50 hover:bg-blue-50 rounded-xl transition group"
+                className="flex items-start gap-3 p-4 bg-slate-50 hover:bg-blue-50 rounded-xl transition group"
               >
                 <span className="text-2xl">{resourceTypeIcons[res.type] || "📄"}</span>
                 <div className="flex-1">
-                  <h4 className="font-semibold text-gray-800 group-hover:text-blue-600 transition">{res.title}</h4>
-                  <p className="text-sm text-gray-500 mt-0.5">{res.description}</p>
-                  <span className="inline-block mt-2 px-2 py-0.5 bg-gray-200 text-gray-600 rounded text-xs capitalize">
+                  <h4 className="font-semibold text-slate-800 group-hover:text-blue-600 transition">{res.title}</h4>
+                  <p className="text-sm text-slate-500 mt-0.5">{res.description}</p>
+                  <span className="inline-block mt-2 px-2 py-0.5 bg-slate-200 text-slate-600 rounded text-xs capitalize">
                     {res.type}
                   </span>
                 </div>
-                <span className="text-gray-400 group-hover:text-blue-500 mt-1">↗</span>
+                <span className="text-slate-400 group-hover:text-blue-500 mt-1">↗</span>
               </a>
             ))}
           </div>
@@ -146,27 +146,27 @@ const StageDetail: React.FC<Props> = ({ stage, onClose }) => {
                 <div
                   key={task.id}
                   className={`p-4 rounded-xl border-2 transition ${
-                    completed ? "border-green-200 bg-green-50" : "border-gray-100 bg-gray-50"
+                    completed ? "border-green-200 bg-green-50" : "border-slate-200/60 bg-slate-50"
                   }`}
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
-                        <h4 className={`font-semibold ${completed ? "text-green-600 line-through" : "text-gray-800"}`}>
+                        <h4 className={`font-semibold ${completed ? "text-green-600 line-through" : "text-slate-800"}`}>
                           {task.title}
                         </h4>
                         <span className={`px-2 py-0.5 rounded text-xs font-medium ${difficultyColors[task.difficulty]}`}>
                           {task.difficulty}
                         </span>
                       </div>
-                      <p className="text-sm text-gray-500 mt-1">{task.description}</p>
+                      <p className="text-sm text-slate-500 mt-1">{task.description}</p>
                     </div>
                     <button
                       onClick={() => toggleExercise(task.id)}
                       className={`ml-3 px-4 py-2 rounded-lg text-sm font-medium transition ${
                         completed
                           ? "bg-green-500 text-white hover:bg-green-600"
-                          : "bg-white border-2 border-gray-200 text-gray-600 hover:border-gray-400"
+                          : "bg-white border-2 border-slate-200 text-slate-600 hover:border-slate-400"
                       }`}
                     >
                       {completed ? "✓ Done" : "Mark Done"}
@@ -186,21 +186,21 @@ const StageDetail: React.FC<Props> = ({ stage, onClose }) => {
                 <div
                   key={proj.id}
                   className={`p-5 rounded-xl border-2 transition ${
-                    completed ? "border-green-200 bg-green-50" : "border-gray-100 bg-white"
+                    completed ? "border-green-200 bg-green-50" : "border-slate-200/60 bg-white"
                   }`}
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
                         <span className="text-xl">🚀</span>
-                        <h4 className={`font-bold text-lg ${completed ? "text-green-600 line-through" : "text-gray-800"}`}>
+                        <h4 className={`font-bold text-lg ${completed ? "text-green-600 line-through" : "text-slate-800"}`}>
                           {proj.title}
                         </h4>
                         <span className={`px-2 py-0.5 rounded text-xs font-medium ${difficultyColors[proj.difficulty]}`}>
                           {proj.difficulty}
                         </span>
                       </div>
-                      <p className="text-gray-600 mt-2">{proj.description}</p>
+                      <p className="text-slate-600 mt-2">{proj.description}</p>
                     </div>
                     <button
                       onClick={() => toggleProject(proj.id)}

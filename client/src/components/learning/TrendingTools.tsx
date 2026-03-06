@@ -28,7 +28,7 @@ const TrendingTools: React.FC = () => {
             className={`px-3 py-1.5 rounded-full text-sm font-medium transition ${
               filter === cat
                 ? "bg-orange-500 text-white"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
             }`}
           >
             {cat}
@@ -50,7 +50,7 @@ const TrendingTools: React.FC = () => {
               <span className="text-3xl">{tool.icon}</span>
               <div className="flex-1">
                 <div className="flex items-center gap-2">
-                  <h4 className="font-bold text-gray-800 group-hover:text-orange-600 transition">
+                  <h4 className="font-bold text-slate-800 group-hover:text-orange-600 transition">
                     {tool.name}
                   </h4>
                   {tool.trending && (
@@ -59,12 +59,12 @@ const TrendingTools: React.FC = () => {
                     </span>
                   )}
                 </div>
-                <p className="text-sm text-gray-500 mt-1">{tool.description}</p>
-                <span className="inline-block mt-2 px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-xs">
+                <p className="text-sm text-slate-500 mt-1">{tool.description}</p>
+                <span className="inline-block mt-2 px-2 py-0.5 bg-slate-100 text-slate-500 rounded text-xs">
                   {tool.category}
                 </span>
               </div>
-              <span className="text-gray-300 group-hover:text-orange-500 transition">↗</span>
+              <span className="text-slate-300 group-hover:text-orange-500 transition">↗</span>
             </div>
           </a>
         ))}

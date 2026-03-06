@@ -98,16 +98,16 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
   }, [code, exerciseId, saveCodeSnapshot]);
 
   return (
-    <div className="bg-gray-900 rounded-2xl border border-gray-700 overflow-hidden">
+    <div className="bg-slate-900 rounded-2xl border border-slate-700 overflow-hidden">
       {/* Header */}
-      <div className="bg-gray-800 px-4 py-3 flex items-center justify-between border-b border-gray-700">
+      <div className="bg-slate-800 px-4 py-3 flex items-center justify-between border-b border-slate-700">
         <div className="flex items-center gap-3">
           <div className="flex gap-1.5">
             <div className="w-3 h-3 rounded-full bg-red-500" />
             <div className="w-3 h-3 rounded-full bg-yellow-500" />
             <div className="w-3 h-3 rounded-full bg-green-500" />
           </div>
-          <span className="text-gray-300 text-sm font-mono">{title}</span>
+          <span className="text-slate-300 text-sm font-mono">{title}</span>
         </div>
         <div className="flex items-center gap-2">
           {isCompleted && (
@@ -119,13 +119,13 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
       </div>
 
       {/* Description */}
-      <div className="px-4 py-3 bg-gray-800/50 border-b border-gray-700">
-        <p className="text-gray-300 text-sm">{description}</p>
+      <div className="px-4 py-3 bg-slate-800/50 border-b border-slate-700">
+        <p className="text-slate-300 text-sm">{description}</p>
       </div>
 
       {/* Editor */}
       <div className="relative">
-        <div className="absolute left-0 top-0 bottom-0 w-12 bg-gray-800/80 flex flex-col items-center pt-3 text-gray-600 text-xs font-mono select-none">
+        <div className="absolute left-0 top-0 bottom-0 w-12 bg-slate-800/80 flex flex-col items-center pt-3 text-slate-600 text-xs font-mono select-none">
           {code.split("\n").map((_, i) => (
             <div key={i} className="h-[20px] leading-[20px]">
               {i + 1}
@@ -137,14 +137,14 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
           value={code}
           onChange={handleCodeChange}
           onKeyDown={handleTab}
-          className="w-full bg-gray-900 text-green-400 font-mono text-sm p-3 pl-14 outline-none resize-none min-h-[300px] leading-[20px]"
+          className="w-full bg-slate-900 text-green-400 font-mono text-sm p-3 pl-14 outline-none resize-none min-h-[300px] leading-[20px]"
           spellCheck={false}
           style={{ tabSize: 2 }}
         />
       </div>
 
       {/* Actions */}
-      <div className="bg-gray-800 px-4 py-3 flex items-center justify-between border-t border-gray-700">
+      <div className="bg-slate-800 px-4 py-3 flex items-center justify-between border-t border-slate-700">
         <div className="flex gap-2">
           <button
             onClick={runCode}
@@ -161,7 +161,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
           </button>
           <button
             onClick={resetCode}
-            className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-gray-300 text-sm rounded-lg transition-colors"
+            className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 text-sm rounded-lg transition-colors"
           >
             ↺ Reset
           </button>
@@ -196,8 +196,8 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
 
       {/* Output */}
       {output.length > 0 && (
-        <div className="border-t border-gray-700">
-          <div className="px-4 py-2 bg-gray-800 text-gray-400 text-xs font-semibold">
+        <div className="border-t border-slate-700">
+          <div className="px-4 py-2 bg-slate-800 text-slate-400 text-xs font-semibold">
             📟 Output
           </div>
           <div className="px-4 py-3 bg-black/50 max-h-[250px] overflow-y-auto">
@@ -205,7 +205,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
               <pre
                 key={i}
                 className={`text-sm font-mono whitespace-pre-wrap mb-1 ${
-                  line.startsWith("❌") ? "text-red-400" : line.startsWith("⚠️") ? "text-yellow-400" : "text-gray-300"
+                  line.startsWith("❌") ? "text-red-400" : line.startsWith("⚠️") ? "text-yellow-400" : "text-slate-300"
                 }`}
               >
                 {line}

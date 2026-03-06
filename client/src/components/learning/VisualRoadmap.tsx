@@ -59,15 +59,15 @@ const VisualRoadmap: React.FC<Props> = ({ onSelectStage, selectedStage }) => {
                         ? "border-current shadow-lg ring-2 ring-offset-2"
                         : completion === 100
                         ? "border-green-300 bg-green-50"
-                        : "border-gray-200 bg-white hover:border-gray-300"
+                        : "border-slate-200 bg-white hover:border-slate-300"
                     }`}
                     style={isSelected ? { borderColor: stage.color, boxShadow: `0 4px 14px ${stage.color}30` } : {}}
                   >
                     <div className={`flex items-center gap-3 ${isEven ? 'md:flex-row-reverse' : ''}`}>
                       <span className="text-2xl">{stage.icon}</span>
                       <div className={`flex-1 ${isEven ? 'md:text-right' : ''}`}>
-                        <h3 className="font-bold text-gray-800">{stage.title}</h3>
-                        <p className="text-sm text-gray-500 mt-0.5">Stage {stage.id} of 8</p>
+                        <h3 className="font-bold text-slate-800">{stage.title}</h3>
+                        <p className="text-sm text-slate-500 mt-0.5">Stage {stage.id} of 8</p>
                       </div>
                       {completion === 100 && (
                         <span className="text-green-500 text-xl">✅</span>
@@ -77,10 +77,10 @@ const VisualRoadmap: React.FC<Props> = ({ onSelectStage, selectedStage }) => {
                     {/* Progress Bar */}
                     <div className="mt-3">
                       <div className="flex justify-between text-xs mb-1">
-                        <span className="text-gray-500">{completion}% complete</span>
-                        <span className="text-gray-400">{stage.topics.length} topics</span>
+                        <span className="text-slate-500">{completion}% complete</span>
+                        <span className="text-slate-400">{stage.topics.length} topics</span>
                       </div>
-                      <div className="w-full bg-gray-100 rounded-full h-2">
+                      <div className="w-full bg-slate-100 rounded-full h-2">
                         <div
                           className="h-2 rounded-full transition-all duration-500"
                           style={{ width: `${completion}%`, backgroundColor: stage.color }}

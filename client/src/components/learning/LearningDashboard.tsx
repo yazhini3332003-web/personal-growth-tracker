@@ -48,8 +48,8 @@ const LearningDashboard: React.FC<Props> = ({ onNavigate }) => {
         ].map((stat) => (
           <div key={stat.label} className={`${stat.color} rounded-xl p-4`}>
             <span className="text-2xl">{stat.icon}</span>
-            <div className="text-xl font-bold text-gray-800 mt-1">{stat.value}</div>
-            <div className="text-xs text-gray-500">{stat.label}</div>
+            <div className="text-xl font-bold text-slate-800 mt-1">{stat.value}</div>
+            <div className="text-xs text-slate-500">{stat.label}</div>
           </div>
         ))}
       </div>
@@ -58,32 +58,32 @@ const LearningDashboard: React.FC<Props> = ({ onNavigate }) => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Current Stage */}
         <div className="bg-white border rounded-xl p-5">
-          <h3 className="font-bold text-gray-800 mb-3 flex items-center gap-2">
+          <h3 className="font-bold text-slate-800 mb-3 flex items-center gap-2">
             <span className="text-xl">{currentStage.icon}</span>
             Current: {currentStage.title}
           </h3>
           <div className="mb-3">
             <div className="flex justify-between text-sm mb-1">
-              <span className="text-gray-500">Stage Progress</span>
+              <span className="text-slate-500">Stage Progress</span>
               <span className="font-medium">{progress.stageProgress[currentStage.id] || 0}%</span>
             </div>
-            <div className="w-full bg-gray-100 rounded-full h-2.5">
+            <div className="w-full bg-slate-100 rounded-full h-2.5">
               <div
                 className="h-2.5 rounded-full transition-all"
                 style={{ width: `${progress.stageProgress[currentStage.id] || 0}%`, backgroundColor: currentStage.color }}
               />
             </div>
           </div>
-          <h4 className="text-sm font-medium text-gray-600 mb-2">Next topics to study:</h4>
+          <h4 className="text-sm font-medium text-slate-600 mb-2">Next topics to study:</h4>
           <ul className="space-y-1.5">
             {nextTopics.slice(0, 4).map((topic, i) => (
-              <li key={i} className="text-sm text-gray-600 flex items-center gap-2">
+              <li key={i} className="text-sm text-slate-600 flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: currentStage.color }} />
                 {topic}
               </li>
             ))}
             {nextTopics.length > 4 && (
-              <li className="text-sm text-gray-400">+{nextTopics.length - 4} more topics</li>
+              <li className="text-sm text-slate-400">+{nextTopics.length - 4} more topics</li>
             )}
           </ul>
           <button
@@ -97,7 +97,7 @@ const LearningDashboard: React.FC<Props> = ({ onNavigate }) => {
 
         {/* Recommended Resources */}
         <div className="bg-white border rounded-xl p-5">
-          <h3 className="font-bold text-gray-800 mb-3">📌 Recommended Resources</h3>
+          <h3 className="font-bold text-slate-800 mb-3">📌 Recommended Resources</h3>
           <div className="space-y-2">
             {currentStage.resources.slice(0, 4).map((res, i) => (
               <a
@@ -105,16 +105,16 @@ const LearningDashboard: React.FC<Props> = ({ onNavigate }) => {
                 href={res.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 p-3 bg-gray-50 hover:bg-blue-50 rounded-lg transition group"
+                className="flex items-center gap-3 p-3 bg-slate-50 hover:bg-blue-50 rounded-lg transition group"
               >
                 <span className="text-lg">
                   {res.type === "docs" ? "📄" : res.type === "video" ? "🎥" : res.type === "course" ? "🎓" : res.type === "github" ? "💻" : "📝"}
                 </span>
                 <div className="flex-1">
-                  <h4 className="text-sm font-medium text-gray-700 group-hover:text-blue-600">{res.title}</h4>
-                  <p className="text-xs text-gray-400">{res.type}</p>
+                  <h4 className="text-sm font-medium text-slate-700 group-hover:text-blue-600">{res.title}</h4>
+                  <p className="text-xs text-slate-400">{res.type}</p>
                 </div>
-                <span className="text-gray-300 group-hover:text-blue-500">↗</span>
+                <span className="text-slate-300 group-hover:text-blue-500">↗</span>
               </a>
             ))}
           </div>
@@ -124,7 +124,7 @@ const LearningDashboard: React.FC<Props> = ({ onNavigate }) => {
       {/* Recent News */}
       <div className="bg-white border rounded-xl p-5">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="font-bold text-gray-800">📰 Latest AI News</h3>
+          <h3 className="font-bold text-slate-800">📰 Latest AI News</h3>
           <button
             onClick={() => onNavigate("news")}
             className="text-sm text-indigo-600 hover:text-indigo-700 font-medium"
@@ -139,15 +139,15 @@ const LearningDashboard: React.FC<Props> = ({ onNavigate }) => {
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-gray-50 hover:bg-blue-50 rounded-lg transition group"
+              className="p-3 bg-slate-50 hover:bg-blue-50 rounded-lg transition group"
             >
-              <h4 className="text-sm font-medium text-gray-700 group-hover:text-blue-600 line-clamp-2">
+              <h4 className="text-sm font-medium text-slate-700 group-hover:text-blue-600 line-clamp-2">
                 {item.title}
               </h4>
               <div className="flex items-center gap-2 mt-1.5">
-                <span className="text-xs text-gray-400">{item.source}</span>
-                <span className="text-xs text-gray-300">•</span>
-                <span className="text-xs text-gray-400">{item.date}</span>
+                <span className="text-xs text-slate-400">{item.source}</span>
+                <span className="text-xs text-slate-300">•</span>
+                <span className="text-xs text-slate-400">{item.date}</span>
               </div>
             </a>
           ))}

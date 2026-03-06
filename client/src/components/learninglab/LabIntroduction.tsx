@@ -29,7 +29,7 @@ const LabIntroduction: React.FC = () => {
         </h1>
 
         {/* Description */}
-        <p className="text-gray-300 text-base sm:text-lg mb-8 leading-relaxed max-w-4xl">
+        <p className="text-slate-300 text-base sm:text-lg mb-8 leading-relaxed max-w-4xl">
           Your complete interactive learning system to become an AI-powered web developer.
           Follow a structured roadmap, practice real coding exercises, build mini projects,
           and track your progress — all without leaving this platform.
@@ -50,7 +50,7 @@ const LabIntroduction: React.FC = () => {
               className="flex items-center gap-3 px-4 py-3 bg-white/5 rounded-xl border border-white/10 hover:bg-white/[0.08] transition-colors"
             >
               <span className="text-lg flex-shrink-0">{item.icon}</span>
-              <span className="text-gray-200 text-sm font-medium">{item.text}</span>
+              <span className="text-slate-200 text-sm font-medium">{item.text}</span>
             </div>
           ))}
         </div>
@@ -64,7 +64,7 @@ const LabIntroduction: React.FC = () => {
             { value: "8", label: "Mini Projects" },
           ].map((stat, i) => (
             <React.Fragment key={i}>
-              {i > 0 && <div className="hidden sm:block w-px h-10 bg-gray-700/60 mx-2" />}
+              {i > 0 && <div className="hidden sm:block w-px h-10 bg-slate-700/60 mx-2" />}
               <div className="flex-1 min-w-[120px] text-center px-4">
                 <div className="text-2xl sm:text-3xl font-extrabold text-white leading-none mb-1">{stat.value}</div>
                 <div className="text-indigo-300/80 text-xs font-medium">{stat.label}</div>
@@ -80,7 +80,7 @@ const LabIntroduction: React.FC = () => {
               <span className="text-lg">🎯</span>
               <span className="text-white font-semibold text-sm">Learning Goal</span>
             </div>
-            <p className="text-gray-300 text-sm leading-relaxed flex-1">
+            <p className="text-slate-300 text-sm leading-relaxed flex-1">
               Become an <span className="text-indigo-300 font-semibold">AI-powered web developer</span> capable of building intelligent applications
             </p>
           </div>
@@ -89,7 +89,7 @@ const LabIntroduction: React.FC = () => {
               <span className="text-lg">⏱️</span>
               <span className="text-white font-semibold text-sm">Estimated Time</span>
             </div>
-            <p className="text-gray-300 text-sm leading-relaxed flex-1">
+            <p className="text-slate-300 text-sm leading-relaxed flex-1">
               <span className="text-purple-300 font-semibold">Beginner → Advanced</span> roadmap with self-paced learning
             </p>
           </div>

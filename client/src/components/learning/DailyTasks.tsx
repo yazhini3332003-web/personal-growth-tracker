@@ -35,7 +35,7 @@ const DailyTasks: React.FC = () => {
 
       {/* Time Logger */}
       <div className="bg-white border rounded-xl p-5">
-        <h4 className="font-bold text-gray-800 mb-3">⏱️ Log Study Time</h4>
+        <h4 className="font-bold text-slate-800 mb-3">⏱️ Log Study Time</h4>
         <div className="flex gap-3">
           <input
             type="number"
@@ -52,7 +52,7 @@ const DailyTasks: React.FC = () => {
             + Add Time
           </button>
         </div>
-        <p className="text-xs text-gray-400 mt-2">
+        <p className="text-xs text-slate-400 mt-2">
           Total logged today: {(progress.dailyLog[today]?.minutes || 0)} minutes
         </p>
       </div>
@@ -67,23 +67,23 @@ const DailyTasks: React.FC = () => {
             <div
               key={task.id}
               className={`bg-white border-2 rounded-xl p-4 transition ${
-                completed ? "border-green-200 bg-green-50" : "border-gray-100"
+                completed ? "border-green-200 bg-green-50" : "border-slate-200/60"
               }`}
             >
               <div className="flex items-center gap-3">
                 <span className="text-2xl">{taskTypeIcons[task.type] || "📝"}</span>
                 <div className="flex-1">
-                  <h4 className={`font-medium ${completed ? "text-green-600 line-through" : "text-gray-800"}`}>
+                  <h4 className={`font-medium ${completed ? "text-green-600 line-through" : "text-slate-800"}`}>
                     {task.title}
                   </h4>
-                  <p className="text-sm text-gray-500 mt-0.5">{task.description}</p>
+                  <p className="text-sm text-slate-500 mt-0.5">{task.description}</p>
                 </div>
                 <button
                   onClick={() => toggleDailyTask(task.id)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
                     completed
                       ? "bg-green-500 text-white"
-                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                   }`}
                 >
                   {completed ? "✓ Done" : "Complete"}

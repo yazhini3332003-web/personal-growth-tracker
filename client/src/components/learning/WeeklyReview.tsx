@@ -43,7 +43,7 @@ const WeeklyReview: React.FC = () => {
     if (week.tasks >= 5) return { grade: "B", color: "text-blue-500", msg: "Good job, keep it up!" };
     if (week.tasks >= 3) return { grade: "C", color: "text-yellow-500", msg: "Decent effort, try more!" };
     if (week.tasks >= 1) return { grade: "D", color: "text-orange-500", msg: "Just getting started." };
-    return { grade: "—", color: "text-gray-400", msg: "No activity this week yet." };
+    return { grade: "—", color: "text-slate-400", msg: "No activity this week yet." };
   };
 
   const { grade, color, msg } = getGrade();
@@ -60,7 +60,7 @@ const WeeklyReview: React.FC = () => {
       {/* Grade Card */}
       <div className="bg-white border-2 rounded-2xl p-8 text-center">
         <div className={`text-7xl font-black ${color}`}>{grade}</div>
-        <p className="text-gray-600 mt-2 text-lg font-medium">{msg}</p>
+        <p className="text-slate-600 mt-2 text-lg font-medium">{msg}</p>
       </div>
 
       {/* Week Stats */}
@@ -71,10 +71,10 @@ const WeeklyReview: React.FC = () => {
           { icon: "🚀", label: "Projects Finished", value: progress.completedProjects.length },
           { icon: "⏱️", label: "Minutes Spent", value: week.minutes },
         ].map((stat) => (
-          <div key={stat.label} className="bg-gray-50 rounded-xl p-4 text-center">
+          <div key={stat.label} className="bg-slate-50 rounded-xl p-4 text-center">
             <div className="text-2xl">{stat.icon}</div>
-            <div className="text-2xl font-bold text-gray-800 mt-1">{stat.value}</div>
-            <div className="text-xs text-gray-500">{stat.label}</div>
+            <div className="text-2xl font-bold text-slate-800 mt-1">{stat.value}</div>
+            <div className="text-xs text-slate-500">{stat.label}</div>
           </div>
         ))}
       </div>
@@ -82,7 +82,7 @@ const WeeklyReview: React.FC = () => {
       {/* Skills Improved */}
       {recentSkills.length > 0 && (
         <div className="bg-white border rounded-xl p-5">
-          <h4 className="font-bold text-gray-800 mb-3">🎯 Skills Improved</h4>
+          <h4 className="font-bold text-slate-800 mb-3">🎯 Skills Improved</h4>
           <div className="flex flex-wrap gap-2">
             {recentSkills.map((skill, i) => (
               <span
@@ -99,13 +99,13 @@ const WeeklyReview: React.FC = () => {
       {/* Active Stages */}
       {activeStages.length > 0 && (
         <div className="bg-white border rounded-xl p-5">
-          <h4 className="font-bold text-gray-800 mb-3">📊 Stage Activity</h4>
+          <h4 className="font-bold text-slate-800 mb-3">📊 Stage Activity</h4>
           <div className="space-y-3">
             {activeStages.map((stage) => (
               <div key={stage.id} className="flex items-center gap-3">
                 <span className="text-xl">{stage.icon}</span>
-                <span className="text-sm text-gray-600 flex-1">{stage.title}</span>
-                <div className="w-32 bg-gray-100 rounded-full h-2">
+                <span className="text-sm text-slate-600 flex-1">{stage.title}</span>
+                <div className="w-32 bg-slate-100 rounded-full h-2">
                   <div
                     className="h-2 rounded-full"
                     style={{
@@ -114,7 +114,7 @@ const WeeklyReview: React.FC = () => {
                     }}
                   />
                 </div>
-                <span className="text-sm text-gray-500 w-10 text-right">
+                <span className="text-sm text-slate-500 w-10 text-right">
                   {progress.stageProgress[stage.id] || 0}%
                 </span>
               </div>
@@ -125,7 +125,7 @@ const WeeklyReview: React.FC = () => {
 
       {/* Daily Activity This Week */}
       <div className="bg-white border rounded-xl p-5">
-        <h4 className="font-bold text-gray-800 mb-3">📅 Daily Activity (Last 7 Days)</h4>
+        <h4 className="font-bold text-slate-800 mb-3">📅 Daily Activity (Last 7 Days)</h4>
         <div className="grid grid-cols-7 gap-2">
           {Array.from({ length: 7 }).map((_, i) => {
             const d = new Date();
@@ -137,17 +137,17 @@ const WeeklyReview: React.FC = () => {
 
             return (
               <div key={i} className="text-center">
-                <div className="text-xs text-gray-400 mb-1">{dayNames[d.getDay()]}</div>
+                <div className="text-xs text-slate-400 mb-1">{dayNames[d.getDay()]}</div>
                 <div
                   className={`w-10 h-10 rounded-lg flex items-center justify-center mx-auto text-sm font-medium ${
                     hasActivity
                       ? "bg-green-500 text-white"
-                      : "bg-gray-100 text-gray-400"
+                      : "bg-slate-100 text-slate-400"
                   }`}
                 >
                   {hasActivity ? dayData.tasks : "—"}
                 </div>
-                <div className="text-xs text-gray-400 mt-1">{d.getDate()}</div>
+                <div className="text-xs text-slate-400 mt-1">{d.getDate()}</div>
               </div>
             );
           })}

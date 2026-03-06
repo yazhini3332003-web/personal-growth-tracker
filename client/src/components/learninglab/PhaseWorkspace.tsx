@@ -46,7 +46,7 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950">
+    <div className="min-h-screen bg-slate-950">
       {/* Phase Header */}
       <div
         className="relative overflow-hidden rounded-2xl mb-8"
@@ -59,7 +59,7 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
         <div className="p-8">
           <button
             onClick={onBack}
-            className="text-gray-400 hover:text-white text-sm mb-4 flex items-center gap-2 transition-colors"
+            className="text-slate-400 hover:text-white text-sm mb-4 flex items-center gap-2 transition-colors"
           >
             ← Back to Roadmap
           </button>
@@ -72,7 +72,7 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
             </div>
             <div>
               <div className="flex items-center gap-3">
-                <span className="text-gray-500 text-xs font-semibold uppercase tracking-wider">
+                <span className="text-slate-500 text-xs font-semibold uppercase tracking-wider">
                   Phase {phase.id} of 8
                 </span>
                 {pp.phaseDone && (
@@ -84,23 +84,23 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
               <h1 className="text-2xl font-bold text-white">{phase.title}</h1>
             </div>
           </div>
-          <p className="text-gray-400 text-sm max-w-3xl">{phase.description}</p>
+          <p className="text-slate-400 text-sm max-w-3xl">{phase.description}</p>
 
           {/* Progress */}
           <div className="mt-4 flex items-center gap-6">
             <div className="flex items-center gap-2">
-              <span className="text-gray-500 text-xs">Exercises:</span>
+              <span className="text-slate-500 text-xs">Exercises:</span>
               <span className="text-white text-sm font-semibold">
                 {pp.exercises}/{pp.totalExercises}
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-gray-500 text-xs">Project:</span>
+              <span className="text-slate-500 text-xs">Project:</span>
               <span className="text-white text-sm font-semibold">
                 {pp.projectDone ? "✅ Done" : "⬜ Not started"}
               </span>
             </div>
-            <div className="flex-1 max-w-[200px] bg-gray-800 rounded-full h-2">
+            <div className="flex-1 max-w-[200px] bg-slate-800 rounded-full h-2">
               <div
                 className="h-full rounded-full transition-all duration-500"
                 style={{
@@ -114,15 +114,15 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 bg-gray-900 rounded-xl p-1 mb-6 border border-gray-800">
+      <div className="flex gap-1 bg-slate-900 rounded-xl p-1 mb-6 border border-slate-800">
         {tabs.map((tab) => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
             className={`flex-1 py-3 px-4 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 ${
               activeTab === tab.key
-                ? "bg-gray-800 text-white shadow-lg"
-                : "text-gray-500 hover:text-gray-300 hover:bg-gray-800/50"
+                ? "bg-slate-800 text-white shadow-lg"
+                : "text-slate-500 hover:text-slate-300 hover:bg-slate-800/50"
             }`}
           >
             <span>{tab.icon}</span>
@@ -137,30 +137,30 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
         {activeTab === "learn" && (
           <div className="space-y-6">
             {/* Why Important */}
-            <div className="bg-gray-900 rounded-2xl border border-gray-800 p-6">
+            <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6">
               <h2 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
                 ⚡ Why This Matters
               </h2>
-              <p className="text-gray-300 text-sm leading-relaxed">{phase.whyImportant}</p>
+              <p className="text-slate-300 text-sm leading-relaxed">{phase.whyImportant}</p>
             </div>
 
             {/* Real World Applications */}
-            <div className="bg-gray-900 rounded-2xl border border-gray-800 p-6">
+            <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6">
               <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                 🌍 Real-World Applications
               </h2>
               <div className="grid gap-2 sm:grid-cols-2">
                 {phase.realWorldApps.map((app, i) => (
-                  <div key={i} className="flex items-center gap-3 p-3 bg-gray-800/50 rounded-xl border border-gray-700/50">
+                  <div key={i} className="flex items-center gap-3 p-3 bg-slate-800/50 rounded-xl border border-slate-700/50">
                     <span className="text-green-400 text-sm">✓</span>
-                    <span className="text-gray-300 text-sm">{app}</span>
+                    <span className="text-slate-300 text-sm">{app}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Core Concepts */}
-            <div className="bg-gray-900 rounded-2xl border border-gray-800 p-6">
+            <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6">
               <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                 📚 Core Concepts
               </h2>
@@ -168,7 +168,7 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
                 {phase.learningContent.map((content, i) => (
                   <div
                     key={i}
-                    className="flex gap-4 p-4 bg-gray-800/50 rounded-xl border border-gray-700/50"
+                    className="flex gap-4 p-4 bg-slate-800/50 rounded-xl border border-slate-700/50"
                   >
                     <div
                       className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0"
@@ -176,14 +176,14 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
                     >
                       {i + 1}
                     </div>
-                    <p className="text-gray-300 text-sm leading-relaxed">{content}</p>
+                    <p className="text-slate-300 text-sm leading-relaxed">{content}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Notes */}
-            <div className="bg-gray-900 rounded-2xl border border-gray-800 p-6">
+            <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6">
               <h2 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
                 📝 Your Notes
               </h2>
@@ -191,7 +191,7 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="Write your notes here... Key concepts, questions, ideas..."
-                className="w-full bg-gray-800 text-gray-300 text-sm p-4 rounded-xl outline-none resize-none min-h-[120px] border border-gray-700 focus:border-indigo-500 transition-colors placeholder-gray-600"
+                className="w-full bg-slate-800 text-slate-300 text-sm p-4 rounded-xl outline-none resize-none min-h-[120px] border border-slate-700 focus:border-indigo-500 transition-colors placeholder-slate-600"
               />
               <div className="flex justify-end mt-2">
                 <button
@@ -208,7 +208,7 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
         {/* RESOURCES TAB */}
         {activeTab === "resources" && (
           <div className="space-y-4">
-            <div className="bg-gray-900 rounded-2xl border border-gray-800 p-6">
+            <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6">
               <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                 🔧 Tools & Resources
               </h2>
@@ -219,17 +219,17 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
                     href={tool.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-start gap-4 p-4 bg-gray-800/50 rounded-xl border border-gray-700/50 hover:border-gray-500 transition-all hover:bg-gray-800"
+                    className="group flex items-start gap-4 p-4 bg-slate-800/50 rounded-xl border border-slate-700/50 hover:border-slate-500 transition-all hover:bg-slate-800"
                   >
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl bg-gray-700/50 group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl bg-slate-700/50 group-hover:scale-110 transition-transform">
                       {tool.icon}
                     </div>
                     <div>
                       <h3 className="text-white font-semibold text-sm group-hover:text-indigo-300 transition-colors">
                         {tool.name}
-                        <span className="text-xs text-gray-500 ml-2">↗</span>
+                        <span className="text-xs text-slate-500 ml-2">↗</span>
                       </h3>
-                      <p className="text-gray-400 text-xs mt-1">{tool.description}</p>
+                      <p className="text-slate-400 text-xs mt-1">{tool.description}</p>
                     </div>
                   </a>
                 ))}
@@ -237,7 +237,7 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
             </div>
 
             {/* Quick Links */}
-            <div className="bg-gray-900 rounded-2xl border border-gray-800 p-6">
+            <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6">
               <h2 className="text-lg font-bold text-white mb-4">📎 Learning Resources</h2>
               <div className="space-y-2">
                 {phase.resources.map((resource, i) => {
@@ -245,7 +245,7 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
                     tutorial: "text-blue-400 bg-blue-500/10",
                     docs: "text-green-400 bg-green-500/10",
                     blog: "text-purple-400 bg-purple-500/10",
-                    github: "text-gray-300 bg-gray-500/10",
+                    github: "text-slate-300 bg-slate-500/10",
                     video: "text-red-400 bg-red-500/10",
                   };
                   return (
@@ -254,18 +254,18 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
                       href={resource.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-between p-3 bg-gray-800/50 rounded-xl border border-gray-700/50 hover:border-gray-500 transition-all group"
+                      className="flex items-center justify-between p-3 bg-slate-800/50 rounded-xl border border-slate-700/50 hover:border-slate-500 transition-all group"
                     >
                       <div className="flex items-center gap-3">
-                        <span className={`text-xs px-2 py-0.5 rounded-full ${typeColors[resource.type] || "text-gray-400 bg-gray-700"}`}>
+                        <span className={`text-xs px-2 py-0.5 rounded-full ${typeColors[resource.type] || "text-slate-400 bg-slate-700"}`}>
                           {resource.type}
                         </span>
                         <div>
                           <span className="text-white text-sm group-hover:text-indigo-300 transition-colors">{resource.title}</span>
-                          <p className="text-gray-500 text-xs mt-0.5">{resource.description}</p>
+                          <p className="text-slate-500 text-xs mt-0.5">{resource.description}</p>
                         </div>
                       </div>
-                      <span className="text-gray-500 text-xs group-hover:text-indigo-400">↗</span>
+                      <span className="text-slate-500 text-xs group-hover:text-indigo-400">↗</span>
                     </a>
                   );
                 })}
@@ -277,8 +277,8 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
         {/* PRACTICE TAB */}
         {activeTab === "practice" && (
           <div className="space-y-6">
-            <div className="bg-gray-900 rounded-2xl border border-gray-800 p-4">
-              <p className="text-gray-400 text-sm flex items-center gap-2">
+            <div className="bg-slate-900 rounded-2xl border border-slate-800 p-4">
+              <p className="text-slate-400 text-sm flex items-center gap-2">
                 <span>💡</span>
                 {phase.practiceDescription}
               </p>
@@ -326,7 +326,7 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
         {/* PROJECT TAB */}
         {activeTab === "project" && (
           <div className="space-y-6">
-            <div className="bg-gray-900 rounded-2xl border border-gray-800 p-6">
+            <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-bold text-white flex items-center gap-2">
                   🚀 {phase.miniProject.title}
@@ -337,21 +337,21 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
                   </span>
                 )}
               </div>
-              <p className="text-gray-400 text-sm mb-4">{phase.miniProject.description}</p>
+              <p className="text-slate-400 text-sm mb-4">{phase.miniProject.description}</p>
 
               {/* Steps */}
               <div className="mb-6">
-                <h3 className="text-gray-300 text-sm font-semibold mb-3">📋 Steps to Complete:</h3>
+                <h3 className="text-slate-300 text-sm font-semibold mb-3">📋 Steps to Complete:</h3>
                 <div className="space-y-2">
                   {phase.miniProject.steps.map((step, i) => (
                     <div
                       key={i}
-                      className="flex items-center gap-3 p-3 bg-gray-800/50 rounded-lg border border-gray-700/50"
+                      className="flex items-center gap-3 p-3 bg-slate-800/50 rounded-lg border border-slate-700/50"
                     >
-                      <div className="w-6 h-6 rounded-full bg-gray-700 flex items-center justify-center text-xs text-gray-400 font-bold">
+                      <div className="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center text-xs text-slate-400 font-bold">
                         {i + 1}
                       </div>
-                      <span className="text-gray-300 text-sm">{step}</span>
+                      <span className="text-slate-300 text-sm">{step}</span>
                     </div>
                   ))}
                 </div>
@@ -362,7 +362,7 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
                 {phase.miniProject.tags.map((tag, i) => (
                   <span
                     key={i}
-                    className="px-3 py-1 bg-gray-800 text-gray-400 text-xs rounded-full border border-gray-700"
+                    className="px-3 py-1 bg-slate-800 text-slate-400 text-xs rounded-full border border-slate-700"
                   >
                     {tag}
                   </span>
@@ -396,11 +396,11 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
         <div className="mt-8 text-center">
           <button
             onClick={handleCompletePhase}
-            className="px-8 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-xl transition-all shadow-lg shadow-green-500/20 hover:shadow-green-500/40"
+            className="px-8 py-3 bg-gradient-to-r from-accent-600 to-accent-500 hover:from-accent-700 hover:to-accent-600 text-white font-semibold rounded-xl transition-all shadow-sm hover:shadow-md"
           >
             ✅ Mark Phase {phase.id} as Complete
           </button>
-          <p className="text-gray-500 text-xs mt-2">
+          <p className="text-slate-500 text-xs mt-2">
             Complete exercises and projects first for the best learning experience
           </p>
         </div>

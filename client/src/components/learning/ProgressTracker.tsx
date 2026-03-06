@@ -64,21 +64,21 @@ const ProgressTracker: React.FC = () => {
 
       {/* Stage-by-Stage Progress */}
       <div className="bg-white rounded-xl border p-5">
-        <h4 className="font-bold text-gray-800 mb-4">Stage Progress</h4>
+        <h4 className="font-bold text-slate-800 mb-4">Stage Progress</h4>
         <div className="space-y-3">
           {roadmapStages.map((stage) => {
             const completion = progress.stageProgress[stage.id] || 0;
             return (
               <div key={stage.id} className="flex items-center gap-3">
                 <span className="text-xl w-8 text-center">{stage.icon}</span>
-                <span className="text-sm text-gray-600 w-36 truncate">{stage.title}</span>
-                <div className="flex-1 bg-gray-100 rounded-full h-3">
+                <span className="text-sm text-slate-600 w-36 truncate">{stage.title}</span>
+                <div className="flex-1 bg-slate-100 rounded-full h-3">
                   <div
                     className="h-3 rounded-full transition-all duration-500"
                     style={{ width: `${completion}%`, backgroundColor: stage.color }}
                   />
                 </div>
-                <span className="text-sm font-medium text-gray-500 w-12 text-right">{completion}%</span>
+                <span className="text-sm font-medium text-slate-500 w-12 text-right">{completion}%</span>
               </div>
             );
           })}
@@ -86,12 +86,12 @@ const ProgressTracker: React.FC = () => {
       </div>
 
       {/* Overall */}
-      <div className="bg-gray-900 text-white p-5 rounded-xl">
+      <div className="bg-slate-900 text-white p-5 rounded-xl">
         <div className="flex items-center justify-between mb-3">
           <h4 className="font-bold text-lg">🏆 Overall Mastery</h4>
           <span className="text-3xl font-black">{overall}%</span>
         </div>
-        <div className="w-full bg-gray-700 rounded-full h-4">
+        <div className="w-full bg-slate-700 rounded-full h-4">
           <div
             className="h-4 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-all duration-700"
             style={{ width: `${overall}%` }}

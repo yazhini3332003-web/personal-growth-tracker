@@ -488,7 +488,7 @@ const AICopilot: React.FC = () => {
       {/* ── Notification badge (when closed) ───────────────────── */}
       {!isOpen && messages.length === 0 && (
         <div className="fixed bottom-[5.2rem] right-6 z-50 animate-bounce">
-          <div className="bg-white rounded-2xl shadow-xl px-4 py-2 text-sm font-medium text-gray-800 max-w-[200px]">
+          <div className="bg-white rounded-2xl shadow-xl px-4 py-2 text-sm font-medium text-slate-800 max-w-[200px]">
             <div className="absolute -bottom-1.5 right-5 w-3 h-3 bg-white rotate-45 shadow-sm" />
             Need help? Ask me! ✨
           </div>

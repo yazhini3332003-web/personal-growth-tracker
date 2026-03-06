@@ -9,6 +9,7 @@ body {
     'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f8fafc;
 }
 
 /* Custom scrollbar */
@@ -19,9 +20,16 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #c7d2fe;
+  background: #cbd5e1;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #a5b4fc;
+  background: #94a3b8;
+}
+
+/* Smooth focus outlines */
+*:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+  border-radius: 4px;
 }

@@ -158,27 +158,27 @@ const APITestingPlayground: React.FC<APITestingPlaygroundProps> = ({ phaseId }) 
   };
 
   return (
-    <div className="bg-gray-800 rounded-xl border border-gray-700">
+    <div className="bg-slate-800 rounded-xl border border-slate-700">
       {/* Header */}
-      <div className="flex items-center justify-between p-3 border-b border-gray-700">
+      <div className="flex items-center justify-between p-3 border-b border-slate-700">
         <div className="flex items-center space-x-2">
           <span className="text-blue-400 text-sm font-medium">🔗 API Testing Playground</span>
-          <span className="text-xs text-gray-400">Phase {phaseId}</span>
+          <span className="text-xs text-slate-400">Phase {phaseId}</span>
         </div>
-        <button onClick={() => setShowHistory(!showHistory)} className="text-gray-400 hover:text-white text-xs flex items-center space-x-1 transition-colors">
+        <button onClick={() => setShowHistory(!showHistory)} className="text-slate-400 hover:text-white text-xs flex items-center space-x-1 transition-colors">
           <FiClock size={12} />
           <span>{showHistory ? "Hide" : "History"} ({history.length})</span>
         </button>
       </div>
 
       {/* Quick Endpoints */}
-      <div className="p-3 border-b border-gray-700 flex flex-wrap gap-1">
+      <div className="p-3 border-b border-slate-700 flex flex-wrap gap-1">
         {Object.entries(sampleEndpoints).map(([ep, info]) => (
           <button
             key={ep}
             onClick={() => loadEndpoint(ep)}
             className={`text-xs px-2 py-1 rounded-full transition-colors ${
-              endpoint === ep ? "bg-blue-600 text-white" : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+              endpoint === ep ? "bg-blue-600 text-white" : "bg-slate-700 text-slate-300 hover:bg-slate-600"
             }`}
           >
             {info.method} {info.description}
@@ -189,7 +189,7 @@ const APITestingPlayground: React.FC<APITestingPlaygroundProps> = ({ phaseId }) 
       {/* Request */}
       <div className="p-3 space-y-3">
         <div className="flex space-x-2">
-          <select value={method} onChange={(e) => setMethod(e.target.value)} className="bg-gray-700 text-white text-sm rounded px-2 py-2 border border-gray-600">
+          <select value={method} onChange={(e) => setMethod(e.target.value)} className="bg-slate-700 text-white text-sm rounded px-2 py-2 border border-slate-600">
             <option>GET</option>
             <option>POST</option>
             <option>PUT</option>
@@ -199,7 +199,7 @@ const APITestingPlayground: React.FC<APITestingPlaygroundProps> = ({ phaseId }) 
             type="text"
             value={endpoint}
             onChange={(e) => setEndpoint(e.target.value)}
-            className="flex-1 bg-gray-700 text-white text-sm rounded px-3 py-2 border border-gray-600 focus:border-blue-500 focus:outline-none"
+            className="flex-1 bg-slate-700 text-white text-sm rounded px-3 py-2 border border-slate-600 focus:border-blue-500 focus:outline-none"
             placeholder="/api/endpoint"
           />
           <button onClick={handleSend} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 transition-colors flex items-center space-x-1">
@@ -210,12 +210,12 @@ const APITestingPlayground: React.FC<APITestingPlaygroundProps> = ({ phaseId }) 
 
         {method !== "GET" && (
           <div>
-            <label className="text-gray-400 text-xs mb-1 block">Request Body (JSON)</label>
+            <label className="text-slate-400 text-xs mb-1 block">Request Body (JSON)</label>
             <textarea
               value={body}
               onChange={(e) => setBody(e.target.value)}
               rows={6}
-              className="w-full bg-gray-900 text-green-400 text-xs font-mono rounded p-3 border border-gray-600 focus:border-blue-500 focus:outline-none resize-none"
+              className="w-full bg-slate-900 text-green-400 text-xs font-mono rounded p-3 border border-slate-600 focus:border-blue-500 focus:outline-none resize-none"
               placeholder="{ }"
             />
           </div>
@@ -223,7 +223,7 @@ const APITestingPlayground: React.FC<APITestingPlaygroundProps> = ({ phaseId }) 
 
         {/* Response */}
         {response && (
-          <div className="border-t border-gray-700 pt-3">
+          <div className="border-t border-slate-700 pt-3">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center space-x-2">
                 {response.status < 400 ? (
@@ -235,10 +235,10 @@ const APITestingPlayground: React.FC<APITestingPlaygroundProps> = ({ phaseId }) 
                   {response.status} {response.statusText}
                 </span>
               </div>
-              <span className="text-gray-400 text-xs">{response.time}ms</span>
+              <span className="text-slate-400 text-xs">{response.time}ms</span>
             </div>
-            <div className="bg-gray-900 rounded p-3 max-h-64 overflow-y-auto">
-              <pre className="text-xs text-gray-300 font-mono whitespace-pre-wrap">{response.body}</pre>
+            <div className="bg-slate-900 rounded p-3 max-h-64 overflow-y-auto">
+              <pre className="text-xs text-slate-300 font-mono whitespace-pre-wrap">{response.body}</pre>
             </div>
           </div>
         )}
@@ -246,10 +246,10 @@ const APITestingPlayground: React.FC<APITestingPlaygroundProps> = ({ phaseId }) 
 
       {/* History */}
       {showHistory && history.length > 0 && (
-        <div className="border-t border-gray-700 p-3">
+        <div className="border-t border-slate-700 p-3">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-xs font-medium">Request History</span>
-            <button onClick={() => setHistory([])} className="text-gray-500 hover:text-red-400 transition-colors">
+            <span className="text-slate-400 text-xs font-medium">Request History</span>
+            <button onClick={() => setHistory([])} className="text-slate-500 hover:text-red-400 transition-colors">
               <FiTrash2 size={12} />
             </button>
           </div>
@@ -263,9 +263,9 @@ const APITestingPlayground: React.FC<APITestingPlaygroundProps> = ({ phaseId }) 
                   setBody(entry.request.body);
                   setResponse(entry.response);
                 }}
-                className="w-full text-left bg-gray-700/50 hover:bg-gray-700 rounded px-2 py-1 text-xs flex items-center justify-between transition-colors"
+                className="w-full text-left bg-slate-700/50 hover:bg-slate-700 rounded px-2 py-1 text-xs flex items-center justify-between transition-colors"
               >
-                <span className="text-gray-300">
+                <span className="text-slate-300">
                   <span className="text-blue-400">{entry.request.method}</span> {entry.request.endpoint}
                 </span>
                 <span className={entry.response.status < 400 ? "text-green-400" : "text-red-400"}>

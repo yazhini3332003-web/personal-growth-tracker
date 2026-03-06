@@ -54,15 +54,15 @@ const AILearningPlatformInner: React.FC = () => {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="flex flex-wrap gap-2 bg-white border rounded-xl p-2">
+      <div className="flex flex-wrap gap-2 bg-white border border-slate-200/60 rounded-xl p-2">
         {tabs.map((tab) => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
             className={`flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
               activeTab === tab.key
-                ? "bg-indigo-600 text-white shadow-lg shadow-indigo-200"
-                : "text-gray-600 hover:bg-gray-100"
+                ? "bg-primary-600 text-white shadow-sm"
+                : "text-slate-600 hover:bg-slate-100"
             }`}
           >
             <span>{tab.icon}</span>
