@@ -32,7 +32,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <aside className="hidden md:flex md:flex-shrink-0">
-      <div className="flex flex-col w-64">
+      <div className="flex flex-col w-60">
         <div className="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto bg-gradient-to-b from-primary-900 to-primary-800 border-r border-primary-700">
           <div className="flex items-center flex-shrink-0 px-6 mb-8">
             <div className="flex items-center gap-3">

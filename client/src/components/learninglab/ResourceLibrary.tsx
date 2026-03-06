@@ -59,9 +59,9 @@ const ResourceLibrary: React.FC = () => {
   });
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="w-full">
       {/* Header */}
-      <div className="mb-6">
+      <div className="mb-8">
         <h2 className="text-2xl font-bold text-white mb-2">📚 Resource Library</h2>
         <p className="text-gray-400 text-sm">
           Curated tutorials, documentation, blogs, GitHub repos, and videos for every phase of your AI development journey.
@@ -69,7 +69,7 @@ const ResourceLibrary: React.FC = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-gray-800 rounded-xl border border-gray-700 p-4 mb-6">
+      <div className="bg-gray-800/80 rounded-xl border border-gray-700 p-5 mb-8">
         <div className="flex flex-col sm:flex-row gap-3">
           {/* Search */}
           <div className="relative flex-1">

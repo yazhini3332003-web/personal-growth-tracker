@@ -6,12 +6,12 @@ const LabIntroduction: React.FC = () => {
   const stats = getOverallStats();
 
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-950 via-purple-950 to-slate-900 border border-indigo-800/30">
+    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-950 via-purple-950 to-slate-900 border border-indigo-800/30">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
 
-      <div className="relative p-8 md:p-12">
+      <div className="relative p-10 md:p-12">
         <div className="max-w-3xl">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-500/20 rounded-full border border-indigo-500/30 mb-6">

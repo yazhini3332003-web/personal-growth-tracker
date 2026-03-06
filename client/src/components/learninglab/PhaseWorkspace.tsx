@@ -49,14 +49,14 @@ const PhaseWorkspace: React.FC<PhaseWorkspaceProps> = ({ phase, onBack }) => {
     <div className="min-h-screen bg-gray-950">
       {/* Phase Header */}
       <div
-        className="relative overflow-hidden rounded-2xl mb-6"
+        className="relative overflow-hidden rounded-2xl mb-8"
         style={{
           background: `linear-gradient(135deg, ${phase.color}22, ${phase.color}08)`,
           borderColor: `${phase.color}44`,
           borderWidth: 1,
         }}
       >
-        <div className="p-6">
+        <div className="p-8">
           <button
             onClick={onBack}
             className="text-gray-400 hover:text-white text-sm mb-4 flex items-center gap-2 transition-colors"

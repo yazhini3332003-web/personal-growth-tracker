@@ -11,14 +11,14 @@ const LabRoadmap: React.FC<LabRoadmapProps> = ({ onPhaseClick }) => {
 
   return (
     <div className="py-8">
-      <div className="text-center mb-8">
+      <div className="text-center mb-10">
         <h2 className="text-2xl font-bold text-white mb-2">🗺️ Your Learning Journey</h2>
         <p className="text-gray-400 text-sm">Click any phase to start learning. Completed phases turn green.</p>
       </div>
 
       {/* Desktop Roadmap */}
       <div className="hidden lg:block">
-        <div className="relative max-w-6xl mx-auto">
+        <div className="relative w-full">
           {/* Connection Lines */}
           <svg
             className="absolute inset-0 w-full h-full pointer-events-none"
