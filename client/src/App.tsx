@@ -15,6 +15,7 @@ import Investment from "./pages/Investment";
 import AILearningPlatform from "./pages/AILearningPlatform";
 import AILearningLab from "./pages/AILearningLab";
 import Settings from "./pages/Settings";
+import AICopilot from "./components/AICopilot";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
             </div>
           </main>
         </div>
+        <AICopilot />
         <Toaster
           position="bottom-right"
           toastOptions={{
