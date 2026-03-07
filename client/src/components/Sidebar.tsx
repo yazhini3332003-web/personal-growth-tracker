@@ -12,6 +12,7 @@ import {
   HiOutlineAcademicCap,
   HiOutlineBeaker,
   HiOutlineCube,
+  HiOutlineColorSwatch,
 } from "react-icons/hi";
 
 const navigation = [
@@ -26,6 +27,7 @@ const navigation = [
   { name: "AI Learning", href: "/ai-learning", icon: HiOutlineAcademicCap },
   { name: "Learning Lab", href: "/learning-lab", icon: HiOutlineBeaker },
   { name: "Blender Lab", href: "/blender-lab", icon: HiOutlineCube },
+  { name: "Art Hub", href: "/art-hub", icon: HiOutlineColorSwatch },
   { name: "Settings", href: "/settings", icon: HiOutlineCog },
 ];
 

@@ -15,6 +15,7 @@ import Investment from "./pages/Investment";
 import AILearningPlatform from "./pages/AILearningPlatform";
 import AILearningLab from "./pages/AILearningLab";
 import BlenderLearningHub from "./pages/BlenderLearningHub";
+import ArtHub from "./pages/ArtHub";
 import Settings from "./pages/Settings";
 import AICopilot from "./components/AICopilot";
 
@@ -39,6 +40,7 @@ function App() {
                 <Route path="/ai-learning" element={<AILearningPlatform />} />
                 <Route path="/learning-lab" element={<AILearningLab />} />
                 <Route path="/blender-lab" element={<BlenderLearningHub />} />
+                <Route path="/art-hub" element={<ArtHub />} />
                 <Route path="/settings" element={<Settings />} />
               </Routes>
             </div>
