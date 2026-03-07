@@ -18,6 +18,7 @@ import BlenderLearningHub from "./pages/BlenderLearningHub";
 import ArtHub from "./pages/ArtHub";
 import BooksHub from "./pages/BooksHub";
 import MoneyManager from "./pages/MoneyManager";
+import MatrixThinking from "./pages/MatrixThinking";
 import Settings from "./pages/Settings";
 import AICopilot from "./components/AICopilot";
 
@@ -45,6 +46,7 @@ function App() {
                 <Route path="/art-hub" element={<ArtHub />} />
                 <Route path="/books-hub" element={<BooksHub />} />
                 <Route path="/money" element={<MoneyManager />} />
+                <Route path="/matrix-thinking" element={<MatrixThinking />} />
                 <Route path="/settings" element={<Settings />} />
               </Routes>
             </div>

@@ -15,7 +15,7 @@ const AIFinancialAssistant: React.FC = () => {
     {
       id: "welcome",
       role: "assistant",
-      content: "👋 Hi! I'm your AI Financial Assistant. I can help you analyze your spending, suggest budgets, and provide savings strategies. Try asking me something!",
+      content: "👋 Hi! I'm your AI Financial Guide. I can analyze your spending, find where money is leaking, suggest ways to save more, check your financial health, and help you learn money management from scratch. Try asking me anything!",
       timestamp: new Date(),
     },
   ]);
@@ -157,7 +157,102 @@ const AIFinancialAssistant: React.FC = () => {
       return tips;
     }
 
-    return `I can help you with:\n\n• **"summary"** — Financial overview\n• **"spending"** — Expense analysis\n• **"income"** — Income breakdown\n• **"budget"** — Budget status\n• **"savings"** — Goals progress\n• **"investments"** — Portfolio review\n• **"subscriptions"** — Recurring payments\n• **"tips"** — Personalized suggestions\n\nWhat would you like to know?`;
+    // Where am I spending too much?
+    if (q.includes("too much") || q.includes("overspend") || q.includes("where") && (q.includes("spend") || q.includes("money go"))) {
+      if (sortedCats.length === 0) return "📊 No expense data yet. Start tracking your expenses to get spending insights!";
+      let resp = `🔍 **Where Your Money Is Going:**\n\n`;
+      const totalExp = stats.totalExpenses;
+      sortedCats.forEach(([cat, amt], i) => {
+        const pct = Math.round((amt / totalExp) * 100);
+        const cfg = expenseCategoryConfig[cat];
+        const flag = pct > 25 ? " ⚠️ HIGH" : pct > 15 ? " ⚡ Watch" : " ✅";
+        resp += `${i + 1}. ${cfg?.icon || "📦"} ${cfg?.label || cat}: ${fmt(amt)} (${pct}%)${flag}\n`;
+      });
+      resp += `\n📋 **Action Items:**\n`;
+      if (sortedCats[0]) {
+        const topCfg = expenseCategoryConfig[sortedCats[0][0]];
+        resp += `• Cut ${topCfg?.label} by 15% = save ${fmt(Math.round(sortedCats[0][1] * 0.15))}/month\n`;
+      }
+      if (sortedCats[1]) {
+        const secCfg = expenseCategoryConfig[sortedCats[1][0]];
+        resp += `• Reduce ${secCfg?.label} by 10% = save ${fmt(Math.round(sortedCats[1][1] * 0.10))}/month\n`;
+      }
+      resp += `• Review all categories under 5% — small leaks add up`;
+      return resp;
+    }
+
+    // How can I save more?
+    if (q.includes("save more") || q.includes("how to save") || q.includes("saving tips") || q.includes("cut costs")) {
+      const savingsRate = stats.totalIncome > 0 ? Math.round(((stats.totalIncome - stats.totalExpenses) / stats.totalIncome) * 100) : 0;
+      let resp = `💰 **Your Savings Potential:**\n\nCurrent savings rate: ${savingsRate}%\n\n`;
+      resp += `📋 **Personalized Ways to Save More:**\n\n`;
+      if (subCost > 0) resp += `1. 🔄 Review subscriptions: You spend ${fmt(Math.round(subCost))}/month (${fmt(Math.round(subCost * 12))}/year). Cancel 2 unused ones.\n`;
+      const foodCat = sortedCats.find(([cat]) => cat === "food" || cat === "dining");
+      if (foodCat) resp += `2. 🍕 Food spending is ${fmt(foodCat[1])}. Cook 3 more meals/week to save ₹${Math.round(foodCat[1] * 0.3 / 1000)}K/month.\n`;
+      resp += `3. 📱 Switch to cheaper phone/internet plan — save ₹500-1,000/month\n`;
+      resp += `4. ☕ ₹100 daily chai/snacks = ₹3,000/month. Bring from home 3 days/week.\n`;
+      resp += `5. 🎯 Use 24-hour rule: Wait before any purchase over ₹500. 80% of impulses die.\n`;
+      resp += `6. 💰 Auto-transfer ${savingsRate < 20 ? "20" : Math.min(savingsRate + 5, 40)}% on salary day — save BEFORE spending.\n`;
+      resp += `\n✨ Even saving ₹2,000 more/month = ₹24,000/year = ₹3.8L in 10 years at 12% returns!`;
+      return resp;
+    }
+
+    // What to do with extra income?
+    if (q.includes("extra income") || q.includes("bonus") || q.includes("extra money") || q.includes("windfall") || q.includes("got money")) {
+      const emergencyTarget = stats.totalExpenses > 0 ? stats.totalExpenses * 3 : 75000;
+      const totalSaved = savingsGoals.reduce((s, g) => s + g.currentAmount, 0);
+      let resp = `🎉 **Smart Ways to Use Extra Income:**\n\n`;
+      resp += `Based on your financial situation:\n\n`;
+      if (totalSaved < emergencyTarget) {
+        resp += `1. 🛡️ **TOP PRIORITY:** Boost emergency fund. You have ${fmt(totalSaved)}, target is ${fmt(Math.round(emergencyTarget))}. Put 50% of extra income here.\n\n`;
+      }
+      resp += `2. 💳 Pay off any high-interest debt first (credit cards, personal loans)\n`;
+      resp += `3. 📈 Increase SIP amount — one-time top-up or increase monthly SIP\n`;
+      resp += `4. 🎯 Accelerate savings goals — pick your highest-priority goal\n`;
+      resp += `5. 📚 Invest in yourself — a course or skill that increases earning potential\n`;
+      resp += `6. 🎁 Allocate 10% for guilt-free enjoyment — you deserve it!\n\n`;
+      resp += `💡 **Rule of thumb:** 50% invest/save, 30% goals/debt, 20% enjoy.`;
+      return resp;
+    }
+
+    // Financial health check
+    if (q.includes("health") || q.includes("score") || q.includes("how am i") || q.includes("checkup") || q.includes("status")) {
+      const savingsRate = stats.totalIncome > 0 ? Math.round(((stats.totalIncome - stats.totalExpenses) / stats.totalIncome) * 100) : 0;
+      const totalSaved = savingsGoals.reduce((s, g) => s + g.currentAmount, 0);
+      const emergencyMonths = stats.totalExpenses > 0 ? Math.round((totalSaved / (stats.totalExpenses / Math.max(expenses.length, 1))) * 10) / 10 : 0;
+      let score = 0;
+      let resp = `🏥 **Financial Health Checkup:**\n\n`;
+      // Scoring
+      if (savingsRate >= 20) { score += 25; resp += `✅ Savings Rate: ${savingsRate}% (Excellent!)\n`; }
+      else if (savingsRate >= 10) { score += 15; resp += `⚡ Savings Rate: ${savingsRate}% (Good, aim for 20%)\n`; }
+      else { score += 5; resp += `⚠️ Savings Rate: ${savingsRate}% (Needs improvement)\n`; }
+      
+      if (investments.length >= 3) { score += 25; resp += `✅ Portfolio: ${investments.length} investments (Well diversified)\n`; }
+      else if (investments.length >= 1) { score += 15; resp += `⚡ Portfolio: ${investments.length} investment(s) (Add more diversity)\n`; }
+      else { score += 0; resp += `⚠️ No investments yet (Start with a simple SIP)\n`; }
+      
+      if (savingsGoals.length >= 3) { score += 25; resp += `✅ Goals: ${savingsGoals.length} savings goals (Great planning!)\n`; }
+      else if (savingsGoals.length >= 1) { score += 15; resp += `⚡ Goals: ${savingsGoals.length} goal(s) (Set more targets)\n`; }
+      else { score += 5; resp += `⚠️ No savings goals (Set at least 3)\n`; }
+      
+      const hasInsurance = subscriptions.some(s => s.name.toLowerCase().includes("insurance") || s.name.toLowerCase().includes("health"));
+      if (hasInsurance) { score += 25; resp += `✅ Insurance: Protected\n`; }
+      else { score += 0; resp += `⚠️ No insurance found (Critical — get health insurance ASAP)\n`; }
+      
+      resp += `\n📊 **Financial Health Score: ${score}/100**\n`;
+      if (score >= 80) resp += `🏆 Excellent! You're in great financial shape.`;
+      else if (score >= 60) resp += `👍 Good foundation. Focus on the ⚡ items to level up.`;
+      else if (score >= 40) resp += `📈 Making progress. Address the ⚠️ items one at a time.`;
+      else resp += `🌱 Just getting started. That's okay! Focus on tracking and saving first.`;
+      return resp;
+    }
+
+    // Learning / what should I learn
+    if (q.includes("learn") || q.includes("beginner") || q.includes("start") || q.includes("new to")) {
+      return `📚 **Getting Started with Money Management:**\n\n1. 🌱 Start with the **Introduction** tab — understand what money management really means\n2. 🧩 Move to **Core Concepts** — learn about income, expenses, savings & investments\n3. 🧠 Go through **Financial Awareness** — needs vs wants, budgeting mindset, avoiding debt\n4. 📋 Then start practicing with **Dashboard, Budget & Expense Tracker**\n5. 📅 Use **Growth System** to see the year-by-year plan\n6. 📚 Visit the **Library** for in-depth guides and book recommendations\n\n💡 **Tip:** Don't try to do everything at once. Spend a week on each section. Understanding comes before action!`;
+    }
+
+    return `I can help you with:\n\n• **"summary"** — Financial overview\n• **"spending"** — Expense analysis\n• **"where is my money going"** — Spending breakdown\n• **"income"** — Income breakdown\n• **"budget"** — Budget status\n• **"savings"** — Goals progress\n• **"investments"** — Portfolio review\n• **"subscriptions"** — Recurring payments\n• **"how to save more"** — Saving strategies\n• **"extra income"** — What to do with bonuses\n• **"health check"** — Financial health score\n• **"tips"** — Personalized suggestions\n• **"learn"** — Getting started guide\n\nWhat would you like to know?`;
   };
 
   const handleSend = () => {
@@ -175,11 +270,15 @@ const AIFinancialAssistant: React.FC = () => {
 
   const quickActions = [
     { label: "📊 Summary", query: "Give me a financial summary" },
-    { label: "💸 Spending", query: "Analyze my spending" },
+    { label: "💸 Where's my money?", query: "Where am I spending too much?" },
+    { label: "💰 Save more", query: "How can I save more?" },
     { label: "📋 Budget", query: "How is my budget?" },
     { label: "🎯 Savings", query: "Show savings goals" },
     { label: "📈 Investments", query: "Review my investments" },
+    { label: "🎉 Extra income", query: "What to do with extra income?" },
+    { label: "🏥 Health check", query: "Financial health checkup" },
     { label: "💡 Tips", query: "Give me financial tips" },
+    { label: "📚 Learn", query: "I'm new to money management" },
   ];
 
   return (
@@ -189,8 +288,8 @@ const AIFinancialAssistant: React.FC = () => {
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl backdrop-blur">🤖</div>
           <div>
-            <h2 className="font-bold text-lg">AI Financial Assistant</h2>
-            <p className="text-white/70 text-sm">Ask me anything about your finances</p>
+            <h2 className="font-bold text-lg">AI Financial Guide</h2>
+            <p className="text-white/70 text-sm">Your personal money mentor — ask anything about finances</p>
           </div>
         </div>
       </div>
