@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
+import BlenderAIAssistant, { BlenderAIFloatingButton } from "./BlenderAIAssistant";
 
 // ==================== TYPES ====================
 interface SceneObject {
@@ -155,8 +156,17 @@ const Blender3DWorkspacePro: React.FC<Blender3DWorkspaceProps> = ({
   const [isSaving, setIsSaving] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   
+  // AI Assistant states
+  const [showAIAssistant, setShowAIAssistant] = useState(false);
+  const [showHelpPrompt, setShowHelpPrompt] = useState(false);
+  const [undoCount, setUndoCount] = useState(0);
+  const [lastActivityTime, setLastActivityTime] = useState(Date.now());
+  const [lastAction, setLastAction] = useState<string>("");
+  
   // Refs
   const viewportRef = useRef<HTMLDivElement>(null);
+  const helpPromptTimer = useRef<NodeJS.Timeout | null>(null);
+  const inactivityTimer = useRef<NodeJS.Timeout | null>(null);
   const isDragging = useRef(false);
   const lastMousePos = useRef({ x: 0, y: 0 });
   const autoSaveTimer = useRef<NodeJS.Timeout | null>(null);
@@ -203,7 +213,62 @@ const Blender3DWorkspacePro: React.FC<Blender3DWorkspaceProps> = ({
   // Track changes
   useEffect(() => {
     setHasUnsavedChanges(true);
+    setLastActivityTime(Date.now());
   }, [objects]);
+
+  // Help detection - repeated undos
+  useEffect(() => {
+    if (undoCount >= 3 && !showAIAssistant && !showHelpPrompt) {
+      // User has undone 3+ times, they might be stuck
+      setShowHelpPrompt(true);
+      setUndoCount(0); // Reset counter
+      
+      // Auto-hide after 10 seconds
+      if (helpPromptTimer.current) {
+        clearTimeout(helpPromptTimer.current);
+      }
+      helpPromptTimer.current = setTimeout(() => {
+        setShowHelpPrompt(false);
+      }, 10000);
+    }
+  }, [undoCount, showAIAssistant, showHelpPrompt]);
+
+  // Help detection - inactivity
+  useEffect(() => {
+    if (inactivityTimer.current) {
+      clearTimeout(inactivityTimer.current);
+    }
+    
+    // Show help prompt after 60 seconds of inactivity
+    inactivityTimer.current = setTimeout(() => {
+      if (!showAIAssistant && !showHelpPrompt) {
+        setShowHelpPrompt(true);
+        
+        // Auto-hide after 10 seconds
+        if (helpPromptTimer.current) {
+          clearTimeout(helpPromptTimer.current);
+        }
+        helpPromptTimer.current = setTimeout(() => {
+          setShowHelpPrompt(false);
+        }, 10000);
+      }
+    }, 60000);
+    
+    return () => {
+      if (inactivityTimer.current) {
+        clearTimeout(inactivityTimer.current);
+      }
+    };
+  }, [lastActivityTime, showAIAssistant, showHelpPrompt]);
+
+  // Cleanup help prompt timer
+  useEffect(() => {
+    return () => {
+      if (helpPromptTimer.current) {
+        clearTimeout(helpPromptTimer.current);
+      }
+    };
+  }, []);
 
   const saveCurrentSession = useCallback(() => {
     setIsSaving(true);
@@ -357,6 +422,11 @@ const Blender3DWorkspacePro: React.FC<Blender3DWorkspaceProps> = ({
     if (historyIndex >= 0) {
       setObjects(history[historyIndex]);
       setHistoryIndex(historyIndex - 1);
+      
+      // Track undo count for help detection
+      setUndoCount(prev => prev + 1);
+      setLastAction("undo");
+      setLastActivityTime(Date.now());
     }
   };
 
@@ -364,6 +434,8 @@ const Blender3DWorkspacePro: React.FC<Blender3DWorkspaceProps> = ({
     if (historyIndex < history.length - 1) {
       setHistoryIndex(historyIndex + 1);
       setObjects(history[historyIndex + 1]);
+      setLastAction("redo");
+      setLastActivityTime(Date.now());
     }
   };
 
@@ -639,6 +711,19 @@ const Blender3DWorkspacePro: React.FC<Blender3DWorkspaceProps> = ({
             className="px-4 py-1.5 bg-orange-500 text-white text-xs font-medium rounded hover:bg-orange-600 disabled:opacity-50"
           >
             {isRendering ? "Rendering..." : "🎬 Render"}
+          </button>
+
+          {/* AI Assistant Button */}
+          <button 
+            onClick={() => setShowAIAssistant(true)}
+            className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
+              showAIAssistant 
+                ? "bg-purple-500 text-white" 
+                : "bg-purple-500/20 text-purple-400 hover:bg-purple-500/30"
+            }`}
+            title="AI Assistant"
+          >
+            🤖 AI Help
           </button>
 
           {/* Size Controls */}
@@ -1339,6 +1424,33 @@ const Blender3DWorkspacePro: React.FC<Blender3DWorkspaceProps> = ({
           </div>
         </div>
       )}
+
+      {/* AI Assistant Floating Button */}
+      {!showAIAssistant && (
+        <BlenderAIFloatingButton
+          onClick={() => {
+            setShowAIAssistant(true);
+            setShowHelpPrompt(false);
+          }}
+          showHelpPrompt={showHelpPrompt}
+          onHelpPromptDismiss={() => setShowHelpPrompt(false)}
+        />
+      )}
+
+      {/* AI Assistant Panel */}
+      <BlenderAIAssistant
+        isOpen={showAIAssistant}
+        onClose={() => setShowAIAssistant(false)}
+        currentObject={selected?.type}
+        currentTool={toolMode}
+        objectCount={objects.length}
+        undoCount={undoCount}
+        lastAction={lastAction}
+        onSuggestionClick={(suggestion) => {
+          console.log("AI suggestion:", suggestion);
+          // Could implement automatic actions based on suggestions
+        }}
+      />
     </div>
   );
 };
