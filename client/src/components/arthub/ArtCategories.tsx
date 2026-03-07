@@ -3,13 +3,13 @@ import { artworks } from "../../data/artHubData";
 import { useArtHubContext } from "../../context/ArtHubContext";
 import { ArtCategory } from "../../types/artHub";
 
-const categoryConfig: { key: ArtCategory | "all"; label: string; icon: string }[] = [
-  { key: "all", label: "All Art", icon: "🌐" },
-  { key: "stories", label: "Stories", icon: "📖" },
-  { key: "poems", label: "Poems", icon: "🌸" },
-  { key: "drawings", label: "Drawings", icon: "✏️" },
-  { key: "digital-art", label: "Digital Art", icon: "🖥️" },
-  { key: "experimental", label: "Experimental", icon: "🔬" },
+const categoryConfig: { key: ArtCategory | "all"; label: string; icon: string; desc?: string }[] = [
+  { key: "all", label: "All Art", icon: "🌐", desc: "Browse all creative works" },
+  { key: "stories", label: "Stories", icon: "📖", desc: "Short fiction, narratives & creative writing" },
+  { key: "poems", label: "Poetry", icon: "🌸", desc: "Verses, haikus, sonnets & free poetry" },
+  { key: "drawings", label: "Drawings", icon: "✏️", desc: "Sketches, illustrations & hand-drawn art" },
+  { key: "digital-art", label: "Digital Art", icon: "🖥️", desc: "Digital paintings, photo art & design" },
+  { key: "experimental", label: "Experimental", icon: "🔬", desc: "Mixed media, abstract & boundary-breaking art" },
 ];
 
 const ArtCategories: React.FC = () => {
@@ -47,26 +47,31 @@ const ArtCategories: React.FC = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-bold text-gray-900">Art Categories</h2>
-          <p className="text-sm text-gray-500 mt-1">Explore and discover artwork across all creative forms</p>
+          <h2 className="text-xl font-bold text-gray-900">📂 Art Categories</h2>
+          <p className="text-sm text-gray-500 mt-1">Explore creative works organized by form — stories, poetry, drawings, digital art & experimental</p>
         </div>
         <span className="text-xs text-gray-400">{filteredArtworks.length} works</span>
       </div>
 
-      {/* Category Filter */}
-      <div className="flex gap-2 flex-wrap">
+      {/* Category Filter with descriptions */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
         {categoryConfig.map((cat) => (
           <button
             key={cat.key}
             onClick={() => setActiveCategory(cat.key)}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all flex items-center gap-1.5 ${
+            className={`p-3 rounded-xl text-left transition-all border ${
               activeCategory === cat.key
-                ? "bg-gray-900 text-white shadow-lg"
-                : "bg-white text-gray-600 border border-gray-200 hover:border-gray-300 hover:shadow-sm"
+                ? "bg-gray-900 text-white border-gray-900 shadow-lg"
+                : "bg-white text-gray-600 border-gray-200 hover:border-gray-300 hover:shadow-sm"
             }`}
           >
-            <span>{cat.icon}</span>
-            {cat.label}
+            <span className="text-lg block mb-1">{cat.icon}</span>
+            <p className="text-xs font-semibold">{cat.label}</p>
+            {cat.desc && (
+              <p className={`text-[10px] mt-0.5 leading-tight ${activeCategory === cat.key ? "text-white/70" : "text-gray-400"}`}>
+                {cat.desc}
+              </p>
+            )}
           </button>
         ))}
       </div>

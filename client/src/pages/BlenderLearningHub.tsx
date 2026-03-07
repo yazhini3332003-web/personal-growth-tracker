@@ -73,7 +73,7 @@ const BlenderHubContent: React.FC = () => {
       {/* Content */}
       {view === "home" && (
         <div className="space-y-8">
-          <BlenderIntroduction />
+          <BlenderIntroduction onNavigate={(v) => setView(v as ViewMode)} />
           <BlenderRoadmap onPhaseClick={handlePhaseClick} />
         </div>
       )}

@@ -88,7 +88,7 @@ const ArtHubContent: React.FC = () => {
       </div>
 
       {/* Content Area */}
-      {view === "home" && <ArtHubIntroduction />}
+      {view === "home" && <ArtHubIntroduction onNavigate={(v) => setView(v as ViewMode)} />}
       {view === "categories" && <ArtCategories />}
       {view === "artists" && <ArtistProfiles />}
       {view === "post" && <ArtworkPosting />}

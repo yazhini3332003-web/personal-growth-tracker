@@ -113,12 +113,40 @@ const CommunityGallery: React.FC = () => {
             <span className="px-3 py-1 bg-white/20 rounded-full text-xs font-medium backdrop-blur-sm">🌍 Digital Exhibition</span>
           </div>
           <h2 className="text-2xl font-bold mb-2">Community Art Gallery</h2>
-          <p className="text-white/80 text-sm max-w-xl">
-            A curated collection of the finest creative works from our global community.
-            Every piece here has been reviewed and approved for the official gallery — 
-            a digital art exhibition celebrating talent from around the world.
+          <p className="text-white/90 text-sm max-w-xl leading-relaxed">
+            Welcome to the official gallery — a curated digital art exhibition featuring the best creative
+            works from our global community. Every piece here has been submitted by an artist, reviewed
+            by the community, and approved for public showcase.
           </p>
-          <p className="text-white/60 text-xs mt-3">{galleryWorks.length} approved works</p>
+          <p className="text-white/60 text-xs mt-3">{galleryWorks.length} approved works on display</p>
+        </div>
+      </div>
+
+      {/* How It Works */}
+      <div className="bg-gradient-to-r from-amber-50 to-rose-50 rounded-xl border border-amber-100 p-5">
+        <h3 className="font-bold text-gray-900 mb-3 text-sm">🎯 How the Gallery Works</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="flex items-start gap-3 p-3 bg-white rounded-lg border border-amber-100">
+            <div className="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center text-sm flex-shrink-0">1</div>
+            <div>
+              <p className="text-xs font-semibold text-gray-900">Submit Your Art</p>
+              <p className="text-[10px] text-gray-500 mt-0.5">Post your best work and submit it for gallery review</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 p-3 bg-white rounded-lg border border-rose-100">
+            <div className="w-8 h-8 rounded-lg bg-rose-100 flex items-center justify-center text-sm flex-shrink-0">2</div>
+            <div>
+              <p className="text-xs font-semibold text-gray-900">Community Review</p>
+              <p className="text-[10px] text-gray-500 mt-0.5">Your submission is reviewed for quality & originality</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 p-3 bg-white rounded-lg border border-purple-100">
+            <div className="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center text-sm flex-shrink-0">3</div>
+            <div>
+              <p className="text-xs font-semibold text-gray-900">Gallery Showcase</p>
+              <p className="text-[10px] text-gray-500 mt-0.5">Approved works are featured in our global digital exhibition</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -172,14 +200,22 @@ const CommunityGallery: React.FC = () => {
       </div>
 
       {/* Submit CTA */}
-      <div className="bg-gray-50 rounded-xl border border-gray-100 p-6 text-center">
-        <h3 className="font-bold text-gray-900 mb-2">🖼️ Want Your Art in the Gallery?</h3>
-        <p className="text-sm text-gray-500 mb-4">
-          Submit your best work for review. If approved, it will be featured in the official community gallery.
-        </p>
-        <button className="px-6 py-2.5 bg-gradient-to-r from-amber-600 to-rose-600 text-white rounded-xl text-sm font-medium hover:shadow-lg transition-all">
-          Submit to Gallery
-        </button>
+      <div className="bg-gradient-to-r from-amber-50 to-rose-50 rounded-xl border border-amber-100 p-6">
+        <div className="flex flex-col sm:flex-row items-center gap-5">
+          <div className="w-16 h-16 bg-gradient-to-br from-amber-100 to-rose-100 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0">
+            🖼️
+          </div>
+          <div className="flex-1 text-center sm:text-left">
+            <h3 className="font-bold text-gray-900 mb-1">Want Your Art in the Gallery?</h3>
+            <p className="text-sm text-gray-500">
+              Submit your best creation for community review. Once approved, your work will be showcased
+              in our global digital exhibition alongside artists from around the world.
+            </p>
+          </div>
+          <button className="px-6 py-2.5 bg-gradient-to-r from-amber-600 to-rose-600 text-white rounded-xl text-sm font-medium hover:shadow-lg transition-all flex-shrink-0">
+            Submit to Gallery →
+          </button>
+        </div>
       </div>
     </div>
   );
