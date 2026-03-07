@@ -16,6 +16,7 @@ import {
   HiOutlineCube,
   HiOutlineColorSwatch,
   HiOutlineBookOpen,
+  HiOutlineCash,
 } from "react-icons/hi";
 
 type NavItem = { name: string; href: string; icon: React.ComponentType<{ className?: string }> };
@@ -35,6 +36,7 @@ const sections: { label: string; items: NavItem[] }[] = [
       { name: "Categories", href: "/categories", icon: HiOutlineViewGrid },
       { name: "Tasks", href: "/tasks", icon: HiOutlineCalendar },
       { name: "Tracker", href: "/tracker", icon: HiOutlineCalendar },
+      { name: "Money", href: "/money", icon: HiOutlineCash },
     ],
   },
   {
