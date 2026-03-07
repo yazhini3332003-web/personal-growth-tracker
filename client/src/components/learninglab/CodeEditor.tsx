@@ -98,20 +98,20 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
   }, [code, exerciseId, saveCodeSnapshot]);
 
   return (
-    <div className="bg-slate-900 rounded-2xl border border-slate-700 overflow-hidden">
+    <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
       {/* Header */}
-      <div className="bg-slate-800 px-4 py-3 flex items-center justify-between border-b border-slate-700">
+      <div className="bg-gray-100 px-4 py-3 flex items-center justify-between border-b border-gray-200">
         <div className="flex items-center gap-3">
           <div className="flex gap-1.5">
             <div className="w-3 h-3 rounded-full bg-red-500" />
             <div className="w-3 h-3 rounded-full bg-yellow-500" />
             <div className="w-3 h-3 rounded-full bg-green-500" />
           </div>
-          <span className="text-slate-300 text-sm font-mono">{title}</span>
+          <span className="text-gray-700 text-sm font-mono">{title}</span>
         </div>
         <div className="flex items-center gap-2">
           {isCompleted && (
-            <span className="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">
+            <span className="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">
               ✅ Completed
             </span>
           )}
@@ -119,13 +119,13 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
       </div>
 
       {/* Description */}
-      <div className="px-4 py-3 bg-slate-800/50 border-b border-slate-700">
-        <p className="text-slate-300 text-sm">{description}</p>
+      <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
+        <p className="text-gray-700 text-sm">{description}</p>
       </div>
 
       {/* Editor */}
       <div className="relative">
-        <div className="absolute left-0 top-0 bottom-0 w-12 bg-slate-800/80 flex flex-col items-center pt-3 text-slate-600 text-xs font-mono select-none">
+        <div className="absolute left-0 top-0 bottom-0 w-12 bg-gray-100 flex flex-col items-center pt-3 text-gray-500 text-xs font-mono select-none">
           {code.split("\n").map((_, i) => (
             <div key={i} className="h-[20px] leading-[20px]">
               {i + 1}
@@ -137,19 +137,19 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
           value={code}
           onChange={handleCodeChange}
           onKeyDown={handleTab}
-          className="w-full bg-slate-900 text-green-400 font-mono text-sm p-3 pl-14 outline-none resize-none min-h-[300px] leading-[20px]"
+          className="w-full bg-white text-green-400 font-mono text-sm p-3 pl-14 outline-none resize-none min-h-[300px] leading-[20px]"
           spellCheck={false}
           style={{ tabSize: 2 }}
         />
       </div>
 
       {/* Actions */}
-      <div className="bg-slate-800 px-4 py-3 flex items-center justify-between border-t border-slate-700">
+      <div className="bg-gray-100 px-4 py-3 flex items-center justify-between border-t border-gray-200">
         <div className="flex gap-2">
           <button
             onClick={runCode}
             disabled={isRunning}
-            className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 flex items-center gap-2"
+            className="px-4 py-2 bg-green-600 hover:bg-green-700 text-gray-900 text-sm font-medium rounded-lg transition-colors disabled:opacity-50 flex items-center gap-2"
           >
             {isRunning ? (
               <>
@@ -161,7 +161,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
           </button>
           <button
             onClick={resetCode}
-            className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 text-sm rounded-lg transition-colors"
+            className="px-4 py-2 bg-gray-200 hover:bg-gray-200 text-gray-700 text-sm rounded-lg transition-colors"
           >
             ↺ Reset
           </button>
@@ -175,7 +175,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
         {!isCompleted && (
           <button
             onClick={onComplete}
-            className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors"
+            className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-gray-900 text-sm font-medium rounded-lg transition-colors"
           >
             ✓ Mark Complete
           </button>
@@ -196,8 +196,8 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
 
       {/* Output */}
       {output.length > 0 && (
-        <div className="border-t border-slate-700">
-          <div className="px-4 py-2 bg-slate-800 text-slate-400 text-xs font-semibold">
+        <div className="border-t border-gray-200">
+          <div className="px-4 py-2 bg-gray-100 text-gray-500 text-xs font-semibold">
             📟 Output
           </div>
           <div className="px-4 py-3 bg-black/50 max-h-[250px] overflow-y-auto">
@@ -205,7 +205,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
               <pre
                 key={i}
                 className={`text-sm font-mono whitespace-pre-wrap mb-1 ${
-                  line.startsWith("❌") ? "text-red-400" : line.startsWith("⚠️") ? "text-yellow-400" : "text-slate-300"
+                  line.startsWith("❌") ? "text-red-400" : line.startsWith("⚠️") ? "text-yellow-400" : "text-gray-700"
                 }`}
               >
                 {line}

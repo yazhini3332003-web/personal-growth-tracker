@@ -119,24 +119,24 @@ const ChatbotSimulator: React.FC<ChatbotSimulatorProps> = ({ phaseId }) => {
   ];
 
   return (
-    <div className="bg-slate-800 rounded-xl border border-slate-700 flex flex-col h-[500px]">
+    <div className="bg-gray-100 rounded-xl border border-gray-200 flex flex-col h-[500px]">
       {/* Header */}
-      <div className="flex items-center justify-between p-3 border-b border-slate-700">
+      <div className="flex items-center justify-between p-3 border-b border-gray-200">
         <div className="flex items-center space-x-2">
-          <FiCpu className="text-green-400" />
-          <span className="text-white font-medium text-sm">AI Chatbot Simulator</span>
-          <span className="text-xs text-slate-400">Phase {phaseId}</span>
+          <FiCpu className="text-green-600" />
+          <span className="text-gray-900 font-medium text-sm">AI Chatbot Simulator</span>
+          <span className="text-xs text-gray-500">Phase {phaseId}</span>
         </div>
         <div className="flex items-center space-x-2">
           <select
             value={kbMode}
             onChange={(e) => setKbMode(e.target.value as "general" | "coding")}
-            className="bg-slate-700 text-slate-300 text-xs rounded px-2 py-1 border border-slate-600"
+            className="bg-gray-200 text-gray-700 text-xs rounded px-2 py-1 border border-gray-300"
           >
             <option value="general">General KB</option>
             <option value="coding">Coding KB</option>
           </select>
-          <button onClick={clearChat} className="text-slate-400 hover:text-red-400 transition-colors" title="Clear chat">
+          <button onClick={clearChat} className="text-gray-500 hover:text-red-500 transition-colors" title="Clear chat">
             <FiTrash2 size={14} />
           </button>
         </div>
@@ -149,17 +149,17 @@ const ChatbotSimulator: React.FC<ChatbotSimulatorProps> = ({ phaseId }) => {
             <div
               className={`max-w-[80%] rounded-lg px-3 py-2 text-sm ${
                 msg.role === "user"
-                  ? "bg-indigo-600 text-white"
+                  ? "bg-blue-500 text-gray-900"
                   : msg.role === "system"
-                  ? "bg-slate-700/50 text-slate-400 text-xs italic"
-                  : "bg-slate-700 text-slate-200"
+                  ? "bg-gray-100 text-gray-500 text-xs italic"
+                  : "bg-gray-200 text-gray-700"
               }`}
             >
               {msg.role === "bot" && (
                 <div className="flex items-center space-x-1 mb-1">
-                  <FiCpu className="text-green-400" size={10} />
-                  <span className="text-green-400 text-xs font-medium">AI Bot</span>
-                  <span className="text-slate-500 text-xs">{msg.timestamp}</span>
+                  <FiCpu className="text-green-600" size={10} />
+                  <span className="text-green-600 text-xs font-medium">AI Bot</span>
+                  <span className="text-gray-500 text-xs">{msg.timestamp}</span>
                 </div>
               )}
               <div className="whitespace-pre-wrap">{msg.content}</div>
@@ -168,7 +168,7 @@ const ChatbotSimulator: React.FC<ChatbotSimulatorProps> = ({ phaseId }) => {
         ))}
         {isTyping && (
           <div className="flex justify-start">
-            <div className="bg-slate-700 rounded-lg px-3 py-2 text-sm text-slate-400">
+            <div className="bg-gray-200 rounded-lg px-3 py-2 text-sm text-gray-500">
               <span className="animate-pulse">● ● ●</span>
             </div>
           </div>
@@ -188,7 +188,7 @@ const ChatbotSimulator: React.FC<ChatbotSimulatorProps> = ({ phaseId }) => {
                 handleSend();
               }, 100);
             }}
-            className="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded-full hover:bg-slate-600 transition-colors"
+            className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded-full hover:bg-gray-200 transition-colors"
           >
             {q}
           </button>
@@ -196,20 +196,20 @@ const ChatbotSimulator: React.FC<ChatbotSimulatorProps> = ({ phaseId }) => {
       </div>
 
       {/* Input */}
-      <div className="p-3 border-t border-slate-700 flex space-x-2">
+      <div className="p-3 border-t border-gray-200 flex space-x-2">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Ask the AI chatbot..."
-          className="flex-1 bg-slate-700 text-white text-sm rounded-lg px-3 py-2 border border-slate-600 focus:border-indigo-500 focus:outline-none"
+          className="flex-1 bg-gray-200 text-gray-900 text-sm rounded-lg px-3 py-2 border border-gray-300 focus:border-blue-500 focus:outline-none"
           disabled={isTyping}
         />
         <button
           onClick={handleSend}
           disabled={!input.trim() || isTyping}
-          className="bg-indigo-600 text-white px-3 py-2 rounded-lg hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="bg-blue-500 text-gray-900 px-3 py-2 rounded-lg hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           <FiSend size={14} />
         </button>

@@ -21,13 +21,13 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
     <div>
       {showLabel && (
         <div className="flex justify-between text-sm mb-1">
-          <span className="text-slate-600">
+          <span className="text-gray-600">
             {current} / {target} points
           </span>
           <span className="font-semibold text-primary-600">{percentage}%</span>
         </div>
       )}
-      <div className={`w-full bg-slate-200 rounded-full ${height} overflow-hidden`}>
+      <div className={`w-full bg-gray-200 rounded-full ${height} overflow-hidden`}>
         <div
           className={`${color} ${height} rounded-full transition-all duration-500 ease-out`}
           style={{ width: `${percentage}%` }}

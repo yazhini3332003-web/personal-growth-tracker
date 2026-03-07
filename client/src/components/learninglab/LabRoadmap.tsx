@@ -12,8 +12,8 @@ const LabRoadmap: React.FC<LabRoadmapProps> = ({ onPhaseClick }) => {
   return (
     <div className="py-8">
       <div className="text-center mb-10">
-        <h2 className="text-2xl font-bold text-white mb-2">🗺️ Your Learning Journey</h2>
-        <p className="text-slate-400 text-sm">Click any phase to start learning. Completed phases turn green.</p>
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">🗺️ Your Learning Journey</h2>
+        <p className="text-gray-500 text-sm">Click any phase to start learning. Completed phases turn green.</p>
       </div>
 
       {/* Desktop Roadmap */}
@@ -70,10 +70,10 @@ const LabRoadmap: React.FC<LabRoadmapProps> = ({ onPhaseClick }) => {
                   onClick={() => onPhaseClick(phase.id)}
                   className={`group relative p-5 rounded-2xl border-2 transition-all duration-300 text-left hover:scale-105 hover:shadow-2xl ${
                     isComplete
-                      ? "bg-green-900/30 border-green-500 shadow-md"
+                      ? "bg-green-50 border-green-500 shadow-md"
                       : isActive
-                      ? "bg-indigo-900/40 border-indigo-500 shadow-md animate-pulse-slow"
-                      : "bg-slate-800/80 border-slate-600 hover:border-slate-400"
+                      ? "bg-gray-50 border-blue-500 shadow-md animate-pulse-slow"
+                      : "bg-gray-100 border-gray-300 hover:border-gray-400"
                   }`}
                 >
                   <div className="flex items-center gap-3 mb-3">
@@ -82,23 +82,23 @@ const LabRoadmap: React.FC<LabRoadmapProps> = ({ onPhaseClick }) => {
                         isComplete
                           ? "bg-green-500 text-white"
                           : isActive
-                          ? "bg-indigo-500 text-white"
-                          : "bg-slate-700 text-slate-300"
+                          ? "bg-blue-500 text-white"
+                          : "bg-gray-200 text-gray-700"
                       }`}
                     >
                       {isComplete ? "✓" : phase.id}
                     </div>
                     <span className="text-xl">{phase.icon}</span>
                   </div>
-                  <h3 className={`font-semibold text-sm mb-1 ${isComplete ? "text-green-300" : "text-white"}`}>
+                  <h3 className={`font-semibold text-sm mb-1 ${isComplete ? "text-green-600" : "text-gray-900"}`}>
                     {phase.title}
                   </h3>
-                  <p className="text-slate-400 text-xs line-clamp-2">{phase.subtitle}</p>
+                  <p className="text-gray-500 text-xs line-clamp-2">{phase.subtitle}</p>
                   {/* Progress bar */}
-                  <div className="mt-3 bg-slate-700 rounded-full h-1.5">
+                  <div className="mt-3 bg-gray-200 rounded-full h-1.5">
                     <div
                       className={`h-full rounded-full transition-all duration-500 ${
-                        isComplete ? "bg-green-500" : "bg-indigo-500"
+                        isComplete ? "bg-green-500" : "bg-blue-500"
                       }`}
                       style={{
                         width: `${
@@ -130,10 +130,10 @@ const LabRoadmap: React.FC<LabRoadmapProps> = ({ onPhaseClick }) => {
                     onClick={() => onPhaseClick(phase.id)}
                     className={`group relative p-5 rounded-2xl border-2 transition-all duration-300 text-left hover:scale-105 hover:shadow-2xl ${
                       isComplete
-                        ? "bg-green-900/30 border-green-500 shadow-md"
+                        ? "bg-green-50 border-green-500 shadow-md"
                         : isActive
-                        ? "bg-indigo-900/40 border-indigo-500 shadow-md"
-                        : "bg-slate-800/80 border-slate-600 hover:border-slate-400"
+                        ? "bg-gray-50 border-blue-500 shadow-md"
+                        : "bg-gray-100 border-gray-300 hover:border-gray-400"
                     }`}
                   >
                     <div className="flex items-center gap-3 mb-3">
@@ -142,22 +142,22 @@ const LabRoadmap: React.FC<LabRoadmapProps> = ({ onPhaseClick }) => {
                           isComplete
                             ? "bg-green-500 text-white"
                             : isActive
-                            ? "bg-indigo-500 text-white"
-                            : "bg-slate-700 text-slate-300"
+                            ? "bg-blue-500 text-white"
+                            : "bg-gray-200 text-gray-700"
                         }`}
                       >
                         {isComplete ? "✓" : phase.id}
                       </div>
                       <span className="text-xl">{phase.icon}</span>
                     </div>
-                    <h3 className={`font-semibold text-sm mb-1 ${isComplete ? "text-green-300" : "text-white"}`}>
+                    <h3 className={`font-semibold text-sm mb-1 ${isComplete ? "text-green-600" : "text-gray-900"}`}>
                       {phase.title}
                     </h3>
-                    <p className="text-slate-400 text-xs line-clamp-2">{phase.subtitle}</p>
-                    <div className="mt-3 bg-slate-700 rounded-full h-1.5">
+                    <p className="text-gray-500 text-xs line-clamp-2">{phase.subtitle}</p>
+                    <div className="mt-3 bg-gray-200 rounded-full h-1.5">
                       <div
                         className={`h-full rounded-full transition-all duration-500 ${
-                          isComplete ? "bg-green-500" : "bg-indigo-500"
+                          isComplete ? "bg-green-500" : "bg-blue-500"
                         }`}
                         style={{
                           width: `${
@@ -191,14 +191,14 @@ const LabRoadmap: React.FC<LabRoadmapProps> = ({ onPhaseClick }) => {
                     isComplete
                       ? "bg-green-500 text-white"
                       : isActive
-                      ? "bg-indigo-500 text-white ring-4 ring-indigo-500/30"
-                      : "bg-slate-700 text-slate-400"
+                      ? "bg-blue-500 text-white ring-4 ring-blue-200"
+                      : "bg-gray-200 text-gray-500"
                   }`}
                 >
                   {isComplete ? "✓" : phase.id}
                 </div>
                 {i < labPhases.length - 1 && (
-                  <div className={`w-0.5 h-12 ${isComplete ? "bg-green-500" : "bg-slate-700"}`} />
+                  <div className={`w-0.5 h-12 ${isComplete ? "bg-green-500" : "bg-gray-300"}`} />
                 )}
               </div>
 
@@ -207,20 +207,20 @@ const LabRoadmap: React.FC<LabRoadmapProps> = ({ onPhaseClick }) => {
                 onClick={() => onPhaseClick(phase.id)}
                 className={`flex-1 p-4 rounded-xl border text-left transition-all ${
                   isComplete
-                    ? "bg-green-900/20 border-green-600"
+                    ? "bg-green-50 border-green-300"
                     : isActive
-                    ? "bg-indigo-900/30 border-indigo-500"
-                    : "bg-slate-800/50 border-slate-700 hover:border-slate-500"
+                    ? "bg-gray-50 border-blue-500"
+                    : "bg-gray-50 border-gray-200 hover:border-gray-400"
                 }`}
               >
                 <div className="flex items-center gap-2 mb-1">
                   <span>{phase.icon}</span>
-                  <h3 className="font-semibold text-sm text-white">{phase.title}</h3>
+                  <h3 className="font-semibold text-sm text-gray-900">{phase.title}</h3>
                 </div>
-                <p className="text-slate-400 text-xs">{phase.subtitle}</p>
-                <div className="mt-2 bg-slate-700 rounded-full h-1">
+                <p className="text-gray-500 text-xs">{phase.subtitle}</p>
+                <div className="mt-2 bg-gray-200 rounded-full h-1">
                   <div
-                    className={`h-full rounded-full ${isComplete ? "bg-green-500" : "bg-indigo-500"}`}
+                    className={`h-full rounded-full ${isComplete ? "bg-green-500" : "bg-blue-500"}`}
                     style={{
                       width: `${
                         isComplete

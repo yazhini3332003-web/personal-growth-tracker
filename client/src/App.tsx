@@ -21,7 +21,7 @@ function App() {
   return (
     <GoalProvider>
       <Router>
-        <div className="min-h-screen bg-slate-50 flex flex-col md:flex-row">
+          <div className="min-h-screen bg-[#F8FAFC] flex flex-col md:flex-row">
           <Sidebar />
           <MobileNav />
           <main className="flex-1 overflow-auto">
@@ -49,10 +49,11 @@ function App() {
             duration: 3000,
             style: {
               borderRadius: "12px",
-              background: "#1e293b",
-              color: "#f8fafc",
+              background: "#FFFFFF",
+              color: "#1F2937",
               fontSize: "14px",
-              border: "1px solid #334155",
+              border: "1px solid #E5E7EB",
+              boxShadow: "0 4px 12px rgba(124, 58, 237, 0.08)",
             },
           }}
         />

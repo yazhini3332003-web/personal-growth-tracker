@@ -2,56 +2,60 @@ import React from "react";
 import { newsItems } from "../../data/learningData";
 
 const categoryColors: Record<string, string> = {
-  "AI Research": "bg-purple-100 text-purple-700",
-  "AI Tools": "bg-blue-100 text-blue-700",
-  Programming: "bg-green-100 text-green-700",
-  DevOps: "bg-orange-100 text-orange-700",
-  Startups: "bg-pink-100 text-pink-700",
+  "AI Research": "bg-gray-100 text-gray-600",
+  "AI Tools": "bg-gray-100 text-gray-600",
+  Programming: "bg-gray-100 text-gray-600",
+  DevOps: "bg-gray-100 text-gray-600",
+  Startups: "bg-gray-100 text-gray-600",
 };
 
 const AINewsFeed: React.FC = () => {
   return (
-    <div className="space-y-4">
-      <div className="bg-gradient-to-r from-rose-500 to-pink-600 text-white p-5 rounded-xl">
-        <h3 className="text-lg font-bold flex items-center gap-2">
-          📡 AI & Tech News Feed
-        </h3>
-        <p className="text-rose-100 text-sm mt-1">
-          Stay updated with the latest in AI, programming, and technology
-        </p>
+    <div className="space-y-5">
+      {/* Compact Header */}
+      <div className="bg-white border border-gray-200 rounded-lg p-5">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center">
+            <span className="text-xl">📡</span>
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900">AI & Tech News Feed</h3>
+            <p className="text-sm text-gray-500">Stay updated with the latest in AI, programming, and technology</p>
+          </div>
+        </div>
       </div>
 
-      <div className="space-y-3">
+      {/* News Cards Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {newsItems.map((item) => (
           <a
             key={item.id}
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="block bg-white border rounded-xl p-4 hover:shadow-md hover:-translate-y-0.5 transition-all group"
+            className="bg-white border border-gray-200 rounded-lg p-5 hover:border-blue-300 hover:shadow-sm transition-all group"
           >
-            <div className="flex items-start justify-between gap-3">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${categoryColors[item.category] || "bg-slate-100 text-slate-600"}`}>
-                    {item.category}
-                  </span>
-                  <span className="text-xs text-slate-400">{item.date}</span>
-                </div>
-                <h4 className="font-bold text-slate-800 group-hover:text-blue-600 transition">
-                  {item.title}
-                </h4>
-                <p className="text-sm text-slate-500 mt-1">{item.summary}</p>
-                <span className="text-xs text-slate-400 mt-2 inline-block">Source: {item.source}</span>
-              </div>
-              <span className="text-slate-300 group-hover:text-blue-500 transition text-xl mt-2">↗</span>
+            <div className="flex items-center gap-2 mb-3">
+              <span className={`px-2 py-0.5 rounded text-xs font-medium ${categoryColors[item.category] || "bg-gray-100 text-gray-600"}`}>
+                {item.category}
+              </span>
+              <span className="text-xs text-gray-400">{item.date}</span>
+            </div>
+            <h4 className="font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
+              {item.title}
+            </h4>
+            <p className="text-sm text-gray-500 mt-2 line-clamp-2">{item.summary}</p>
+            <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-100">
+              <span className="text-xs text-gray-400">{item.source}</span>
+              <span className="text-xs text-blue-500 font-medium group-hover:underline">Read More →</span>
             </div>
           </a>
         ))}
       </div>
 
-      <div className="bg-slate-50 border border-dashed border-slate-300 rounded-xl p-6 text-center">
-        <p className="text-slate-500 text-sm">
+      {/* Footer Note */}
+      <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
+        <p className="text-gray-500 text-sm">
           💡 News is curated from trusted tech sources. Check back daily for new updates!
         </p>
       </div>

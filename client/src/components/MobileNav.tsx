@@ -35,16 +35,16 @@ const MobileNav: React.FC = () => {
 
   return (
     <div className="md:hidden">
-      <div className="bg-slate-900 px-4 py-3 flex items-center justify-between">
+      <div className="bg-[#0F172A] px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
             <span className="text-white text-sm font-bold">P</span>
           </div>
           <span className="text-white font-bold">Growth Tracker</span>
         </div>
         <button
           onClick={() => setOpen(!open)}
-          className="text-white p-1"
+          className="text-gray-400 p-1"
         >
           {open ? (
             <HiOutlineX className="h-6 w-6" />
@@ -54,7 +54,7 @@ const MobileNav: React.FC = () => {
         </button>
       </div>
       {open && (
-        <div className="bg-slate-800 px-3 py-2 space-y-1">
+        <div className="bg-[#0F172A] border-b border-gray-800 px-3 py-2 space-y-1">
           {navigation.map((item) => {
             const isActive = location.pathname === item.href;
             return (
@@ -64,11 +64,11 @@ const MobileNav: React.FC = () => {
                 onClick={() => setOpen(false)}
                 className={`flex items-center px-3 py-2 text-sm font-medium rounded-lg ${
                   isActive
-                    ? "bg-primary-600 text-white"
-                    : "text-slate-300 hover:bg-slate-700"
+                    ? "bg-blue-500/15 text-blue-400"
+                    : "text-gray-400 hover:bg-white/5 hover:text-white"
                 }`}
               >
-                <item.icon className="mr-3 h-5 w-5" />
+                <item.icon className={`mr-3 h-5 w-5 ${isActive ? "text-blue-400" : "text-gray-500"}`} />
                 {item.name}
               </Link>
             );

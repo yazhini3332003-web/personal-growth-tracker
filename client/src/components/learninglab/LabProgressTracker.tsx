@@ -22,32 +22,32 @@ const LabProgressTracker: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="text-center mb-4">
-        <h2 className="text-2xl font-bold text-white mb-2">📊 Learning Progress</h2>
-        <p className="text-slate-400 text-sm">Track your journey to becoming an AI developer</p>
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">📊 Learning Progress</h2>
+        <p className="text-gray-500 text-sm">Track your journey to becoming an AI developer</p>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-gradient-to-br from-indigo-900/40 to-indigo-900/20 rounded-2xl p-5 border border-indigo-800/40">
-          <p className="text-indigo-300 text-xs font-semibold mb-1">Total Progress</p>
+        <div className="bg-gray-50 rounded-2xl p-5 border border-blue-200">
+          <p className="text-blue-500 text-xs font-semibold mb-1">Total Progress</p>
           <div className="flex items-end gap-2">
-            <span className="text-3xl font-bold text-white">{stats.totalProgress}%</span>
+            <span className="text-3xl font-bold text-gray-900">{stats.totalProgress}%</span>
           </div>
-          <div className="mt-3 bg-indigo-950 rounded-full h-2">
+          <div className="mt-3 bg-gray-100 rounded-full h-2">
             <div
-              className="h-full bg-indigo-500 rounded-full transition-all duration-700"
+              className="h-full bg-blue-500 rounded-full transition-all duration-700"
               style={{ width: `${stats.totalProgress}%` }}
             />
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-green-900/40 to-green-900/20 rounded-2xl p-5 border border-green-800/40">
-          <p className="text-green-300 text-xs font-semibold mb-1">Phases Completed</p>
+        <div className="bg-green-50 rounded-2xl p-5 border border-green-200">
+          <p className="text-green-600 text-xs font-semibold mb-1">Phases Completed</p>
           <div className="flex items-end gap-2">
-            <span className="text-3xl font-bold text-white">{stats.completedPhases}</span>
-            <span className="text-green-400 text-sm mb-1">/ 8</span>
+            <span className="text-3xl font-bold text-gray-900">{stats.completedPhases}</span>
+            <span className="text-green-500 text-sm mb-1">/ 8</span>
           </div>
-          <div className="mt-3 bg-green-950 rounded-full h-2">
+          <div className="mt-3 bg-green-100 rounded-full h-2">
             <div
               className="h-full bg-green-500 rounded-full transition-all"
               style={{ width: `${(stats.completedPhases / 8) * 100}%` }}
@@ -55,42 +55,42 @@ const LabProgressTracker: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-amber-900/40 to-amber-900/20 rounded-2xl p-5 border border-amber-800/40">
-          <p className="text-amber-300 text-xs font-semibold mb-1">🔥 Learning Streak</p>
+        <div className="bg-amber-50 rounded-2xl p-5 border border-amber-200">
+          <p className="text-amber-600 text-xs font-semibold mb-1">🔥 Learning Streak</p>
           <div className="flex items-end gap-2">
-            <span className="text-3xl font-bold text-white">{stats.streak}</span>
-            <span className="text-amber-400 text-sm mb-1">days</span>
+            <span className="text-3xl font-bold text-gray-900">{stats.streak}</span>
+            <span className="text-amber-500 text-sm mb-1">days</span>
           </div>
-          <p className="text-amber-500/60 text-xs mt-3">
+          <p className="text-amber-400 text-xs mt-3">
             {stats.streak >= 7 ? "🏆 Amazing streak!" : stats.streak >= 3 ? "💪 Keep going!" : "🌱 Just getting started!"}
           </p>
         </div>
 
-        <div className="bg-gradient-to-br from-cyan-900/40 to-cyan-900/20 rounded-2xl p-5 border border-cyan-800/40">
-          <p className="text-cyan-300 text-xs font-semibold mb-1">⏱️ Total Time</p>
+        <div className="bg-cyan-50 rounded-2xl p-5 border border-cyan-200">
+          <p className="text-cyan-600 text-xs font-semibold mb-1">⏱️ Total Time</p>
           <div className="flex items-end gap-2">
-            <span className="text-3xl font-bold text-white">
+            <span className="text-3xl font-bold text-gray-900">
               {stats.totalMinutes >= 60
                 ? `${Math.floor(stats.totalMinutes / 60)}h`
                 : `${stats.totalMinutes}m`}
             </span>
             {stats.totalMinutes >= 60 && (
-              <span className="text-cyan-400 text-sm mb-1">
+              <span className="text-cyan-500 text-sm mb-1">
                 {stats.totalMinutes % 60}m
               </span>
             )}
           </div>
-          <p className="text-cyan-500/60 text-xs mt-3">
+          <p className="text-cyan-400 text-xs mt-3">
             Exercises: {stats.completedExercises} | Projects: {stats.completedProjects}
           </p>
         </div>
 
-        <div className="bg-gradient-to-br from-purple-900/40 to-purple-900/20 rounded-2xl p-5 border border-purple-800/40 col-span-2 lg:col-span-4">
+        <div className="bg-purple-50 rounded-2xl p-5 border border-purple-200 col-span-2 lg:col-span-4">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-purple-300 text-xs font-semibold">📖 Lessons Completed</p>
-            <span className="text-purple-400 text-xs">{stats.completedLessons} lessons</span>
+            <p className="text-purple-600 text-xs font-semibold">📖 Lessons Completed</p>
+            <span className="text-purple-500 text-xs">{stats.completedLessons} lessons</span>
           </div>
-          <div className="bg-purple-950 rounded-full h-2">
+          <div className="bg-purple-100 rounded-full h-2">
             <div
               className="h-full bg-purple-500 rounded-full transition-all duration-700"
               style={{ width: `${Math.min((stats.completedLessons / 75) * 100, 100)}%` }}
@@ -100,8 +100,8 @@ const LabProgressTracker: React.FC = () => {
       </div>
 
       {/* Weekly Chart */}
-      <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6">
-        <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+      <div className="bg-white rounded-2xl border border-gray-200 p-6">
+        <h3 className="text-gray-900 font-semibold mb-4 flex items-center gap-2">
           📅 Weekly Learning Activity
         </h3>
         <div className="flex items-end gap-3 h-[160px]">
@@ -112,16 +112,16 @@ const LabProgressTracker: React.FC = () => {
 
             return (
               <div key={day} className="flex-1 flex flex-col items-center gap-2">
-                <span className="text-slate-500 text-xs">{minutes}m</span>
-                <div className="w-full bg-slate-800 rounded-t-lg relative" style={{ height: "120px" }}>
+                <span className="text-gray-500 text-xs">{minutes}m</span>
+                <div className="w-full bg-gray-100 rounded-t-lg relative" style={{ height: "120px" }}>
                   <div
                     className={`absolute bottom-0 w-full rounded-t-lg transition-all duration-500 ${
-                      isToday ? "bg-indigo-500" : "bg-indigo-700"
+                      isToday ? "bg-blue-500" : "bg-blue-600"
                     }`}
                     style={{ height: `${height}%`, minHeight: minutes > 0 ? "4px" : "0" }}
                   />
                 </div>
-                <span className={`text-xs ${isToday ? "text-indigo-400 font-semibold" : "text-slate-500"}`}>
+                <span className={`text-xs ${isToday ? "text-blue-400 font-semibold" : "text-gray-500"}`}>
                   {weekLabels[i]}
                 </span>
               </div>
@@ -131,8 +131,8 @@ const LabProgressTracker: React.FC = () => {
       </div>
 
       {/* Daily Progress Log */}
-      <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6">
-        <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+      <div className="bg-white rounded-2xl border border-gray-200 p-6">
+        <h3 className="text-gray-900 font-semibold mb-4 flex items-center gap-2">
           📝 Daily Learning Log
         </h3>
         {Object.keys(progress.dailyLog || {}).length > 0 ? (
@@ -144,11 +144,11 @@ const LabProgressTracker: React.FC = () => {
               const mins = (progress.dailyLog || {})[key] || 0;
               const intensity = mins === 0 ? 0 : mins < 10 ? 1 : mins < 30 ? 2 : mins < 60 ? 3 : 4;
               const colors = [
-                "bg-slate-800",
-                "bg-indigo-900/60",
-                "bg-indigo-700/60",
-                "bg-indigo-500/60",
-                "bg-indigo-400/80",
+                "bg-gray-200",
+                "bg-blue-900/60",
+                "bg-blue-600/60",
+                "bg-blue-500/60",
+                "bg-blue-400/80",
               ];
               return (
                 <div
@@ -157,7 +157,7 @@ const LabProgressTracker: React.FC = () => {
                   title={`${key}: ${mins} min`}
                 >
                   {i >= 21 && (
-                    <span className="text-[10px] text-slate-400">
+                    <span className="text-[10px] text-gray-500">
                       {d.getDate()}
                     </span>
                   )}
@@ -166,22 +166,22 @@ const LabProgressTracker: React.FC = () => {
             })}
           </div>
         ) : (
-          <p className="text-slate-600 text-sm text-center py-4">
+          <p className="text-gray-500 text-sm text-center py-4">
             Start learning to see your daily activity!
           </p>
         )}
         <div className="flex items-center gap-2 mt-3 justify-end">
-          <span className="text-slate-600 text-xs">Less</span>
-          {["bg-slate-800", "bg-indigo-900/60", "bg-indigo-700/60", "bg-indigo-500/60", "bg-indigo-400/80"].map((c, i) => (
+          <span className="text-gray-500 text-xs">Less</span>
+          {["bg-gray-200", "bg-blue-900/60", "bg-blue-600/60", "bg-blue-500/60", "bg-blue-400/80"].map((c, i) => (
             <div key={i} className={`w-3 h-3 rounded-sm ${c}`} />
           ))}
-          <span className="text-slate-600 text-xs">More</span>
+          <span className="text-gray-500 text-xs">More</span>
         </div>
       </div>
 
       {/* Phase-by-Phase Breakdown */}
-      <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6">
-        <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+      <div className="bg-white rounded-2xl border border-gray-200 p-6">
+        <h3 className="text-gray-900 font-semibold mb-4 flex items-center gap-2">
           🎯 Phase Breakdown
         </h3>
         <div className="space-y-3">
@@ -200,13 +200,13 @@ const LabProgressTracker: React.FC = () => {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-slate-300 text-sm">{phase.title}</span>
-                    <span className="text-slate-500 text-xs">
+                    <span className="text-gray-700 text-sm">{phase.title}</span>
+                    <span className="text-gray-500 text-xs">
                       {pp.exercises}/{pp.totalExercises} exercises
                       {pp.projectDone && " • Project ✅"}
                     </span>
                   </div>
-                  <div className="bg-slate-800 rounded-full h-2">
+                  <div className="bg-gray-100 rounded-full h-2">
                     <div
                       className="h-full rounded-full transition-all duration-500"
                       style={{
@@ -216,7 +216,7 @@ const LabProgressTracker: React.FC = () => {
                     />
                   </div>
                 </div>
-                <span className="text-slate-500 text-xs w-10 text-right">{percent}%</span>
+                <span className="text-gray-500 text-xs w-10 text-right">{percent}%</span>
               </div>
             );
           })}

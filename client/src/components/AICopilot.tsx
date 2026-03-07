@@ -420,7 +420,7 @@ const AICopilot: React.FC = () => {
     return lines.map((line, i) => {
       if (line.startsWith("## ")) {
         return (
-          <h3 key={i} className="text-base font-bold mt-2 mb-1 text-indigo-300">
+          <h3 key={i} className="text-base font-bold mt-2 mb-1 text-blue-300">
             {line.replace("## ", "")}
           </h3>
         );
@@ -429,7 +429,7 @@ const AICopilot: React.FC = () => {
         return (
           <blockquote
             key={i}
-            className="border-l-3 border-indigo-400 pl-3 italic text-indigo-200 my-2"
+            className="border-l-3 border-blue-400 pl-3 italic text-blue-200 my-2"
           >
             {renderInline(line.replace("> ", ""))}
           </blockquote>
@@ -468,10 +468,10 @@ const AICopilot: React.FC = () => {
           hover:scale-110 active:scale-95
           ${
             isOpen
-              ? "bg-gradient-to-br from-red-500 to-pink-600 rotate-0"
-              : "bg-gradient-to-br from-indigo-600 to-purple-700 hover:from-indigo-500 hover:to-purple-600"
+              ? "bg-red-500 hover:bg-red-600 rotate-0"
+              : "bg-blue-500 hover:bg-blue-600"
           }`}
-        style={{ boxShadow: isOpen ? "0 4px 24px rgba(239,68,68,0.4)" : "0 4px 24px rgba(99,102,241,0.5)" }}
+        style={{ boxShadow: isOpen ? "0 4px 24px rgba(239,68,68,0.4)" : "0 4px 24px rgba(124,58,237,0.5)" }}
         aria-label={isOpen ? "Close AI Copilot" : "Open AI Copilot"}
       >
         {isOpen ? (
@@ -488,7 +488,7 @@ const AICopilot: React.FC = () => {
       {/* ── Notification badge (when closed) ───────────────────── */}
       {!isOpen && messages.length === 0 && (
         <div className="fixed bottom-[5.2rem] right-6 z-50 animate-bounce">
-          <div className="bg-white rounded-2xl shadow-xl px-4 py-2 text-sm font-medium text-slate-800 max-w-[200px]">
+          <div className="bg-white rounded-2xl shadow-xl px-4 py-2 text-sm font-medium text-gray-800 max-w-[200px]">
             <div className="absolute -bottom-1.5 right-5 w-3 h-3 bg-white rotate-45 shadow-sm" />
             Need help? Ask me! ✨
           </div>
@@ -501,19 +501,19 @@ const AICopilot: React.FC = () => {
           transition-all duration-300 ease-out origin-bottom-right
           ${isOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-4 pointer-events-none"}`}
       >
-        <div className="bg-[#0f0b2e] rounded-2xl shadow-2xl border border-indigo-500/20 flex flex-col overflow-hidden"
+        <div className="bg-[#0f0b2e] rounded-2xl shadow-2xl border border-blue-500/20 flex flex-col overflow-hidden"
           style={{ height: "min(580px, calc(100vh - 140px))", boxShadow: "0 8px 40px rgba(15,11,46,0.6)" }}
         >
           {/* ── Header ─────────────────────────────────────────── */}
-          <div className="bg-gradient-to-r from-indigo-700 via-purple-700 to-indigo-800 px-5 py-4 flex items-center gap-3 shrink-0">
+          <div className="bg-blue-600 px-5 py-4 flex items-center gap-3 shrink-0">
             <div className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center">
-              <svg className="w-5 h-5 text-indigo-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+              <svg className="w-5 h-5 text-blue-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
               </svg>
             </div>
             <div className="flex-1">
               <h2 className="text-white font-bold text-sm tracking-wide">AI Growth Copilot</h2>
-              <p className="text-indigo-200 text-xs">Your personal growth mentor</p>
+              <p className="text-blue-200 text-xs">Your personal growth mentor</p>
             </div>
             <div className="flex items-center gap-1.5">
               <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
@@ -532,8 +532,8 @@ const AICopilot: React.FC = () => {
                   className={`max-w-[85%] rounded-2xl px-4 py-3 text-[13.5px] leading-relaxed
                     ${
                       msg.role === "user"
-                        ? "bg-indigo-600 text-white rounded-br-md"
-                        : "bg-white/8 text-indigo-100 rounded-bl-md border border-white/5"
+                        ? "bg-blue-500 text-white rounded-br-md"
+                        : "bg-white/8 text-blue-100 rounded-bl-md border border-white/5"
                     }`}
                 >
                   {renderText(msg.text)}
@@ -546,8 +546,8 @@ const AICopilot: React.FC = () => {
                           key={i}
                           onClick={() => handleAction(action)}
                           className="px-3 py-1.5 text-xs font-medium rounded-lg
-                            bg-indigo-600/40 hover:bg-indigo-600/70 text-indigo-100
-                            border border-indigo-500/30 hover:border-indigo-400/50
+                            bg-blue-500/40 hover:bg-blue-500/70 text-blue-100
+                            border border-blue-500/30 hover:border-blue-400/50
                             transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
                         >
                           {action.label}
@@ -564,9 +564,9 @@ const AICopilot: React.FC = () => {
               <div className="flex justify-start">
                 <div className="bg-white/8 rounded-2xl rounded-bl-md px-4 py-3 border border-white/5">
                   <div className="flex gap-1.5 items-center">
-                    <div className="w-2 h-2 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: "0ms" }} />
-                    <div className="w-2 h-2 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: "150ms" }} />
-                    <div className="w-2 h-2 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: "300ms" }} />
+                    <div className="w-2 h-2 rounded-full bg-blue-400 animate-bounce" style={{ animationDelay: "0ms" }} />
+                    <div className="w-2 h-2 rounded-full bg-blue-400 animate-bounce" style={{ animationDelay: "150ms" }} />
+                    <div className="w-2 h-2 rounded-full bg-blue-400 animate-bounce" style={{ animationDelay: "300ms" }} />
                   </div>
                 </div>
               </div>
@@ -578,7 +578,7 @@ const AICopilot: React.FC = () => {
           {/* ── Quick suggestions ──────────────────────────────── */}
           {messages.length <= 1 && (
             <div className="px-4 pb-2 shrink-0">
-              <p className="text-indigo-400 text-[11px] font-semibold uppercase tracking-wider mb-2">
+              <p className="text-blue-400 text-[11px] font-semibold uppercase tracking-wider mb-2">
                 Quick Suggestions
               </p>
               <div className="flex flex-wrap gap-1.5">
@@ -587,8 +587,8 @@ const AICopilot: React.FC = () => {
                     key={i}
                     onClick={() => handleSuggestionClick(s)}
                     className="text-xs px-3 py-1.5 rounded-full 
-                      bg-white/5 hover:bg-indigo-600/30 text-indigo-200 hover:text-white
-                      border border-white/8 hover:border-indigo-500/30
+                      bg-white/5 hover:bg-blue-500/30 text-blue-200 hover:text-white
+                      border border-white/8 hover:border-blue-500/30
                       transition-all duration-200"
                   >
                     {s}
@@ -600,7 +600,7 @@ const AICopilot: React.FC = () => {
 
           {/* ── Input ──────────────────────────────────────────── */}
           <div className="px-4 py-3 border-t border-white/8 shrink-0">
-            <div className="flex items-center gap-2 bg-white/5 rounded-xl border border-white/10 focus-within:border-indigo-500/50 transition-colors">
+            <div className="flex items-center gap-2 bg-white/5 rounded-xl border border-white/10 focus-within:border-blue-500/50 transition-colors">
               <input
                 ref={inputRef}
                 type="text"
@@ -608,7 +608,7 @@ const AICopilot: React.FC = () => {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
                 placeholder="Ask me anything..."
-                className="flex-1 bg-transparent text-white text-sm px-4 py-3 outline-none placeholder:text-indigo-300/40"
+                className="flex-1 bg-transparent text-white text-sm px-4 py-3 outline-none placeholder:text-blue-300/40"
               />
               <button
                 onClick={handleSend}
@@ -616,8 +616,8 @@ const AICopilot: React.FC = () => {
                 className={`mr-2 p-2 rounded-lg transition-all duration-200
                   ${
                     input.trim()
-                      ? "bg-indigo-600 hover:bg-indigo-500 text-white scale-100"
-                      : "bg-transparent text-indigo-500/30 scale-95"
+                      ? "bg-blue-500 hover:bg-blue-500 text-white scale-100"
+                      : "bg-transparent text-blue-500/30 scale-95"
                   }`}
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>

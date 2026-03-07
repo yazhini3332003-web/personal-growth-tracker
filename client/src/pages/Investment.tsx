@@ -18,7 +18,7 @@ interface InvestmentTab {
 
 const tabs: InvestmentTab[] = [
   { key: "health", label: "Health", color: "#10b981", icon: "\u2764\uFE0F" },
-  { key: "time", label: "Time Freedom", color: "#6366f1", icon: "\u23F0" },
+  { key: "time", label: "Time Freedom", color: "#3B82F6", icon: "\u23F0" },
   { key: "money", label: "Money", color: "#f59e0b", icon: "\uD83D\uDCB0" },
   { key: "knowledge", label: "Knowledge", color: "#8b5cf6", icon: "\uD83D\uDCDA" },
   { key: "trending", label: "Trending", color: "#ec4899", icon: "\uD83D\uDD25" },
@@ -122,22 +122,22 @@ const Investment: React.FC = () => {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-slate-900">Investment</h1>
-        <p className="text-slate-500 mt-1">
+        <h1 className="text-3xl font-bold text-gray-900">Investment</h1>
+        <p className="text-gray-500 mt-1">
           Invest wisely in every area of life \u2014 health, knowledge, time, and
           money
         </p>
       </div>
 
       {/* Introduction */}
-      <div className="bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl p-6 text-white">
-        <h2 className="text-xl font-bold mb-3">Introduction</h2>
-        <p className="text-primary-100 leading-relaxed">
+      <div className="bg-white rounded-2xl border border-gray-200 p-6">
+        <h2 className="text-xl font-bold text-gray-900 mb-3">Introduction</h2>
+        <p className="text-gray-600 leading-relaxed">
           The Investment section helps users understand how to invest in
           different areas of life. Investment is not limited to money; it also
           includes health, knowledge, and time.
         </p>
-        <p className="text-primary-100 leading-relaxed mt-3">
+        <p className="text-gray-600 leading-relaxed mt-3">
           This section provides insights, ideas, and trends that help users make
           better long-term decisions.
         </p>
@@ -152,7 +152,7 @@ const Investment: React.FC = () => {
             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
               activeTab === tab.key
                 ? "text-white shadow-sm"
-                : "bg-white text-slate-600 border border-slate-200/60 hover:border-slate-300 hover:shadow-sm"
+                : "bg-white text-gray-600 border border-gray-200/60 hover:border-gray-300 hover:shadow-sm"
             }`}
             style={
               activeTab === tab.key
@@ -167,7 +167,7 @@ const Investment: React.FC = () => {
       </div>
 
       {/* Tab Content */}
-      <div className="bg-white rounded-xl border border-slate-200/60 p-6 shadow-sm">
+      <div className="bg-white rounded-xl border border-gray-200/60 p-6 shadow-sm">
         <div className="flex items-center gap-3 mb-4">
           <div
             className="w-10 h-10 rounded-xl flex items-center justify-center text-lg"
@@ -175,16 +175,16 @@ const Investment: React.FC = () => {
           >
             {activeTabMeta.icon}
           </div>
-          <h3 className="text-xl font-bold text-slate-900">{current.title}</h3>
+          <h3 className="text-xl font-bold text-gray-900">{current.title}</h3>
         </div>
-        <p className="text-slate-600 leading-relaxed mb-6">
+        <p className="text-gray-600 leading-relaxed mb-6">
           {current.description}
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {current.items.map((item, index) => (
             <div
               key={index}
-              className="flex items-center gap-3 p-4 rounded-xl border border-slate-200/60 hover:shadow-sm transition"
+              className="flex items-center gap-3 p-4 rounded-xl border border-gray-200/60 hover:shadow-sm transition"
             >
               <div
                 className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
@@ -192,7 +192,7 @@ const Investment: React.FC = () => {
               >
                 {index + 1}
               </div>
-              <span className="text-slate-700 font-medium">{item}</span>
+              <span className="text-gray-700 font-medium">{item}</span>
             </div>
           ))}
         </div>
@@ -200,7 +200,7 @@ const Investment: React.FC = () => {
 
       {/* Overview Cards */}
       <div>
-        <h3 className="text-xl font-bold text-slate-900 mb-4">
+        <h3 className="text-xl font-bold text-gray-900 mb-4">
           All Investment Areas
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -213,7 +213,7 @@ const Investment: React.FC = () => {
                 className={`text-left p-5 rounded-xl border transition-all hover:shadow-md ${
                   activeTab === tab.key
                     ? "border-2 shadow-md"
-                    : "border-slate-200/60"
+                    : "border-gray-200/60"
                 }`}
                 style={
                   activeTab === tab.key
@@ -222,10 +222,10 @@ const Investment: React.FC = () => {
                 }
               >
                 <div className="text-2xl mb-2">{tab.icon}</div>
-                <h4 className="font-semibold text-slate-900 mb-1">
+                <h4 className="font-semibold text-gray-900 mb-1">
                   {tab.label}
                 </h4>
-                <p className="text-slate-500 text-xs line-clamp-2">
+                <p className="text-gray-500 text-xs line-clamp-2">
                   {content.description}
                 </p>
                 <p

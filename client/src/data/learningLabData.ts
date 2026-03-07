@@ -79,7 +79,7 @@ export const labPhases: LabPhase[] = [
     },
     practiceType: "prompt",
     practiceDescription: "Write prompts in the playground below. Experiment with different wording to see how prompt quality affects AI output quality.",
-    color: "#6366f1",
+    color: "#7C3AED",
     icon: "🧠",
   },
   {

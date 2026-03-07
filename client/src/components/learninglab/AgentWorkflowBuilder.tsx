@@ -177,19 +177,19 @@ const AgentWorkflowBuilder: React.FC<AgentWorkflowBuilderProps> = ({ phaseId }) 
   };
 
   return (
-    <div className="bg-slate-800 rounded-xl border border-slate-700">
+    <div className="bg-gray-100 rounded-xl border border-gray-200">
       {/* Header */}
-      <div className="flex items-center justify-between p-3 border-b border-slate-700">
+      <div className="flex items-center justify-between p-3 border-b border-gray-200">
         <div className="flex items-center space-x-2">
-          <span className="text-red-400 text-sm font-medium">🤖 Agent Workflow Builder</span>
-          <span className="text-xs text-slate-400">Phase {phaseId}</span>
+          <span className="text-blue-500 text-sm font-medium">🤖 Agent Workflow Builder</span>
+          <span className="text-xs text-gray-500">Phase {phaseId}</span>
         </div>
         <div className="flex items-center space-x-2">
-          <button onClick={resetWorkflow} className="text-slate-400 hover:text-white text-xs transition-colors">Reset</button>
+          <button onClick={resetWorkflow} className="text-gray-500 hover:text-gray-900 text-xs transition-colors">Reset</button>
           <button
             onClick={runWorkflow}
             disabled={isRunning || steps.length === 0}
-            className="bg-red-600 text-white text-xs px-3 py-1 rounded hover:bg-red-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center space-x-1"
+            className="bg-blue-500 text-gray-900 text-xs px-3 py-1 rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center space-x-1"
           >
             <FiPlay size={10} />
             <span>{isRunning ? "Running..." : "Run Workflow"}</span>
@@ -198,14 +198,14 @@ const AgentWorkflowBuilder: React.FC<AgentWorkflowBuilderProps> = ({ phaseId }) 
       </div>
 
       {/* Templates */}
-      <div className="p-3 border-b border-slate-700 flex flex-wrap gap-1">
-        <span className="text-slate-400 text-xs mr-2">Templates:</span>
+      <div className="p-3 border-b border-gray-200 flex flex-wrap gap-1">
+        <span className="text-gray-500 text-xs mr-2">Templates:</span>
         {[
           { id: "research", label: "🔍 Research Agent" },
           { id: "validate", label: "✅ Code Validator" },
           { id: "dataflow", label: "🔄 Data Pipeline" },
         ].map((t) => (
-          <button key={t.id} onClick={() => loadTemplate(t.id)} className="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded hover:bg-slate-600 transition-colors">
+          <button key={t.id} onClick={() => loadTemplate(t.id)} className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded hover:bg-gray-200 transition-colors">
             {t.label}
           </button>
         ))}
@@ -225,16 +225,16 @@ const AgentWorkflowBuilder: React.FC<AgentWorkflowBuilderProps> = ({ phaseId }) 
                     ? "border-green-500/50 bg-green-500/5"
                     : step.status === "error"
                     ? "border-red-500/50 bg-red-500/5"
-                    : "border-slate-600"
+                    : "border-gray-300"
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center space-x-2">
-                    <span className="text-xs text-slate-400">Step {i + 1}</span>
+                    <span className="text-xs text-gray-500">Step {i + 1}</span>
                     {step.status === "running" && <span className="text-yellow-400 text-xs animate-pulse">Running...</span>}
                     {step.status === "done" && <FiCheckCircle className="text-green-400" size={12} />}
                   </div>
-                  <button onClick={() => removeStep(step.id)} className="text-slate-500 hover:text-red-400 transition-colors" disabled={isRunning}>
+                  <button onClick={() => removeStep(step.id)} className="text-gray-500 hover:text-blue-500 transition-colors" disabled={isRunning}>
                     <FiTrash2 size={12} />
                   </button>
                 </div>
@@ -243,7 +243,7 @@ const AgentWorkflowBuilder: React.FC<AgentWorkflowBuilderProps> = ({ phaseId }) 
                   <select
                     value={step.toolId}
                     onChange={(e) => updateStep(step.id, { toolId: e.target.value })}
-                    className="bg-slate-700 text-white text-xs rounded px-2 py-1.5 border border-slate-600 sm:w-40"
+                    className="bg-gray-200 text-gray-900 text-xs rounded px-2 py-1.5 border border-gray-300 sm:w-40"
                     disabled={isRunning}
                   >
                     {availableTools.map((t) => (
@@ -257,13 +257,13 @@ const AgentWorkflowBuilder: React.FC<AgentWorkflowBuilderProps> = ({ phaseId }) 
                     value={step.input}
                     onChange={(e) => updateStep(step.id, { input: e.target.value })}
                     placeholder={i === 0 ? "Enter input..." : "Leave empty to use previous output"}
-                    className="flex-1 bg-slate-700 text-white text-xs rounded px-3 py-1.5 border border-slate-600 focus:border-indigo-500 focus:outline-none"
+                    className="flex-1 bg-gray-200 text-gray-900 text-xs rounded px-3 py-1.5 border border-gray-300 focus:border-blue-500 focus:outline-none"
                     disabled={isRunning}
                   />
                 </div>
 
                 {step.output && (
-                  <div className="bg-slate-900 rounded p-2 text-xs text-slate-300 font-mono whitespace-pre-wrap max-h-32 overflow-y-auto mt-2">
+                  <div className="bg-white rounded p-2 text-xs text-gray-700 font-mono whitespace-pre-wrap max-h-32 overflow-y-auto mt-2">
                     {step.output}
                   </div>
                 )}
@@ -271,7 +271,7 @@ const AgentWorkflowBuilder: React.FC<AgentWorkflowBuilderProps> = ({ phaseId }) 
 
               {i < steps.length - 1 && (
                 <div className="flex justify-center py-1">
-                  <FiArrowRight className="text-slate-500" size={16} />
+                  <FiArrowRight className="text-gray-500" size={16} />
                 </div>
               )}
             </div>
@@ -281,7 +281,7 @@ const AgentWorkflowBuilder: React.FC<AgentWorkflowBuilderProps> = ({ phaseId }) 
         <button
           onClick={addStep}
           disabled={isRunning}
-          className="w-full border border-dashed border-slate-600 rounded-lg py-2 text-slate-400 hover:text-white hover:border-slate-400 transition-colors flex items-center justify-center space-x-1 text-xs"
+          className="w-full border border-dashed border-gray-300 rounded-lg py-2 text-gray-500 hover:text-gray-900 hover:border-gray-400 transition-colors flex items-center justify-center space-x-1 text-xs"
         >
           <FiPlus size={12} />
           <span>Add Step</span>
@@ -290,14 +290,14 @@ const AgentWorkflowBuilder: React.FC<AgentWorkflowBuilderProps> = ({ phaseId }) 
 
       {/* Agent Log */}
       {agentLog.length > 0 && (
-        <div className="border-t border-slate-700 p-3">
+        <div className="border-t border-gray-200 p-3">
           <div className="flex items-center space-x-2 mb-2">
-            <FiSettings className="text-slate-400" size={12} />
-            <span className="text-slate-400 text-xs font-medium">Agent Log</span>
+            <FiSettings className="text-gray-500" size={12} />
+            <span className="text-gray-500 text-xs font-medium">Agent Log</span>
           </div>
-          <div className="bg-slate-900 rounded p-3 max-h-40 overflow-y-auto">
+          <div className="bg-white rounded p-3 max-h-40 overflow-y-auto">
             {agentLog.map((log, i) => (
-              <div key={i} className="text-xs text-slate-300 font-mono">
+              <div key={i} className="text-xs text-gray-700 font-mono">
                 {log}
               </div>
             ))}

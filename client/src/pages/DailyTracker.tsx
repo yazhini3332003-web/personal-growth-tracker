@@ -123,7 +123,7 @@ const DailyTracker: React.FC = () => {
   if (!activeGoal) {
     return (
       <div className="text-center py-20">
-        <p className="text-slate-500">
+        <p className="text-gray-500">
           Please create a goal first to start tracking.
         </p>
       </div>
@@ -135,18 +135,18 @@ const DailyTracker: React.FC = () => {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-slate-900">Daily Tracker</h1>
-        <p className="text-slate-500 mt-1">
+        <h1 className="text-3xl font-bold text-gray-900">Daily Tracker</h1>
+        <p className="text-gray-500 mt-1">
           Record your completed tasks for today
         </p>
       </div>
 
-      <div className="bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl p-6 text-white">
+      <div className="bg-white rounded-2xl border border-gray-200 p-6">
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <HiOutlineCalendar className="w-5 h-5 text-primary-200" />
-              <span className="text-primary-200 text-sm">
+              <HiOutlineCalendar className="w-5 h-5 text-blue-500" />
+              <span className="text-gray-500 text-sm">
                 {new Date().toLocaleDateString("en-US", {
                   weekday: "long",
                   year: "numeric",
@@ -155,13 +155,13 @@ const DailyTracker: React.FC = () => {
                 })}
               </span>
             </div>
-            <h2 className="text-2xl font-bold">
+            <h2 className="text-2xl font-bold text-gray-900">
               Day {dayNumber} of {activeGoal.totalDays}
             </h2>
           </div>
           <div className="text-right">
-            <p className="text-primary-200 text-sm">Today's Points</p>
-            <p className="text-4xl font-bold">{todayPoints}</p>
+            <p className="text-gray-500 text-sm">Today's Points</p>
+            <p className="text-4xl font-bold text-blue-500">{todayPoints}</p>
           </div>
         </div>
       </div>
@@ -171,8 +171,8 @@ const DailyTracker: React.FC = () => {
           <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary-600" />
         </div>
       ) : tasks.length === 0 ? (
-        <div className="text-center py-16 bg-white rounded-xl border border-slate-200/60">
-          <p className="text-slate-500 text-lg">
+        <div className="text-center py-16 bg-white rounded-xl border border-gray-200/60">
+          <p className="text-gray-500 text-lg">
             No tasks available. Please create tasks first.
           </p>
         </div>
@@ -193,7 +193,7 @@ const DailyTracker: React.FC = () => {
                         style={{ backgroundColor: cat.color }}
                       />
                     )}
-                    <h3 className="text-lg font-semibold text-slate-700">
+                    <h3 className="text-lg font-semibold text-gray-700">
                       {catName}
                     </h3>
                   </div>
@@ -207,7 +207,7 @@ const DailyTracker: React.FC = () => {
                           className={`w-full flex items-center justify-between p-4 rounded-xl border transition-all ${
                             isSelected
                               ? "bg-primary-50 border-primary-300 shadow-sm"
-                              : "bg-white border-slate-200/60 hover:border-slate-200"
+                              : "bg-white border-gray-200/60 hover:border-gray-200"
                           }`}
                         >
                           <div className="flex items-center gap-3">
@@ -215,7 +215,7 @@ const DailyTracker: React.FC = () => {
                               className={`w-6 h-6 rounded-md border-2 flex items-center justify-center transition ${
                                 isSelected
                                   ? "bg-primary-600 border-primary-600"
-                                  : "border-slate-300"
+                                  : "border-gray-300"
                               }`}
                             >
                               {isSelected && (
@@ -226,7 +226,7 @@ const DailyTracker: React.FC = () => {
                               className={`font-medium ${
                                 isSelected
                                   ? "text-primary-700"
-                                  : "text-slate-700"
+                                  : "text-gray-700"
                               }`}
                             >
                               {task.name}
@@ -236,7 +236,7 @@ const DailyTracker: React.FC = () => {
                             className={`font-bold text-sm ${
                               isSelected
                                 ? "text-primary-600"
-                                : "text-slate-400"
+                                : "text-gray-400"
                             }`}
                           >
                             +{task.points} pts
@@ -251,13 +251,13 @@ const DailyTracker: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Notes (optional)
             </label>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
+              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
               rows={3}
               placeholder="How was your day? Any reflections..."
             />
@@ -273,21 +273,21 @@ const DailyTracker: React.FC = () => {
 
           {dailyLogs.length > 0 && (
             <div>
-              <h3 className="text-xl font-bold text-slate-900 mb-4">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
                 Progress History
               </h3>
               <div className="space-y-3">
                 {[...dailyLogs].reverse().map((log) => (
                   <div
                     key={log._id}
-                    className="bg-white rounded-xl border border-slate-200/60 p-4 shadow-sm"
+                    className="bg-white rounded-xl border border-gray-200/60 p-4 shadow-sm"
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-semibold text-slate-900">
+                        <p className="font-semibold text-gray-900">
                           Day {log.dayNumber}
                         </p>
-                        <p className="text-slate-500 text-sm">
+                        <p className="text-gray-500 text-sm">
                           {new Date(log.date).toLocaleDateString()}
                           {" \u00B7 "}
                           {log.completedTasks.length} tasks completed
@@ -298,7 +298,7 @@ const DailyTracker: React.FC = () => {
                       </span>
                     </div>
                     {log.notes && (
-                      <p className="text-slate-500 text-sm mt-2 italic">
+                      <p className="text-gray-500 text-sm mt-2 italic">
                         "{log.notes}"
                       </p>
                     )}

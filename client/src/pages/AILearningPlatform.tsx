@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LearningProvider } from "../context/LearningContext";
+import { LearningProvider, useLearning } from "../context/LearningContext";
 import VisualRoadmap from "../components/learning/VisualRoadmap";
 import StageDetail from "../components/learning/StageDetail";
 import ProgressTracker from "../components/learning/ProgressTracker";
@@ -12,19 +12,38 @@ import { roadmapStages } from "../data/learningData";
 
 type TabKey = "dashboard" | "roadmap" | "progress" | "daily" | "weekly" | "news" | "tools";
 
-const tabs: { key: TabKey; label: string; icon: string }[] = [
-  { key: "dashboard", label: "Dashboard", icon: "🏠" },
-  { key: "roadmap", label: "Roadmap", icon: "🗺️" },
-  { key: "progress", label: "Progress", icon: "📊" },
-  { key: "daily", label: "Daily Tasks", icon: "📋" },
-  { key: "weekly", label: "Weekly Review", icon: "📈" },
-  { key: "news", label: "AI News", icon: "📡" },
-  { key: "tools", label: "Trending Tools", icon: "🔥" },
+const tabGroups: { label: string; tabs: { key: TabKey; label: string; icon: string }[] }[] = [
+  {
+    label: "Overview",
+    tabs: [
+      { key: "dashboard", label: "Dashboard", icon: "🏠" },
+      { key: "roadmap", label: "Roadmap", icon: "🗺️" },
+      { key: "progress", label: "Progress", icon: "📊" },
+    ],
+  },
+  {
+    label: "Learn",
+    tabs: [
+      { key: "daily", label: "Daily Tasks", icon: "📋" },
+      { key: "weekly", label: "Weekly Review", icon: "📈" },
+    ],
+  },
+  {
+    label: "Discover",
+    tabs: [
+      { key: "news", label: "AI News", icon: "📡" },
+      { key: "tools", label: "Trending Tools", icon: "🔥" },
+    ],
+  },
 ];
 
 const AILearningPlatformInner: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabKey>("dashboard");
   const [selectedStage, setSelectedStage] = useState<number | null>(null);
+  const { getOverallCompletion, getTodayStats, progress } = useLearning();
+  const overall = getOverallCompletion();
+  const today = getTodayStats();
+  const currentStage = roadmapStages.find((s) => s.id === progress.currentStage) || roadmapStages[0];
 
   const handleSelectStage = (stageId: number) => {
     setSelectedStage(selectedStage === stageId ? null : stageId);
@@ -40,34 +59,60 @@ const AILearningPlatformInner: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-violet-700 via-indigo-700 to-blue-700 rounded-2xl p-6 md:p-8 text-white">
-        <div className="flex items-center gap-3 mb-2">
-          <span className="text-4xl">🧠</span>
+      {/* Clean Header */}
+      <div className="bg-white border-b border-gray-200 rounded-none -mx-6 lg:-mx-10 -mt-8 px-6 lg:px-10 py-6">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <h1 className="text-2xl md:text-3xl font-black">AI Web Developer Learning Platform</h1>
-            <p className="text-indigo-200 text-sm md:text-base mt-1">
-              Your complete interactive learning system — from zero to AI-powered web developer
-            </p>
+            <h1 className="text-xl font-semibold text-gray-900">AI Web Developer Learning Platform</h1>
+            <p className="text-gray-500 text-sm mt-1">Track your progress from zero to AI-powered web developer</p>
           </div>
+          <div className="flex items-center gap-6">
+            <div className="text-right">
+              <div className="text-sm font-medium text-gray-900">{overall}%</div>
+              <div className="text-xs text-gray-500">Complete</div>
+            </div>
+            <div className="text-right">
+              <div className="text-sm font-medium text-gray-900">{today.tasks}</div>
+              <div className="text-xs text-gray-500">Today</div>
+            </div>
+            <div className="hidden md:block text-right">
+              <div className="text-sm font-medium text-gray-900">{currentStage.shortTitle}</div>
+              <div className="text-xs text-gray-500">Current Stage</div>
+            </div>
+          </div>
+        </div>
+        {/* Progress Bar */}
+        <div className="mt-4 flex items-center gap-3">
+          <div className="flex-1 bg-gray-100 rounded-full h-1.5">
+            <div
+              className="h-1.5 rounded-full bg-blue-500 transition-all duration-700"
+              style={{ width: `${overall}%` }}
+            />
+          </div>
+          <span className="text-xs text-gray-500">{overall}%</span>
         </div>
       </div>
 
       {/* Navigation Tabs */}
-      <div className="flex flex-wrap gap-2 bg-white border border-slate-200/60 rounded-xl p-2">
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={`flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
-              activeTab === tab.key
-                ? "bg-primary-600 text-white shadow-sm"
-                : "text-slate-600 hover:bg-slate-100"
-            }`}
-          >
-            <span>{tab.icon}</span>
-            <span className="hidden sm:inline">{tab.label}</span>
-          </button>
+      <div className="bg-white border border-gray-200 rounded-lg p-1 flex flex-wrap items-center gap-1">
+        {tabGroups.map((group, gi) => (
+          <React.Fragment key={group.label}>
+            {gi > 0 && <div className="w-px h-6 bg-gray-200 mx-1 hidden sm:block" />}
+            {group.tabs.map((tab) => (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium transition-all ${
+                  activeTab === tab.key
+                    ? "bg-blue-500 text-white"
+                    : "text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+                }`}
+              >
+                <span className="text-sm">{tab.icon}</span>
+                <span className="hidden sm:inline">{tab.label}</span>
+              </button>
+            ))}
+          </React.Fragment>
         ))}
       </div>
 

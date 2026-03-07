@@ -74,23 +74,23 @@ const PromptPlayground: React.FC<PromptPlaygroundProps> = ({ phaseId }) => {
   }, [prompt, addLearningTime]);
 
   return (
-    <div className="bg-slate-900 rounded-2xl border border-slate-700 overflow-hidden">
-      <div className="bg-slate-800 px-4 py-3 border-b border-slate-700">
+    <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+      <div className="bg-gray-100 px-4 py-3 border-b border-gray-200">
         <div className="flex items-center gap-2">
           <span className="text-lg">🎮</span>
-          <span className="text-white font-semibold text-sm">Prompt Playground</span>
-          <span className="text-slate-500 text-xs ml-2">Practice prompt engineering</span>
+          <span className="text-gray-900 font-semibold text-sm">Prompt Playground</span>
+          <span className="text-gray-500 text-xs ml-2">Practice prompt engineering</span>
         </div>
       </div>
 
       {/* Template buttons */}
-      <div className="px-4 py-3 bg-slate-800/50 border-b border-slate-700 flex flex-wrap gap-2">
-        <span className="text-slate-500 text-xs self-center mr-1">Templates:</span>
+      <div className="px-4 py-3 bg-gray-50 border-b border-gray-200 flex flex-wrap gap-2">
+        <span className="text-gray-500 text-xs self-center mr-1">Templates:</span>
         {templates.map((t, i) => (
           <button
             key={i}
             onClick={() => setPrompt(t.prompt)}
-            className="px-3 py-1.5 bg-indigo-600/20 text-indigo-300 text-xs rounded-lg hover:bg-indigo-600/30 transition-colors border border-indigo-500/20"
+            className="px-3 py-1.5 bg-blue-500/20 text-blue-300 text-xs rounded-lg hover:bg-blue-500/30 transition-colors border border-blue-500/20"
           >
             {t.label}
           </button>
@@ -99,28 +99,28 @@ const PromptPlayground: React.FC<PromptPlaygroundProps> = ({ phaseId }) => {
 
       {/* Input */}
       <div className="p-4">
-        <label className="text-slate-400 text-xs font-semibold block mb-2">
+        <label className="text-gray-500 text-xs font-semibold block mb-2">
           ✍️ Your Prompt:
         </label>
         <textarea
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
           placeholder="Write your prompt here... Be specific about what you want the AI to do."
-          className="w-full bg-slate-800 text-slate-200 font-mono text-sm p-4 rounded-xl outline-none resize-none min-h-[120px] border border-slate-700 focus:border-indigo-500 transition-colors placeholder-slate-600"
+          className="w-full bg-gray-100 text-gray-700 font-mono text-sm p-4 rounded-xl outline-none resize-none min-h-[120px] border border-gray-200 focus:border-blue-500 transition-colors placeholder-gray-600"
         />
         <div className="flex justify-between items-center mt-3">
-          <span className="text-slate-500 text-xs">{prompt.length} characters</span>
+          <span className="text-gray-500 text-xs">{prompt.length} characters</span>
           <div className="flex gap-2">
             <button
               onClick={() => { setPrompt(""); setResponse(""); }}
-              className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 text-sm rounded-lg transition-colors"
+              className="px-4 py-2 bg-gray-200 hover:bg-gray-200 text-gray-700 text-sm rounded-lg transition-colors"
             >
               Clear
             </button>
             <button
               onClick={generateResponse}
               disabled={isGenerating || !prompt.trim()}
-              className="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 flex items-center gap-2"
+              className="px-5 py-2 bg-blue-500 hover:bg-blue-600 text-gray-900 text-sm font-medium rounded-lg transition-colors disabled:opacity-50 flex items-center gap-2"
             >
               {isGenerating ? (
                 <>
@@ -136,13 +136,13 @@ const PromptPlayground: React.FC<PromptPlaygroundProps> = ({ phaseId }) => {
 
       {/* Response */}
       {response && (
-        <div className="border-t border-slate-700">
-          <div className="px-4 py-2 bg-slate-800 text-slate-400 text-xs font-semibold flex items-center gap-2">
+        <div className="border-t border-gray-200">
+          <div className="px-4 py-2 bg-gray-100 text-gray-500 text-xs font-semibold flex items-center gap-2">
             <span>🤖</span> AI Response
-            {isGenerating && <span className="animate-pulse text-indigo-400">generating...</span>}
+            {isGenerating && <span className="animate-pulse text-blue-400">generating...</span>}
           </div>
-          <div className="p-4 bg-slate-900/50 max-h-[400px] overflow-y-auto">
-            <pre className="text-slate-300 text-sm whitespace-pre-wrap font-mono leading-relaxed">
+          <div className="p-4 bg-gray-50 max-h-[400px] overflow-y-auto">
+            <pre className="text-gray-700 text-sm whitespace-pre-wrap font-mono leading-relaxed">
               {response}
             </pre>
           </div>
@@ -151,8 +151,8 @@ const PromptPlayground: React.FC<PromptPlaygroundProps> = ({ phaseId }) => {
 
       {/* History */}
       {history.length > 0 && (
-        <div className="border-t border-slate-700 px-4 py-3 bg-slate-800/30">
-          <p className="text-slate-500 text-xs font-semibold mb-2">
+        <div className="border-t border-gray-200 px-4 py-3 bg-gray-50">
+          <p className="text-gray-500 text-xs font-semibold mb-2">
             📜 History ({history.length} prompts)
           </p>
           <div className="flex flex-wrap gap-2">
@@ -160,7 +160,7 @@ const PromptPlayground: React.FC<PromptPlaygroundProps> = ({ phaseId }) => {
               <button
                 key={i}
                 onClick={() => { setPrompt(h.prompt); setResponse(h.response); }}
-                className="px-3 py-1 bg-slate-700 text-slate-400 text-xs rounded-lg hover:bg-slate-600 transition-colors truncate max-w-[200px]"
+                className="px-3 py-1 bg-gray-200 text-gray-500 text-xs rounded-lg hover:bg-gray-200 transition-colors truncate max-w-[200px]"
               >
                 {h.prompt.slice(0, 30)}...
               </button>

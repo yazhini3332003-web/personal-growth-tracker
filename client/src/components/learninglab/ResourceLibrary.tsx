@@ -9,7 +9,7 @@ const typeIcons: Record<string, React.ReactNode> = {
   tutorial: <FiBook className="text-blue-400" />,
   docs: <FiFileText className="text-green-400" />,
   blog: <FiCode className="text-purple-400" />,
-  github: <FiGithub className="text-slate-300" />,
+  github: <FiGithub className="text-gray-700" />,
   video: <FiVideo className="text-red-400" />,
 };
 
@@ -17,7 +17,7 @@ const typeColors: Record<string, string> = {
   tutorial: "bg-blue-500/10 text-blue-400 border-blue-500/30",
   docs: "bg-green-500/10 text-green-400 border-green-500/30",
   blog: "bg-purple-500/10 text-purple-400 border-purple-500/30",
-  github: "bg-slate-500/10 text-slate-300 border-slate-500/30",
+  github: "bg-gray-100 text-gray-700 border-gray-400/30",
   video: "bg-red-500/10 text-red-400 border-red-500/30",
 };
 
@@ -62,24 +62,24 @@ const ResourceLibrary: React.FC = () => {
     <div className="w-full">
       {/* Header */}
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-white mb-2">📚 Resource Library</h2>
-        <p className="text-slate-400 text-sm">
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">📚 Resource Library</h2>
+        <p className="text-gray-500 text-sm">
           Curated tutorials, documentation, blogs, GitHub repos, and videos for every phase of your AI development journey.
         </p>
       </div>
 
       {/* Filters */}
-      <div className="bg-slate-800/80 rounded-xl border border-slate-700 p-5 mb-8">
+      <div className="bg-gray-100 rounded-xl border border-gray-200 p-5 mb-8">
         <div className="flex flex-col sm:flex-row gap-3">
           {/* Search */}
           <div className="relative flex-1">
-            <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
+            <FiSearch className="absolute left-3 top-1/2 -trangray-y-1/2 text-gray-500" size={14} />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search resources..."
-              className="w-full bg-slate-700 text-white text-sm rounded-lg pl-9 pr-3 py-2 border border-slate-600 focus:border-indigo-500 focus:outline-none"
+              className="w-full bg-gray-200 text-gray-900 text-sm rounded-lg pl-9 pr-3 py-2 border border-gray-300 focus:border-blue-500 focus:outline-none"
             />
           </div>
 
@@ -87,7 +87,7 @@ const ResourceLibrary: React.FC = () => {
           <select
             value={selectedPhase}
             onChange={(e) => setSelectedPhase(Number(e.target.value))}
-            className="bg-slate-700 text-white text-sm rounded-lg px-3 py-2 border border-slate-600 sm:w-56"
+            className="bg-gray-200 text-gray-900 text-sm rounded-lg px-3 py-2 border border-gray-300 sm:w-56"
           >
             <option value={0}>All Phases</option>
             {labPhases.map((p) => (
@@ -106,20 +106,20 @@ const ResourceLibrary: React.FC = () => {
               onClick={() => setSelectedType(type)}
               className={`text-xs px-3 py-1.5 rounded-full border transition-colors flex items-center space-x-1 ${
                 selectedType === type
-                  ? "bg-indigo-600 text-white border-indigo-500"
-                  : "bg-slate-700 text-slate-300 border-slate-600 hover:border-slate-400"
+                  ? "bg-blue-500 text-gray-900 border-blue-500"
+                  : "bg-gray-200 text-gray-700 border-gray-300 hover:border-gray-400"
               }`}
             >
               {type !== "all" && <span className="mr-1">{typeIcons[type]}</span>}
               <span className="capitalize">{type}</span>
-              <span className="text-slate-400 ml-1">({typeCounts[type] || 0})</span>
+              <span className="text-gray-500 ml-1">({typeCounts[type] || 0})</span>
             </button>
           ))}
         </div>
       </div>
 
       {/* Results count */}
-      <div className="text-slate-400 text-sm mb-4">
+      <div className="text-gray-500 text-sm mb-4">
         Showing {filtered.length} of {allResources.length} resources
       </div>
 
@@ -131,29 +131,29 @@ const ResourceLibrary: React.FC = () => {
             href={resource.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-slate-800 rounded-xl border border-slate-700 p-4 hover:border-indigo-500/50 transition-all duration-200 group"
+            className="bg-gray-100 rounded-xl border border-gray-200 p-4 hover:border-blue-500/50 transition-all duration-200 group"
           >
             {/* Type badge */}
             <div className="flex items-center justify-between mb-3">
               <span className={`text-xs px-2 py-0.5 rounded-full border ${typeColors[resource.type]}`}>
                 {resource.type}
               </span>
-              <FiExternalLink className="text-slate-500 group-hover:text-indigo-400 transition-colors" size={12} />
+              <FiExternalLink className="text-gray-500 group-hover:text-blue-400 transition-colors" size={12} />
             </div>
 
             {/* Title */}
-            <h3 className="text-white font-medium text-sm mb-1 group-hover:text-indigo-300 transition-colors">
+            <h3 className="text-gray-900 font-medium text-sm mb-1 group-hover:text-blue-300 transition-colors">
               {resource.title}
             </h3>
 
             {/* Description */}
-            <p className="text-slate-400 text-xs mb-3">{resource.description}</p>
+            <p className="text-gray-500 text-xs mb-3">{resource.description}</p>
 
             {/* Phase tag */}
             <div className="flex items-center space-x-1">
-              <span className="text-xs text-slate-500">Phase {resource.phaseId}</span>
-              <span className="text-slate-600">·</span>
-              <span className="text-xs text-slate-500 truncate">{resource.phaseTitle}</span>
+              <span className="text-xs text-gray-500">Phase {resource.phaseId}</span>
+              <span className="text-gray-500">·</span>
+              <span className="text-xs text-gray-500 truncate">{resource.phaseTitle}</span>
             </div>
           </a>
         ))}
@@ -161,8 +161,8 @@ const ResourceLibrary: React.FC = () => {
 
       {filtered.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-slate-400 text-lg">No resources found</p>
-          <p className="text-slate-500 text-sm mt-1">Try adjusting your filters or search query</p>
+          <p className="text-gray-500 text-lg">No resources found</p>
+          <p className="text-gray-500 text-sm mt-1">Try adjusting your filters or search query</p>
         </div>
       )}
     </div>

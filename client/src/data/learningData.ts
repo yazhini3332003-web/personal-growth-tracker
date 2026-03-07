@@ -200,7 +200,7 @@ export const roadmapStages: RoadmapStage[] = [
     title: "AI Knowledge Systems",
     shortTitle: "Knowledge",
     icon: "🧠",
-    color: "#6366F1",
+    color: "#7C3AED",
     description:
       "Build AI systems that work with knowledge bases, documents, and data. Learn about RAG, vector databases, and intelligent search.",
     topics: [

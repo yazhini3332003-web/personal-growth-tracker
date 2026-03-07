@@ -103,7 +103,7 @@ const Tasks: React.FC = () => {
   if (!activeGoal) {
     return (
       <div className="text-center py-20">
-        <p className="text-slate-500">
+        <p className="text-gray-500">
           Please create a goal first to manage tasks.
         </p>
       </div>
@@ -114,8 +114,8 @@ const Tasks: React.FC = () => {
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">Tasks</h1>
-          <p className="text-slate-500 mt-1">
+          <h1 className="text-3xl font-bold text-gray-900">Tasks</h1>
+          <p className="text-gray-500 mt-1">
             Manage your daily improvement activities
           </p>
         </div>
@@ -143,8 +143,8 @@ const Tasks: React.FC = () => {
           <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary-600" />
         </div>
       ) : tasks.length === 0 ? (
-        <div className="text-center py-16 bg-white rounded-xl border border-slate-200/60">
-          <p className="text-slate-500 text-lg">
+        <div className="text-center py-16 bg-white rounded-xl border border-gray-200/60">
+          <p className="text-gray-500 text-lg">
             No tasks yet. Create some activities to track!
           </p>
         </div>
@@ -164,10 +164,10 @@ const Tasks: React.FC = () => {
                       style={{ backgroundColor: cat.color }}
                     />
                   )}
-                  <h3 className="text-lg font-semibold text-slate-700">
+                  <h3 className="text-lg font-semibold text-gray-700">
                     {catName}
                   </h3>
-                  <span className="text-sm text-slate-400">
+                  <span className="text-sm text-gray-400">
                     ({catTasks.length} tasks)
                   </span>
                 </div>
@@ -175,11 +175,11 @@ const Tasks: React.FC = () => {
                   {catTasks.map((task) => (
                     <div
                       key={task._id}
-                      className="bg-white rounded-xl border border-slate-200/60 p-4 shadow-sm hover:shadow-md transition-shadow"
+                      className="bg-white rounded-xl border border-gray-200/60 p-4 shadow-sm hover:shadow-md transition-shadow"
                     >
                       <div className="flex items-start justify-between">
                         <div>
-                          <h4 className="font-semibold text-slate-900">
+                          <h4 className="font-semibold text-gray-900">
                             {task.name}
                           </h4>
                           <p className="text-primary-600 font-bold text-sm mt-1">
@@ -189,13 +189,13 @@ const Tasks: React.FC = () => {
                         <div className="flex gap-1">
                           <button
                             onClick={() => handleEdit(task)}
-                            className="p-1.5 text-slate-400 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition"
+                            className="p-1.5 text-gray-400 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition"
                           >
                             <HiOutlinePencil className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => handleDelete(task._id)}
-                            className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
+                            className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
                           >
                             <HiOutlineTrash className="w-4 h-4" />
                           </button>
@@ -220,7 +220,7 @@ const Tasks: React.FC = () => {
       >
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Task Name
             </label>
             <input
@@ -228,19 +228,19 @@ const Tasks: React.FC = () => {
               required
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
               placeholder="e.g., Learn programming for 30 minutes"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Category
             </label>
             <select
               required
               value={form.category}
               onChange={(e) => setForm({ ...form, category: e.target.value })}
-              className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
             >
               <option value="">Select a category</option>
               {categories.map((cat) => (
@@ -251,7 +251,7 @@ const Tasks: React.FC = () => {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Points
             </label>
             <input
@@ -262,7 +262,7 @@ const Tasks: React.FC = () => {
               onChange={(e) =>
                 setForm({ ...form, points: parseInt(e.target.value) || 0 })
               }
-              className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
             />
           </div>
           <div className="flex gap-3 pt-2">
@@ -272,7 +272,7 @@ const Tasks: React.FC = () => {
                 setShowModal(false);
                 resetForm();
               }}
-              className="flex-1 py-2.5 px-4 border border-slate-200 text-slate-600 rounded-xl hover:bg-slate-50 transition font-medium"
+              className="flex-1 py-2.5 px-4 border border-gray-200 text-gray-600 rounded-xl hover:bg-gray-50 transition font-medium"
             >
               Cancel
             </button>

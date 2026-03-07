@@ -86,8 +86,8 @@ const Goals: React.FC = () => {
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">Goals</h1>
-          <p className="text-slate-500 mt-1">
+          <h1 className="text-3xl font-bold text-gray-900">Goals</h1>
+          <p className="text-gray-500 mt-1">
             Create and manage your personal improvement goals
           </p>
         </div>
@@ -104,8 +104,8 @@ const Goals: React.FC = () => {
       </div>
 
       {goals.length === 0 ? (
-        <div className="text-center py-16 bg-white rounded-xl border border-slate-200/60">
-          <p className="text-slate-500 text-lg">
+        <div className="text-center py-16 bg-white rounded-xl border border-gray-200/60">
+          <p className="text-gray-500 text-lg">
             No goals yet. Create your first goal to get started!
           </p>
         </div>
@@ -117,13 +117,13 @@ const Goals: React.FC = () => {
               className={`bg-white rounded-xl border p-6 shadow-sm hover:shadow-md transition-shadow ${
                 goal.isActive
                   ? "border-primary-300 ring-2 ring-primary-100"
-                  : "border-slate-200/60"
+                  : "border-gray-200/60"
               }`}
             >
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="text-lg font-bold text-slate-900">
+                    <h3 className="text-lg font-bold text-gray-900">
                       {goal.name}
                     </h3>
                     {goal.isActive && (
@@ -132,20 +132,20 @@ const Goals: React.FC = () => {
                       </span>
                     )}
                   </div>
-                  <p className="text-slate-500 text-sm mt-1">
+                  <p className="text-gray-500 text-sm mt-1">
                     {goal.description || "No description"}
                   </p>
                 </div>
                 <div className="flex gap-1">
                   <button
                     onClick={() => handleEdit(goal)}
-                    className="p-2 text-slate-400 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition"
+                    className="p-2 text-gray-400 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition"
                   >
                     <HiOutlinePencil className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => handleDelete(goal._id)}
-                    className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
+                    className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
                   >
                     <HiOutlineTrash className="w-4 h-4" />
                   </button>
@@ -154,19 +154,19 @@ const Goals: React.FC = () => {
 
               <div className="grid grid-cols-3 gap-4 mb-4 text-sm">
                 <div>
-                  <span className="text-slate-400">Duration</span>
-                  <p className="font-semibold text-slate-700">
+                  <span className="text-gray-400">Duration</span>
+                  <p className="font-semibold text-gray-700">
                     {goal.totalDays} days
                   </p>
                 </div>
                 <div>
-                  <span className="text-slate-400">Target</span>
-                  <p className="font-semibold text-slate-700">
+                  <span className="text-gray-400">Target</span>
+                  <p className="font-semibold text-gray-700">
                     {goal.targetPoints} pts
                   </p>
                 </div>
                 <div>
-                  <span className="text-slate-400">Earned</span>
+                  <span className="text-gray-400">Earned</span>
                   <p className="font-semibold text-primary-600">
                     {goal.currentPoints} pts
                   </p>
@@ -202,7 +202,7 @@ const Goals: React.FC = () => {
       >
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Goal Name
             </label>
             <input
@@ -210,12 +210,12 @@ const Goals: React.FC = () => {
               required
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
               placeholder="e.g., 30 Day Self Improvement Challenge"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Description
             </label>
             <textarea
@@ -223,14 +223,14 @@ const Goals: React.FC = () => {
               onChange={(e) =>
                 setForm({ ...form, description: e.target.value })
               }
-              className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
               rows={3}
               placeholder="What do you want to achieve?"
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Start Date
               </label>
               <input
@@ -240,11 +240,11 @@ const Goals: React.FC = () => {
                 onChange={(e) =>
                   setForm({ ...form, startDate: e.target.value })
                 }
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
+                className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Challenge Days
               </label>
               <input
@@ -255,12 +255,12 @@ const Goals: React.FC = () => {
                 onChange={(e) =>
                   setForm({ ...form, totalDays: parseInt(e.target.value) || 0 })
                 }
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
+                className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
               />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Target Points
             </label>
             <input
@@ -274,7 +274,7 @@ const Goals: React.FC = () => {
                   targetPoints: parseInt(e.target.value) || 0,
                 })
               }
-              className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
             />
           </div>
           <div className="flex gap-3 pt-2">
@@ -284,7 +284,7 @@ const Goals: React.FC = () => {
                 setShowModal(false);
                 resetForm();
               }}
-              className="flex-1 py-2.5 px-4 border border-slate-200 text-slate-600 rounded-xl hover:bg-slate-50 transition font-medium"
+              className="flex-1 py-2.5 px-4 border border-gray-200 text-gray-600 rounded-xl hover:bg-gray-50 transition font-medium"
             >
               Cancel
             </button>

@@ -33,17 +33,17 @@ const Sidebar: React.FC = () => {
   return (
     <aside className="hidden md:flex md:flex-shrink-0">
       <div className="flex flex-col w-60">
-        <div className="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto bg-slate-900 border-r border-slate-800">
+        <div className="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto bg-[#0F172A]">
           <div className="flex items-center flex-shrink-0 px-6 mb-8">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary-500 rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center">
                 <span className="text-white text-xl font-bold">P</span>
               </div>
               <div>
                 <h1 className="text-white font-bold text-lg leading-tight">
                   Personal Growth
                 </h1>
-                <p className="text-slate-400 text-xs">Tracker</p>
+                <p className="text-gray-500 text-xs">Tracker</p>
               </div>
             </div>
           </div>
@@ -56,15 +56,15 @@ const Sidebar: React.FC = () => {
                   to={item.href}
                   className={`group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 ${
                     isActive
-                      ? "bg-primary-600 text-white shadow-sm"
-                      : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                      ? "bg-blue-500/15 text-blue-400"
+                      : "text-gray-400 hover:bg-white/5 hover:text-white"
                   }`}
                 >
                   <item.icon
                     className={`mr-3 h-5 w-5 flex-shrink-0 ${
                       isActive
-                        ? "text-white"
-                        : "text-slate-500 group-hover:text-white"
+                        ? "text-blue-400"
+                        : "text-gray-500 group-hover:text-white"
                     }`}
                   />
                   {item.name}

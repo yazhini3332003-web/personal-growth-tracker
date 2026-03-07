@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import { HiOutlinePlus, HiOutlineTrash, HiOutlinePencil } from "react-icons/hi";
 
 const PRESET_COLORS = [
-  "#6366f1",
+  "#3B82F6",
   "#ec4899",
   "#14b8a6",
   "#f59e0b",
@@ -32,7 +32,7 @@ const Categories: React.FC = () => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<Omit<CategoryFormData, "goal">>({
     name: "",
-    color: "#6366f1",
+    color: "#3B82F6",
   });
 
   const loadCategories = async () => {
@@ -54,7 +54,7 @@ const Categories: React.FC = () => {
   }, [activeGoal]);
 
   const resetForm = () => {
-    setForm({ name: "", color: "#6366f1" });
+    setForm({ name: "", color: "#3B82F6" });
     setEditingId(null);
   };
 
@@ -97,7 +97,7 @@ const Categories: React.FC = () => {
   if (!activeGoal) {
     return (
       <div className="text-center py-20">
-        <p className="text-slate-500">
+        <p className="text-gray-500">
           Please create a goal first to manage categories.
         </p>
       </div>
@@ -108,8 +108,8 @@ const Categories: React.FC = () => {
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">Categories</h1>
-          <p className="text-slate-500 mt-1">
+          <h1 className="text-3xl font-bold text-gray-900">Categories</h1>
+          <p className="text-gray-500 mt-1">
             Organize your improvement areas for "{activeGoal.name}"
           </p>
         </div>
@@ -130,8 +130,8 @@ const Categories: React.FC = () => {
           <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary-600" />
         </div>
       ) : categories.length === 0 ? (
-        <div className="text-center py-16 bg-white rounded-xl border border-slate-200/60">
-          <p className="text-slate-500 text-lg">
+        <div className="text-center py-16 bg-white rounded-xl border border-gray-200/60">
+          <p className="text-gray-500 text-lg">
             No categories yet. Add some to organize your tasks!
           </p>
         </div>
@@ -140,7 +140,7 @@ const Categories: React.FC = () => {
           {categories.map((cat) => (
             <div
               key={cat._id}
-              className="bg-white rounded-xl border border-slate-200/60 p-6 shadow-sm hover:shadow-md transition-shadow"
+              className="bg-white rounded-xl border border-gray-200/60 p-6 shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
@@ -150,20 +150,20 @@ const Categories: React.FC = () => {
                   >
                     {cat.name.charAt(0)}
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900">
+                  <h3 className="text-lg font-bold text-gray-900">
                     {cat.name}
                   </h3>
                 </div>
                 <div className="flex gap-1">
                   <button
                     onClick={() => handleEdit(cat)}
-                    className="p-2 text-slate-400 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition"
+                    className="p-2 text-gray-400 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition"
                   >
                     <HiOutlinePencil className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => handleDelete(cat._id)}
-                    className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
+                    className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
                   >
                     <HiOutlineTrash className="w-4 h-4" />
                   </button>
@@ -184,7 +184,7 @@ const Categories: React.FC = () => {
       >
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Category Name
             </label>
             <input
@@ -192,12 +192,12 @@ const Categories: React.FC = () => {
               required
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition"
               placeholder="e.g., Career Development"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Color
             </label>
             <div className="flex flex-wrap gap-2">
@@ -223,7 +223,7 @@ const Categories: React.FC = () => {
                 setShowModal(false);
                 resetForm();
               }}
-              className="flex-1 py-2.5 px-4 border border-slate-200 text-slate-600 rounded-xl hover:bg-slate-50 transition font-medium"
+              className="flex-1 py-2.5 px-4 border border-gray-200 text-gray-600 rounded-xl hover:bg-gray-50 transition font-medium"
             >
               Cancel
             </button>
