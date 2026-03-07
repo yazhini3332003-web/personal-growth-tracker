@@ -16,6 +16,10 @@ import BlenderShowcase from "../components/blenderlab/BlenderShowcase";
 import BlenderCommunity from "../components/blenderlab/BlenderCommunity";
 import BlenderResources from "../components/blenderlab/BlenderResources";
 import BlenderRoadmap from "../components/blenderlab/BlenderRoadmap";
+// 3D Workspace components
+import Blender3DWorkspace from "../components/blenderlab/Blender3DWorkspace";
+import BlenderAssetLibrary from "../components/blenderlab/BlenderAssetLibrary";
+import BlenderProjectGallery from "../components/blenderlab/BlenderProjectGallery";
 
 type ViewMode = 
   | "intro" 
@@ -31,7 +35,10 @@ type ViewMode =
   | "phase"
   | "ai-tools"
   | "news"
-  | "addons";
+  | "addons"
+  | "workspace"
+  | "assets"
+  | "gallery";
 
 interface NavGroup {
   label: string;
@@ -64,6 +71,14 @@ const BlenderHubContent: React.FC = () => {
         { key: "levels", label: "Learning Levels", icon: "📊" },
         { key: "lessons", label: "Lessons", icon: "📚" },
         { key: "roadmap", label: "Roadmap", icon: "🗺️" },
+      ]
+    },
+    {
+      label: "CREATE",
+      items: [
+        { key: "workspace", label: "3D Workspace", icon: "🎮" },
+        { key: "assets", label: "Asset Library", icon: "📦" },
+        { key: "gallery", label: "Gallery", icon: "🖼️" },
       ]
     },
     {
@@ -112,7 +127,7 @@ const BlenderHubContent: React.FC = () => {
 
       {/* Grouped Navigation */}
       <div className="bg-white rounded-2xl border border-gray-100 p-4 shadow-sm">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
           {navGroups.map((group) => (
             <div key={group.label}>
               <p className="text-[10px] font-bold text-gray-400 mb-2 px-1">{group.label}</p>
@@ -175,6 +190,12 @@ const BlenderHubContent: React.FC = () => {
       {view === "news" && <BlenderNewsFeed />}
 
       {view === "addons" && <BlenderTrendingTools />}
+
+      {view === "workspace" && <Blender3DWorkspace />}
+
+      {view === "assets" && <BlenderAssetLibrary />}
+
+      {view === "gallery" && <BlenderProjectGallery />}
     </div>
   );
 };
