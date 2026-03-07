@@ -11,6 +11,7 @@ import {
   HiOutlineCurrencyDollar,
   HiOutlineAcademicCap,
   HiOutlineBeaker,
+  HiOutlineCube,
 } from "react-icons/hi";
 
 const navigation = [
@@ -24,6 +25,7 @@ const navigation = [
   { name: "Investment", href: "/investment", icon: HiOutlineCurrencyDollar },
   { name: "AI Learning", href: "/ai-learning", icon: HiOutlineAcademicCap },
   { name: "Learning Lab", href: "/learning-lab", icon: HiOutlineBeaker },
+  { name: "Blender Lab", href: "/blender-lab", icon: HiOutlineCube },
   { name: "Settings", href: "/settings", icon: HiOutlineCog },
 ];
 
