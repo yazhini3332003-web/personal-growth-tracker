@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
 interface ExerciseStep {
   title: string;
@@ -787,6 +787,831 @@ const BlenderPractice: React.FC = () => {
             <p className="text-xs font-medium text-blue-800">Skills</p>
             <p className="text-[10px] text-blue-600">Learn and grow</p>
           </div>
+        </div>
+      </div>
+
+      {/* ==================== BLENDER AI PRACTICE TOOLS ==================== */}
+      <BlenderAIPracticeTools />
+    </div>
+  );
+};
+
+// ==================== AI PRACTICE TOOLS COMPONENT ====================
+interface AITool {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  color: string;
+  examplePrompts: string[];
+}
+
+const aiPracticeTools: AITool[] = [
+  {
+    id: "model-guide",
+    title: "Prompt → 3D Model Guide",
+    description: "Type a prompt describing an object and receive step-by-step instructions to build it in Blender.",
+    icon: "🎯",
+    color: "from-orange-500 to-amber-500",
+    examplePrompts: ["A simple wooden chair", "A low-poly tree", "A sci-fi helmet", "A glass bottle with label"]
+  },
+  {
+    id: "python-script",
+    title: "Prompt → Blender Python Script",
+    description: "Generate Blender automation scripts using Python bpy module for Blender 4+.",
+    icon: "🐍",
+    color: "from-green-500 to-emerald-500",
+    examplePrompts: ["Create 10 random cubes in a grid", "Generate a spiral staircase", "Auto-apply subdivision to all objects", "Create a simple animation of a bouncing ball"]
+  },
+  {
+    id: "material-setup",
+    title: "Prompt → Material Setup",
+    description: "Generate realistic Blender materials with Principled BSDF node configurations.",
+    icon: "🎨",
+    color: "from-purple-500 to-indigo-500",
+    examplePrompts: ["Brushed metal surface", "Worn leather texture", "Glowing neon material", "Realistic glass with scratches"]
+  },
+  {
+    id: "scene-setup",
+    title: "Prompt → Scene Setup",
+    description: "Generate a complete scene layout with objects, lighting, camera, and render settings.",
+    icon: "🌍",
+    color: "from-blue-500 to-cyan-500",
+    examplePrompts: ["Cozy bedroom at night", "Product photography setup", "Outdoor forest scene", "Minimalist studio lighting"]
+  },
+  {
+    id: "geometry-nodes",
+    title: "Prompt → Geometry Nodes Setup",
+    description: "Generate procedural Geometry Nodes systems with node structure and connections.",
+    icon: "🔗",
+    color: "from-pink-500 to-rose-500",
+    examplePrompts: ["Scatter rocks on terrain", "Create procedural tree branches", "Generate a brick pattern", "Instancing objects along a curve"]
+  },
+  {
+    id: "animation-practice",
+    title: "Prompt → Animation Practice",
+    description: "Generate animation exercises with timeline setup, keyframes, and camera movements.",
+    icon: "🎬",
+    color: "from-yellow-500 to-orange-500",
+    examplePrompts: ["Walk cycle for a character", "Camera flythrough a room", "Pendulum swinging motion", "Particle explosion effect"]
+  },
+  {
+    id: "problem-fix",
+    title: "Blender Problem Fix AI",
+    description: "Describe your Blender issue and get step-by-step solutions with prevention tips.",
+    icon: "🔧",
+    color: "from-red-500 to-pink-500",
+    examplePrompts: ["My object has inverted normals", "Render is completely black", "Modifier not applying correctly", "Texture looks stretched"]
+  }
+];
+
+const BlenderAIPracticeTools: React.FC = () => {
+  const [activeToolId, setActiveToolId] = useState<string | null>(null);
+  const [prompts, setPrompts] = useState<Record<string, string>>({});
+  const [results, setResults] = useState<Record<string, string>>({});
+  const [loading, setLoading] = useState<Record<string, boolean>>({});
+
+  const generateResponse = useCallback((toolId: string, prompt: string) => {
+    if (!prompt.trim()) return;
+    
+    setLoading(prev => ({ ...prev, [toolId]: true }));
+    
+    // Simulate AI generation
+    setTimeout(() => {
+      let response = "";
+      
+      switch (toolId) {
+        case "model-guide":
+          response = `# 3D Model Guide: ${prompt}
+
+## Model Breakdown
+Break this into simple primitives:
+• Start with a **Cube** or **Cylinder** as the base shape
+• Use additional primitives for details
+• Apply boolean operations for complex cuts
+
+## Step-by-Step Instructions
+
+### Step 1: Create Base Shape
+1. Press **Shift + A** → Mesh → Choose appropriate primitive
+2. Scale to approximate dimensions using **S** key
+3. Position with **G** key
+
+### Step 2: Enter Edit Mode
+1. Press **Tab** to enter Edit Mode
+2. Use **1/2/3** keys to switch between Vertex/Edge/Face select
+
+### Step 3: Shape the Geometry
+1. Select faces and use **E** to extrude
+2. Use **I** for inset faces
+3. Add edge loops with **Ctrl + R**
+4. Bevel edges with **Ctrl + B**
+
+### Step 4: Add Details
+1. Loop cuts for edge definition
+2. Insets for panel details
+3. Boolean modifier for cutouts
+
+## Blender Tools Used
+• Move (G), Scale (S), Rotate (R)
+• Extrude (E), Inset (I)
+• Loop Cut (Ctrl+R), Bevel (Ctrl+B)
+• Proportional Editing (O)
+
+## Keyboard Shortcuts
+| Action | Shortcut |
+|--------|----------|
+| Add Mesh | Shift+A |
+| Edit Mode | Tab |
+| Extrude | E |
+| Scale | S |
+| Loop Cut | Ctrl+R |
+| Apply Scale | Ctrl+A |
+
+## Suggested Modifiers
+1. **Subdivision Surface** - Smooths geometry
+2. **Bevel** - Adds edge highlights
+3. **Mirror** - For symmetrical objects
+4. **Solidify** - Adds thickness
+
+## Optimization Tips
+✓ Keep polygon count reasonable
+✓ Apply transforms before exporting (Ctrl+A)
+✓ Use Shade Smooth with Auto Smooth
+✓ Check for non-manifold geometry`;
+          break;
+          
+        case "python-script":
+          response = `# Blender Python Script
+# Description: ${prompt}
+# Compatible with Blender 4.x
+
+import bpy
+import math
+import random
+
+def clear_scene():
+    """Remove all mesh objects from the scene"""
+    bpy.ops.object.select_all(action='DESELECT')
+    bpy.ops.object.select_by_type(type='MESH')
+    bpy.ops.object.delete()
+
+def create_object():
+    """Main function to create the requested object"""
+    
+    # Clear existing objects (optional)
+    # clear_scene()
+    
+    # Create base mesh
+    bpy.ops.mesh.primitive_cube_add(
+        size=2,
+        location=(0, 0, 0)
+    )
+    
+    # Get reference to created object
+    obj = bpy.context.active_object
+    obj.name = "Generated_Object"
+    
+    # Enter edit mode for modifications
+    bpy.ops.object.mode_set(mode='EDIT')
+    
+    # Apply transformations
+    bpy.ops.mesh.subdivide(number_cuts=2)
+    
+    # Return to object mode
+    bpy.ops.object.mode_set(mode='OBJECT')
+    
+    # Add modifiers
+    mod = obj.modifiers.new(name="Subdivision", type='SUBSURF')
+    mod.levels = 2
+    mod.render_levels = 3
+    
+    # Apply smooth shading
+    bpy.ops.object.shade_smooth()
+    
+    # Set proper scale
+    obj.scale = (1, 1, 1)
+    
+    return obj
+
+# Execute the script
+if __name__ == "__main__":
+    created_obj = create_object()
+    print(f"Created: {created_obj.name}")
+
+# ========================================
+# HOW TO USE:
+# 1. Open Blender 4.x
+# 2. Go to Scripting workspace
+# 3. Create new text file
+# 4. Paste this script
+# 5. Click Run Script (or Alt+P)
+# ========================================`;
+          break;
+          
+        case "material-setup":
+          response = `# Material Setup: ${prompt}
+
+## Principled BSDF Configuration
+
+### Base Settings
+| Property | Value | Notes |
+|----------|-------|-------|
+| **Base Color** | Adjust based on material | Use color picker or texture |
+| **Roughness** | 0.3 - 0.7 | Lower = shinier |
+| **Metallic** | 0.0 or 1.0 | Usually binary |
+| **IOR** | 1.45 | Standard for most materials |
+
+### Detailed Node Setup
+
+\`\`\`
+[Image Texture] → [Base Color]
+        ↓
+[Color Ramp] → Adjust contrast
+        ↓
+[Principled BSDF]
+        ↓
+[Material Output]
+\`\`\`
+
+### Node Connections
+
+1. **Diffuse/Albedo Map**
+   • Connect to Base Color input
+   • Use sRGB color space
+
+2. **Roughness Map**
+   • Connect to Roughness input
+   • Use Non-Color data
+   • Value: 0.4 (adjust as needed)
+
+3. **Normal Map**
+   • Add Normal Map node
+   • Connect to Normal input
+   • Strength: 1.0
+
+4. **Metallic Map** (if applicable)
+   • Connect to Metallic input
+   • Use Non-Color data
+
+### Node Setup Steps
+
+1. **In Shader Editor:**
+   • Shift+A → Shader → Principled BSDF
+   • Shift+A → Texture → Image Texture
+   • Shift+A → Vector → Normal Map
+
+2. **Connect nodes:**
+   • Image → Base Color
+   • Roughness map → Roughness
+   • Normal Map → Normal
+
+### Material Values
+• **Roughness:** 0.45
+• **Metallic:** 0.0
+• **Specular:** 0.5
+• **Clearcoat:** 0.1
+
+### Tips
+✓ Use PBR textures for realism
+✓ Check UV mapping is correct
+✓ Enable viewport denoising for preview
+✓ Use HDRI for realistic reflections`;
+          break;
+          
+        case "scene-setup":
+          response = `# Scene Setup: ${prompt}
+
+## Scene Objects
+| Object | Type | Location | Scale |
+|--------|------|----------|-------|
+| Main Subject | Mesh | (0, 0, 0) | 1.0 |
+| Ground Plane | Plane | (0, 0, -0.01) | 10.0 |
+| Background | Plane/HDRI | Behind subject | As needed |
+
+## Environment Setup
+
+### World Settings
+1. **Use Nodes** → Enabled
+2. **HDRI Background:**
+   • Shift+A → Texture → Environment Texture
+   • Connect to Background → World Output
+   • Rotation: Adjust for best lighting angle
+
+### Ground
+• Type: Plane with material
+• Shadow Catcher: Enable for compositing
+• Material: Subtle reflection
+
+## Lighting Setup
+
+### Three-Point Lighting
+1. **Key Light**
+   • Type: Area Light
+   • Position: 45° front-right
+   • Power: 1000W
+   • Size: 2m
+
+2. **Fill Light**
+   • Type: Area Light
+   • Position: 45° front-left
+   • Power: 400W (40% of key)
+   • Size: 3m
+
+3. **Rim/Back Light**
+   • Type: Area Light
+   • Position: Behind subject
+   • Power: 600W
+   • Creates edge separation
+
+## Camera Placement
+
+### Settings
+• **Focal Length:** 50mm (natural perspective)
+• **Location:** (5, -5, 3)
+• **Rotation:** Point at origin
+• **Depth of Field:** f/2.8 for blur
+
+### Composition
+• Rule of thirds enabled
+• Safe areas: 90%
+• Resolution: 1920x1080
+
+## Render Settings
+
+### Cycles
+• Samples: 256-512
+• Denoiser: OpenImageDenoise
+• Max Bounces: 12
+• Transparent Background: Optional
+
+### Color Management
+• View Transform: Filmic
+• Look: Medium High Contrast
+• Exposure: 0.0
+
+## Quick Setup Checklist
+☑ Place main objects
+☑ Add ground plane
+☑ Set up HDRI or lights
+☑ Position camera
+☑ Enable denoising
+☑ Test render at low samples`;
+          break;
+          
+        case "geometry-nodes":
+          response = `# Geometry Nodes Setup: ${prompt}
+
+## Node Structure Overview
+
+\`\`\`
+[Group Input]
+      ↓
+[Mesh Primitive] → [Transform Geometry]
+      ↓
+[Instance on Points]
+      ↓
+[Realize Instances]
+      ↓
+[Group Output]
+\`\`\`
+
+## Node Connections
+
+### Input Section
+1. **Group Input**
+   • Add parameters: Count, Scale, Seed
+   • Expose to modifier panel
+
+2. **Base Geometry**
+   • Mesh Line or Grid for distribution
+   • Points from mesh
+
+### Processing Section
+
+3. **Point Distribution**
+   • Distribute Points on Faces
+   • Density: Controlled by input
+   • Random seed for variation
+
+4. **Instance Setup**
+   • Instance on Points node
+   • Scale by attribute
+   • Random rotation
+
+### Output Section
+
+5. **Realize Instances**
+   • Convert instances to real geometry
+   • Optional: Join Geometry
+
+6. **Group Output**
+   • Connect final geometry
+
+## Parameter Controls
+
+| Parameter | Type | Range | Purpose |
+|-----------|------|-------|---------|
+| Count | Integer | 1-1000 | Number of instances |
+| Scale | Float | 0.1-2.0 | Instance size |
+| Seed | Integer | 0-999 | Random variation |
+| Density | Float | 0-100 | Distribution density |
+
+## Usage Explanation
+
+### To Apply:
+1. Select target object
+2. Add Geometry Nodes modifier
+3. Click "New" to create node tree
+4. Build nodes as shown above
+5. Adjust parameters in modifier panel
+
+### Tips:
+• Use Named Attributes for custom data
+• Add Math nodes for calculated values
+• Use Noise Texture for organic variation
+• Frame nodes for organization
+
+## Example Node Setup Code
+\`\`\`python
+# Create via Python
+import bpy
+
+# Add Geometry Nodes modifier
+obj = bpy.context.active_object
+mod = obj.modifiers.new("GeoNodes", 'NODES')
+\`\`\``;
+          break;
+          
+        case "animation-practice":
+          response = `# Animation Practice: ${prompt}
+
+## Objects Needed
+| Object | Purpose | Setup |
+|--------|---------|-------|
+| Main Subject | Animated element | Rigged or simple mesh |
+| Props | Supporting objects | Static or animated |
+| Environment | Background/ground | Simple geometry |
+
+## Timeline Setup
+
+### Project Settings
+• **Frame Rate:** 24 fps (film) or 30 fps (web)
+• **Duration:** 120 frames (5 seconds at 24fps)
+• **Start Frame:** 1
+• **End Frame:** 120
+
+### Key Timing
+| Frame | Action |
+|-------|--------|
+| 1 | Starting pose |
+| 30 | First key pose |
+| 60 | Peak/Mid action |
+| 90 | Recovery |
+| 120 | End pose |
+
+## Keyframe Setup
+
+### Animation Principles Applied
+1. **Anticipation** (Frames 1-15)
+   • Slight opposite movement
+   • Build up tension
+
+2. **Main Action** (Frames 15-60)
+   • Primary movement
+   • Key poses every 10-15 frames
+
+3. **Follow Through** (Frames 60-90)
+   • Overlapping action
+   • Secondary motion
+
+4. **Settle** (Frames 90-120)
+   • Return to rest
+   • Ease out motion
+
+### Keyframe Shortcuts
+| Action | Shortcut |
+|--------|----------|
+| Insert Keyframe | I |
+| Delete Keyframe | Alt+I |
+| Next Keyframe | Up Arrow |
+| Previous Keyframe | Down Arrow |
+| Play Animation | Spacebar |
+
+## Camera Movement
+
+### Camera Keyframes
+• Frame 1: Wide establishing shot
+• Frame 60: Medium shot (dolly in)
+• Frame 120: Close-up or new angle
+
+### Camera Settings
+• Add Track To constraint for smooth follow
+• Use Damped Track for natural movement
+• Enable motion blur in render
+
+## Lighting for Animation
+• Use area lights (soft shadows)
+• Consider animated lights for drama
+• Match lighting to mood changes
+
+## Render Settings
+
+### Animation Render
+• Output: PNG sequence (safest)
+• Resolution: 1920x1080
+• Samples: 128-256 (with denoising)
+• Motion Blur: 0.5
+
+### Export
+1. Render Animation (Ctrl+F12)
+2. Compile PNGs to video in Video Sequencer
+3. Export as MP4 (H.264)
+
+## Practice Tips
+✓ Start with simple motions
+✓ Use Graph Editor for curves
+✓ Study reference footage
+✓ Apply 12 principles of animation`;
+          break;
+          
+        case "problem-fix":
+          response = `# Blender Problem Fix: ${prompt}
+
+## Problem Analysis
+
+### Possible Causes
+1. **Most Likely:** Common setting misconfiguration
+2. **Secondary:** Geometry or data issues
+3. **Less Common:** Software/driver problem
+
+## Step-by-Step Solution
+
+### Step 1: Check Basic Settings
+☐ Verify object is visible (eye icon in Outliner)
+☐ Check object is in correct collection
+☐ Ensure viewport display is correct
+
+### Step 2: Examine Object Data
+☐ Check for applied transforms (Ctrl+A → All Transforms)
+☐ Verify scale is (1, 1, 1)
+☐ Check normals direction (Edit Mode → Overlay → Face Orientation)
+
+### Step 3: Fix Common Issues
+
+**If geometry issue:**
+\`\`\`
+Edit Mode → Mesh → Normals → Recalculate Outside
+or
+Edit Mode → Mesh → Clean Up → Merge by Distance
+\`\`\`
+
+**If modifier issue:**
+\`\`\`
+Check modifier stack order
+Apply modifiers from top to bottom
+Verify object has correct origin point
+\`\`\`
+
+**If render issue:**
+\`\`\`
+Check render layers are enabled
+Verify camera is selected
+Check material is assigned
+\`\`\`
+
+### Step 4: Reset if Needed
+• Try appending object to new file
+• Reset preferences: File → Defaults → Load Factory Settings
+• Update GPU drivers
+
+## Settings to Check
+
+| Setting | Location | Should Be |
+|---------|----------|-----------|
+| Object Visibility | Outliner | Eye icon ON |
+| Render Visibility | Outliner | Camera icon ON |
+| Scale | N Panel | (1, 1, 1) |
+| Origin | Object Mode | Centered |
+| Normals | Edit Mode | Blue (facing out) |
+
+## Prevention Tips
+
+### Best Practices
+✓ Apply transforms regularly (Ctrl+A)
+✓ Save incremental versions
+✓ Check normals after modeling
+✓ Use correct scale from start
+✓ Name objects clearly
+✓ Organize with collections
+
+### Common Shortcuts for Fixes
+| Problem | Quick Fix |
+|---------|-----------|
+| Inverted normals | Shift+N (recalculate) |
+| Hidden object | Alt+H (unhide) |
+| Stuck in mode | Tab (toggle modes) |
+| Reset rotation | Alt+R |
+| Reset scale | Alt+S |
+
+## Still Not Working?
+1. Check Blender console for errors
+2. Search the exact error message online
+3. Try in a fresh Blender file
+4. Update to latest Blender version`;
+          break;
+          
+        default:
+          response = "Please select a tool and enter a prompt to generate content.";
+      }
+      
+      setResults(prev => ({ ...prev, [toolId]: response }));
+      setLoading(prev => ({ ...prev, [toolId]: false }));
+    }, 1500 + Math.random() * 1000);
+  }, []);
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+  };
+
+  const clearTool = (toolId: string) => {
+    setPrompts(prev => ({ ...prev, [toolId]: "" }));
+    setResults(prev => ({ ...prev, [toolId]: "" }));
+  };
+
+  const setExamplePrompt = (toolId: string, prompt: string) => {
+    setPrompts(prev => ({ ...prev, [toolId]: prompt }));
+  };
+
+  return (
+    <div className="mt-8 space-y-6">
+      {/* Section Header */}
+      <div className="bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 rounded-2xl p-6">
+        <div className="flex items-center gap-4">
+          <div className="w-14 h-14 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center">
+            <span className="text-3xl">🤖</span>
+          </div>
+          <div>
+            <h2 className="text-white font-bold text-xl">Blender AI Practice Tools</h2>
+            <p className="text-white/80 text-sm mt-1">Practice modern AI-assisted Blender workflows by typing prompts</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Tools Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {aiPracticeTools.map(tool => (
+          <div
+            key={tool.id}
+            onClick={() => setActiveToolId(activeToolId === tool.id ? null : tool.id)}
+            className={`bg-white rounded-xl border transition-all cursor-pointer ${
+              activeToolId === tool.id 
+                ? "border-purple-300 shadow-lg ring-2 ring-purple-100" 
+                : "border-gray-200 hover:border-gray-300 hover:shadow-md"
+            }`}
+          >
+            <div className={`p-4 bg-gradient-to-r ${tool.color} rounded-t-xl`}>
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">{tool.icon}</span>
+                <h3 className="text-white font-bold text-sm">{tool.title}</h3>
+              </div>
+            </div>
+            <div className="p-4">
+              <p className="text-gray-600 text-xs">{tool.description}</p>
+              <div className="mt-3 flex items-center gap-2">
+                <span className="text-[10px] text-gray-400">Click to {activeToolId === tool.id ? "collapse" : "expand"}</span>
+                <span className="text-gray-400">{activeToolId === tool.id ? "▲" : "▼"}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Active Tool Panel */}
+      {activeToolId && (
+        <div className="bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden">
+          {(() => {
+            const tool = aiPracticeTools.find(t => t.id === activeToolId);
+            if (!tool) return null;
+            
+            return (
+              <>
+                <div className={`p-4 bg-gradient-to-r ${tool.color}`}>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <span className="text-3xl">{tool.icon}</span>
+                      <div>
+                        <h3 className="text-white font-bold">{tool.title}</h3>
+                        <p className="text-white/80 text-xs">{tool.description}</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setActiveToolId(null); }}
+                      className="text-white/80 hover:text-white p-2"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+                
+                <div className="p-6 space-y-4">
+                  {/* Prompt Input */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Enter Your Prompt
+                    </label>
+                    <textarea
+                      value={prompts[tool.id] || ""}
+                      onChange={(e) => setPrompts(prev => ({ ...prev, [tool.id]: e.target.value }))}
+                      placeholder={`Describe what you want... e.g., "${tool.examplePrompts[0]}"`}
+                      className="w-full h-24 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm resize-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100 outline-none transition-all"
+                    />
+                  </div>
+                  
+                  {/* Example Prompts */}
+                  <div>
+                    <p className="text-xs text-gray-500 mb-2">💡 Example prompts:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {tool.examplePrompts.map((example, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setExamplePrompt(tool.id, example)}
+                          className="px-3 py-1.5 bg-gray-100 text-gray-600 rounded-lg text-xs hover:bg-gray-200 transition-colors"
+                        >
+                          {example}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  {/* Action Buttons */}
+                  <div className="flex gap-3">
+                    <button
+                      onClick={() => generateResponse(tool.id, prompts[tool.id] || "")}
+                      disabled={!prompts[tool.id]?.trim() || loading[tool.id]}
+                      className={`flex-1 py-3 rounded-xl font-medium text-sm transition-all flex items-center justify-center gap-2 ${
+                        !prompts[tool.id]?.trim() || loading[tool.id]
+                          ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                          : `bg-gradient-to-r ${tool.color} text-white hover:opacity-90`
+                      }`}
+                    >
+                      {loading[tool.id] ? (
+                        <>
+                          <span className="animate-spin">⏳</span>
+                          Generating...
+                        </>
+                      ) : (
+                        <>
+                          ✨ Generate
+                        </>
+                      )}
+                    </button>
+                    <button
+                      onClick={() => clearTool(tool.id)}
+                      className="px-4 py-3 bg-gray-100 text-gray-600 rounded-xl text-sm hover:bg-gray-200 transition-colors"
+                    >
+                      🗑️ Clear
+                    </button>
+                  </div>
+                  
+                  {/* Result Output */}
+                  {results[tool.id] && (
+                    <div className="mt-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <label className="text-sm font-medium text-gray-700">Result</label>
+                        <button
+                          onClick={() => copyToClipboard(results[tool.id])}
+                          className="px-3 py-1.5 bg-gray-100 text-gray-600 rounded-lg text-xs hover:bg-gray-200 transition-colors flex items-center gap-1"
+                        >
+                          📋 Copy
+                        </button>
+                      </div>
+                      <div className="bg-gray-900 rounded-xl p-4 overflow-auto max-h-96">
+                        <pre className="text-green-400 text-xs font-mono whitespace-pre-wrap">
+                          {results[tool.id]}
+                        </pre>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </>
+            );
+          })()}
+        </div>
+      )}
+
+      {/* Features Summary */}
+      <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl border border-gray-100 p-6">
+        <h3 className="font-bold text-gray-800 mb-4">🎯 What You Can Practice</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+          {aiPracticeTools.map(tool => (
+            <div key={tool.id} className="text-center">
+              <div className={`w-10 h-10 mx-auto bg-gradient-to-br ${tool.color} rounded-lg flex items-center justify-center text-xl mb-2`}>
+                {tool.icon}
+              </div>
+              <p className="text-[10px] text-gray-600 font-medium">{tool.title.split("→")[1]?.trim() || tool.title}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
