@@ -20,6 +20,7 @@ import BlenderRoadmap from "../components/blenderlab/BlenderRoadmap";
 import Blender3DWorkspacePro from "../components/blenderlab/Blender3DWorkspacePro";
 import BlenderAssetLibrary from "../components/blenderlab/BlenderAssetLibrary";
 import BlenderProjectGallery from "../components/blenderlab/BlenderProjectGallery";
+import BlenderAIToolsLab from "../components/blenderlab/BlenderAIToolsLab";
 
 type ViewMode = 
   | "intro" 
@@ -34,6 +35,7 @@ type ViewMode =
   | "roadmap"
   | "phase"
   | "ai-tools"
+  | "ai-lab"
   | "news"
   | "addons"
   | "workspace"
@@ -105,12 +107,19 @@ const BlenderHubContent: React.FC = () => {
       ]
     },
     {
+      label: "AI STUDIO",
+      color: "from-purple-500 to-indigo-600",
+      items: [
+        { key: "ai-lab", label: "AI Tools Lab", icon: "🧪", description: "Explore AI" },
+        { key: "ai-tools", label: "AI Assistant", icon: "🤖", description: "AI help" },
+      ]
+    },
+    {
       label: "RESOURCES",
       color: "from-gray-500 to-slate-600",
       items: [
         { key: "resources", label: "Library", icon: "📖", description: "References" },
         { key: "progress", label: "Progress", icon: "📈", description: "Your stats" },
-        { key: "ai-tools", label: "AI Tools", icon: "🤖", description: "AI assistance" },
         { key: "news", label: "News", icon: "📰", description: "Latest updates" },
         { key: "addons", label: "Addons", icon: "🧩", description: "Extensions" },
       ]
@@ -337,6 +346,8 @@ const BlenderHubContent: React.FC = () => {
       {view === "progress" && <BlenderProgressTracker />}
 
       {view === "ai-tools" && <BlenderAITools />}
+
+      {view === "ai-lab" && <BlenderAIToolsLab />}
 
       {view === "news" && <BlenderNewsFeed />}
 
