@@ -147,7 +147,7 @@ const BlenderHubContent: React.FC = () => {
   }
 
   return (
-    <div className={`min-h-screen ${isExpandedWorkspace ? "space-y-2" : ""}`}>
+    <div className={`min-h-screen bg-gradient-to-br from-gray-50 via-orange-50/30 to-amber-50/20 ${isExpandedWorkspace ? "space-y-2 p-4" : "p-6"}`}>
       {/* Compact Header for Medium Workspace */}
       {isExpandedWorkspace && (
         <div className="bg-gray-800 rounded-xl px-4 py-2 flex items-center justify-between">
@@ -191,34 +191,45 @@ const BlenderHubContent: React.FC = () => {
 
       {/* Main Dashboard Layout */}
       {!isExpandedWorkspace && (
-        <div className="flex gap-6">
-          {/* Left Sidebar - Navigation */}
-          <div className="w-64 flex-shrink-0 space-y-4">
-            {/* Logo & Progress Card */}
-            <div className="bg-gradient-to-br from-orange-500 to-amber-600 rounded-2xl p-5 shadow-lg">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center">
-                  <span className="text-2xl">🟠</span>
+        <div className="max-w-[1600px] mx-auto">
+          {/* Top Navigation Bar */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-gray-100 shadow-sm mb-6 p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center shadow-lg">
+                    <span className="text-xl">🟠</span>
+                  </div>
+                  <div>
+                    <h1 className="text-gray-800 font-bold text-lg leading-tight">Blender Learning Hub</h1>
+                    <p className="text-gray-500 text-xs">Master 3D Creation</p>
+                  </div>
                 </div>
-                <div>
-                  <h1 className="text-white font-bold text-lg leading-tight">Blender</h1>
-                  <p className="text-white/80 text-xs">Learning Hub</p>
+                <div className="h-8 w-px bg-gray-200 mx-2" />
+                <div className="flex items-center gap-2">
+                  <div className="px-3 py-1.5 bg-orange-100 text-orange-600 rounded-full text-xs font-semibold">
+                    📊 {stats.totalProgress}% Complete
+                  </div>
+                  <div className="px-3 py-1.5 bg-green-100 text-green-600 rounded-full text-xs font-semibold">
+                    🔥 {stats.streak || 0} Day Streak
+                  </div>
                 </div>
               </div>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-white text-xs">
-                  <span className="font-medium">Overall Progress</span>
-                  <span className="font-bold">{stats.totalProgress}%</span>
-                </div>
-                <div className="h-2 bg-white/20 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-white rounded-full transition-all duration-500"
-                    style={{ width: `${stats.totalProgress}%` }}
-                  />
-                </div>
+              <div className="flex items-center gap-3">
+                <button 
+                  onClick={() => { setView("workspace"); setWorkspaceSize("normal"); }}
+                  className="px-4 py-2 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-medium text-sm hover:shadow-lg transition-all flex items-center gap-2"
+                >
+                  <span>🎮</span>
+                  <span>Open 3D Studio</span>
+                </button>
               </div>
             </div>
+          </div>
 
+          <div className="flex gap-6">
+          {/* Left Sidebar - Navigation */}
+          <div className="w-64 flex-shrink-0 space-y-4">
             {/* Quick Actions */}
             <div className="bg-white rounded-2xl border border-gray-100 p-4 shadow-sm">
               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Quick Actions</p>
@@ -389,6 +400,7 @@ const BlenderHubContent: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
         </div>
       )}
     </div>
