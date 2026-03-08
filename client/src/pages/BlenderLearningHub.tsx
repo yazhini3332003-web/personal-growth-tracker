@@ -54,7 +54,6 @@ const BlenderHubContent: React.FC = () => {
   const [view, setView] = useState<ViewMode>("intro");
   const [selectedPhaseId, setSelectedPhaseId] = useState<number>(1);
   const [workspaceSize, setWorkspaceSize] = useState<WorkspaceSize>("normal");
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const { setCurrentPhase, getOverallStats } = useBlenderLabContext();
   const stats = getOverallStats();
 
@@ -148,49 +147,7 @@ const BlenderHubContent: React.FC = () => {
   }
 
   return (
-    <div className={`${isExpandedWorkspace ? "space-y-2" : "space-y-6"}`}>
-      {/* Header */}
-      {!isExpandedWorkspace && (
-        <div className="bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 rounded-2xl p-6 shadow-lg">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-white/20 backdrop-blur rounded-2xl flex items-center justify-center">
-                <span className="text-4xl">🟠</span>
-              </div>
-              <div>
-                <h1 className="text-white font-bold text-2xl">Blender Learning Hub</h1>
-                <p className="text-white/80 text-sm mt-1">Complete 3D Creation Studio</p>
-                <div className="flex items-center gap-4 mt-2">
-                  <div className="flex items-center gap-2">
-                    <div className="w-32 h-2 bg-white/20 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-white rounded-full transition-all"
-                        style={{ width: `${stats.totalProgress}%` }}
-                      />
-                    </div>
-                    <span className="text-white text-xs font-medium">{stats.totalProgress}%</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <button 
-                onClick={() => { setView("workspace"); setWorkspaceSize("normal"); }}
-                className="px-4 py-2 bg-white text-orange-600 rounded-lg font-medium text-sm hover:bg-white/90 transition-colors shadow-lg"
-              >
-                🎮 Open 3D Studio
-              </button>
-              <button 
-                onClick={() => { setView("workspace"); setWorkspaceSize("fullscreen"); }}
-                className="px-4 py-2 bg-white/20 text-white rounded-lg font-medium text-sm hover:bg-white/30 transition-colors backdrop-blur"
-              >
-                🖥️ Fullscreen Mode
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
+    <div className={`min-h-screen ${isExpandedWorkspace ? "space-y-2" : ""}`}>
       {/* Compact Header for Medium Workspace */}
       {isExpandedWorkspace && (
         <div className="bg-gray-800 rounded-xl px-4 py-2 flex items-center justify-between">
@@ -232,138 +189,208 @@ const BlenderHubContent: React.FC = () => {
         </div>
       )}
 
-      {/* Navigation Cards - Only show when not in expanded workspace */}
+      {/* Main Dashboard Layout */}
       {!isExpandedWorkspace && (
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-          {navGroups.map((group) => (
-            <div 
-              key={group.label} 
-              className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-            >
-              <div className={`bg-gradient-to-r ${group.color} px-4 py-2`}>
-                <p className="text-xs font-bold text-white">{group.label}</p>
+        <div className="flex gap-6">
+          {/* Left Sidebar - Navigation */}
+          <div className="w-64 flex-shrink-0 space-y-4">
+            {/* Logo & Progress Card */}
+            <div className="bg-gradient-to-br from-orange-500 to-amber-600 rounded-2xl p-5 shadow-lg">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center">
+                  <span className="text-2xl">🟠</span>
+                </div>
+                <div>
+                  <h1 className="text-white font-bold text-lg leading-tight">Blender</h1>
+                  <p className="text-white/80 text-xs">Learning Hub</p>
+                </div>
               </div>
-              <div className="p-3 space-y-1">
-                {group.items.map((item) => (
-                  <button
-                    key={item.key}
-                    onClick={() => {
-                      setView(item.key);
-                      if (item.key === "workspace") {
-                        setWorkspaceSize("normal");
-                      }
-                    }}
-                    className={`w-full px-3 py-2.5 rounded-xl text-left transition-all flex items-center gap-3 group ${
-                      view === item.key || (view === "phase" && item.key === "roadmap")
-                        ? "bg-gradient-to-r " + group.color + " text-white shadow-sm"
-                        : "text-gray-600 hover:bg-gray-50"
-                    }`}
-                  >
-                    <span className="text-lg">{item.icon}</span>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium truncate">{item.label}</p>
-                      <p className={`text-[10px] truncate ${
-                        view === item.key ? "text-white/80" : "text-gray-400"
-                      }`}>
-                        {item.description}
-                      </p>
-                    </div>
-                  </button>
-                ))}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-white text-xs">
+                  <span className="font-medium">Overall Progress</span>
+                  <span className="font-bold">{stats.totalProgress}%</span>
+                </div>
+                <div className="h-2 bg-white/20 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-white rounded-full transition-all duration-500"
+                    style={{ width: `${stats.totalProgress}%` }}
+                  />
+                </div>
               </div>
             </div>
-          ))}
-        </div>
-      )}
 
-      {/* Current Section Header - Only show when not in expanded workspace */}
-      {!isExpandedWorkspace && (
-        <div className={`flex items-center justify-between bg-gradient-to-r ${currentGroup?.color || "from-gray-500 to-gray-600"} rounded-xl px-4 py-3`}>
-          <div className="flex items-center gap-3">
-            <span className="text-2xl">{currentItem.icon}</span>
-            <div>
-              <span className="text-white font-bold">
-                {view === "phase" ? "Phase Detail" : currentItem.label}
-              </span>
-              <p className="text-white/70 text-xs">{currentItem.description}</p>
+            {/* Quick Actions */}
+            <div className="bg-white rounded-2xl border border-gray-100 p-4 shadow-sm">
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Quick Actions</p>
+              <div className="space-y-2">
+                <button 
+                  onClick={() => { setView("workspace"); setWorkspaceSize("normal"); }}
+                  className="w-full px-4 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-medium text-sm hover:shadow-lg transition-all flex items-center gap-3"
+                >
+                  <span className="text-lg">🎮</span>
+                  <span>Open 3D Studio</span>
+                </button>
+                <button 
+                  onClick={() => { setView("workspace"); setWorkspaceSize("fullscreen"); }}
+                  className="w-full px-4 py-2.5 bg-gray-100 text-gray-700 rounded-xl font-medium text-sm hover:bg-gray-200 transition-colors flex items-center gap-3"
+                >
+                  <span>🖥️</span>
+                  <span>Fullscreen Mode</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Navigation Groups */}
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+              {navGroups.map((group, groupIndex) => (
+                <div key={group.label} className={groupIndex > 0 ? "border-t border-gray-100" : ""}>
+                  <div className={`px-4 py-2.5 bg-gradient-to-r ${group.color}`}>
+                    <p className="text-[10px] font-bold text-white uppercase tracking-wider">{group.label}</p>
+                  </div>
+                  <div className="p-2">
+                    {group.items.map((item) => {
+                      const isActive = view === item.key || (view === "phase" && item.key === "roadmap");
+                      return (
+                        <button
+                          key={item.key}
+                          onClick={() => {
+                            setView(item.key);
+                            if (item.key === "workspace") setWorkspaceSize("normal");
+                          }}
+                          className={`w-full px-3 py-2 rounded-lg text-left transition-all flex items-center gap-3 mb-1 last:mb-0 ${
+                            isActive
+                              ? `bg-gradient-to-r ${group.color} text-white shadow-sm`
+                              : "text-gray-600 hover:bg-gray-50"
+                          }`}
+                        >
+                          <span className="text-base">{item.icon}</span>
+                          <span className="text-sm font-medium">{item.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-          {view === "workspace" && (
-            <div className="flex items-center gap-2">
-              <span className="text-white/70 text-xs mr-2">Workspace Size:</span>
-              <button
-                onClick={() => setWorkspaceSize("normal")}
-                className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
-                  workspaceSize === "normal" ? "bg-white text-orange-600" : "bg-white/20 text-white hover:bg-white/30"
-                }`}
-              >
-                Normal
-              </button>
-              <button
-                onClick={() => setWorkspaceSize("medium")}
-                className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
-                  workspaceSize === "medium" ? "bg-white text-orange-600" : "bg-white/20 text-white hover:bg-white/30"
-                }`}
-              >
-                Medium
-              </button>
-              <button
-                onClick={() => setWorkspaceSize("fullscreen")}
-                className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
-                  workspaceSize === "fullscreen" ? "bg-white text-orange-600" : "bg-white/20 text-white hover:bg-white/30"
-                }`}
-              >
-                🖥️ Fullscreen
-              </button>
+
+          {/* Main Content Area */}
+          <div className="flex-1 min-w-0 space-y-5">
+            {/* Top Stats Bar */}
+            <div className="grid grid-cols-4 gap-4">
+              <div className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <span className="text-lg">📚</span>
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500">Lessons</p>
+                    <p className="text-lg font-bold text-gray-800">{stats.completedLessons || 0}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                    <span className="text-lg">🏋️</span>
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500">Exercises</p>
+                    <p className="text-lg font-bold text-gray-800">{stats.completedExercises || 0}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <span className="text-lg">🚀</span>
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500">Projects</p>
+                    <p className="text-lg font-bold text-gray-800">{stats.completedProjects || 0}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white rounded-xl border border-gray-100 p-4 shadow-sm">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <span className="text-lg">🔥</span>
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500">Day Streak</p>
+                    <p className="text-lg font-bold text-gray-800">{stats.streak || 0}</p>
+                  </div>
+                </div>
+              </div>
             </div>
-          )}
+
+            {/* Section Header */}
+            <div className={`flex items-center justify-between bg-gradient-to-r ${currentGroup?.color || "from-gray-500 to-gray-600"} rounded-xl px-5 py-4 shadow-sm`}>
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                  <span className="text-xl">{currentItem.icon}</span>
+                </div>
+                <div>
+                  <h2 className="text-white font-bold text-lg">
+                    {view === "phase" ? "Phase Detail" : currentItem.label}
+                  </h2>
+                  <p className="text-white/70 text-sm">{currentItem.description}</p>
+                </div>
+              </div>
+              {view === "workspace" && (
+                <div className="flex items-center gap-2">
+                  <span className="text-white/70 text-xs mr-2">Size:</span>
+                  {["normal", "medium", "fullscreen"].map((size) => (
+                    <button
+                      key={size}
+                      onClick={() => setWorkspaceSize(size as WorkspaceSize)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors capitalize ${
+                        workspaceSize === size 
+                          ? "bg-white text-orange-600" 
+                          : "bg-white/20 text-white hover:bg-white/30"
+                      }`}
+                    >
+                      {size === "fullscreen" ? "🖥️ Full" : size}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Content Container */}
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden min-h-[500px]">
+              <div className="p-6">
+                {view === "intro" && <BlenderIntro />}
+                {view === "levels" && <BlenderLearningLevels />}
+                {view === "lessons" && <BlenderLessons />}
+                {view === "roadmap" && <BlenderRoadmap onPhaseClick={handlePhaseClick} />}
+                {view === "phase" && selectedPhase && (
+                  <PhaseDetail phase={selectedPhase} onBack={handleBackToHome} />
+                )}
+                {view === "practice" && <BlenderPractice />}
+                {view === "projects" && <BlenderProjects />}
+                {view === "showcase" && <BlenderShowcase />}
+                {view === "community" && <BlenderCommunity />}
+                {view === "resources" && <BlenderResources />}
+                {view === "progress" && <BlenderProgressTracker />}
+                {view === "ai-tools" && <BlenderAITools />}
+                {view === "ai-lab" && <BlenderAIToolsLab />}
+                {view === "news" && <BlenderNewsFeed />}
+                {view === "addons" && <BlenderTrendingTools />}
+                {view === "workspace" && (
+                  <Blender3DWorkspacePro 
+                    workspaceSize={workspaceSize}
+                    onSizeChange={setWorkspaceSize}
+                    onExit={() => setView("intro")}
+                  />
+                )}
+                {view === "assets" && <BlenderAssetLibrary />}
+                {view === "gallery" && <BlenderProjectGallery />}
+              </div>
+            </div>
+          </div>
         </div>
       )}
-
-      {/* Content */}
-      {view === "intro" && <BlenderIntro />}
-      
-      {view === "levels" && <BlenderLearningLevels />}
-      
-      {view === "lessons" && <BlenderLessons />}
-      
-      {view === "roadmap" && <BlenderRoadmap onPhaseClick={handlePhaseClick} />}
-
-      {view === "phase" && selectedPhase && (
-        <PhaseDetail phase={selectedPhase} onBack={handleBackToHome} />
-      )}
-
-      {view === "practice" && <BlenderPractice />}
-
-      {view === "projects" && <BlenderProjects />}
-
-      {view === "showcase" && <BlenderShowcase />}
-
-      {view === "community" && <BlenderCommunity />}
-
-      {view === "resources" && <BlenderResources />}
-
-      {view === "progress" && <BlenderProgressTracker />}
-
-      {view === "ai-tools" && <BlenderAITools />}
-
-      {view === "ai-lab" && <BlenderAIToolsLab />}
-
-      {view === "news" && <BlenderNewsFeed />}
-
-      {view === "addons" && <BlenderTrendingTools />}
-
-      {view === "workspace" && (
-        <Blender3DWorkspacePro 
-          workspaceSize={workspaceSize}
-          onSizeChange={setWorkspaceSize}
-          onExit={() => setView("intro")}
-        />
-      )}
-
-      {view === "assets" && <BlenderAssetLibrary />}
-
-      {view === "gallery" && <BlenderProjectGallery />}
     </div>
   );
 };
